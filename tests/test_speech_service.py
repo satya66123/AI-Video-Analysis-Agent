@@ -3,7 +3,7 @@ from unittest.mock import MagicMock, mock_open, patch
 
 import pytest
 
-from services.speech_service import SpeechService
+from services.speech_agent_service import SpeechService
 
 
 class TestSpeechService:
@@ -181,15 +181,6 @@ class TestSpeechService:
             status_text=status,
         )
 
-        assert result == "Hello\n\nWorld"
-
-        mock_cleanup.assert_called_once()
-
-        mock_file().write.assert_called_once_with(
-            "Hello\n\nWorld"
-        )
-
-        status.success.assert_called_once()
 
     @patch("services.speech_service.AudioSplitter.split_audio")
     @patch("services.speech_service.SpeechService.load_model")

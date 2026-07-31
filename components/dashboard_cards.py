@@ -1,7 +1,7 @@
 import os
 import streamlit as st
 
-from services.video_service import VideoService
+from services.video_agent_service import VideoService
 
 
 def show_dashboard_cards():

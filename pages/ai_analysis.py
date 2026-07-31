@@ -1,7 +1,7 @@
 import os
 import streamlit as st
 
-from services.ai_analysis_service import AIAnalysisService
+from services.ai_analysis_agent_service import AIAnalysisService
 from components.analysis_history import AnalysisHistory
 
 from prompts.summary_prompt import SUMMARY_PROMPT

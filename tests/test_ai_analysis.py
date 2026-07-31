@@ -1,100 +1,145 @@
-from unittest.mock import  patch
+import os
 
 import pytest
 
-from components.show_ai_analysis import (
-
-    get_transcripts,
-    show_ai_analysis,
-)
+from services.ai_analysis_service import AIAnalysisService
 
 
-# ==========================================================
-# Fixtures
-# ==========================================================
+class DummyProvider:
+    def __init__(self):
+        self.calls = []
+
+    def generate(self, *, prompt, model):
+        self.calls.append(
+            {
+                "prompt": prompt,
+                "model": model,
+            }
+        )
+        return "Analysis Result"
+
 
 @pytest.fixture
-def mock_session_state():
-    return {
-        "provider": "ollama",
-        "model": "llama3.1:8b",
-    }
+def analysis_dir(tmp_path, monkeypatch):
+    monkeypatch.setattr(
+        AIAnalysisService,
+        "ANALYSIS_FOLDER",
+        str(tmp_path),
+    )
+    return tmp_path
 
 
-# ==========================================================
-# get_transcripts()
-# ==========================================================
+def test_analyze_success(monkeypatch):
+    provider = DummyProvider()
 
-@patch("components.show_ai_analysis.os.path.exists")
-def test_get_transcripts_folder_missing(mock_exists):
-    mock_exists.return_value = False
-
-    assert get_transcripts() == []
-
-
-@patch("components.show_ai_analysis.os.listdir")
-@patch("components.show_ai_analysis.os.path.exists")
-def test_get_transcripts_success(
-    mock_exists,
-    mock_listdir,
-):
-    mock_exists.return_value = True
-
-    mock_listdir.return_value = [
-        "b.txt",
-        "a.txt",
-        "ignore.pdf",
-        "video.mp4",
-    ]
-
-    result = get_transcripts()
-
-    assert result == [
-        "b.txt",
-        "a.txt",
-    ]
-
-
-# ==========================================================
-# show_ai_analysis()
-# ==========================================================
-
-@patch("components.show_ai_analysis.st.warning")
-@patch("components.show_ai_analysis.st.title")
-@patch("components.show_ai_analysis.get_transcripts")
-def test_show_ai_analysis_no_transcripts(
-    mock_get_transcripts,
-    mock_title,
-    mock_warning,
-):
-    mock_get_transcripts.return_value = []
-
-    show_ai_analysis()
-
-    mock_title.assert_called_once()
-
-    mock_warning.assert_called_once_with(
-        "No transcripts found."
+    monkeypatch.setattr(
+        "providers.provider_factory.ProviderFactory.get_provider",
+        lambda name: provider,
     )
 
-
-@patch("components.show_ai_analysis.st.error")
-@patch("components.show_ai_analysis.st.warning")
-@patch("components.show_ai_analysis.st.session_state", {})
-@patch("components.show_ai_analysis.st.title")
-@patch("components.show_ai_analysis.get_transcripts")
-def test_show_ai_analysis_missing_provider(
-    mock_get_transcripts,
-    mock_title,
-    mock_warning,
-    mock_error,
-):
-    mock_get_transcripts.return_value = [
-        "sample.txt"
-    ]
-
-    show_ai_analysis()
-
-    mock_error.assert_called_once_with(
-        "Please select a Provider and Model from the sidebar."
+    result = AIAnalysisService.analyze(
+        provider_name="Ollama",
+        model_name="llama3.1",
+        transcript="Hello World",
+        prompt="Summarize",
     )
+
+    assert result == "Analysis Result"
+
+    assert len(provider.calls) == 1
+    assert provider.calls[0]["model"] == "llama3.1"
+    assert "Hello World" in provider.calls[0]["prompt"]
+    assert "Summarize" in provider.calls[0]["prompt"]
+
+
+def test_analyze_provider_not_found(monkeypatch):
+    monkeypatch.setattr(
+        "providers.provider_factory.ProviderFactory.get_provider",
+        lambda name: None,
+    )
+
+    with pytest.raises(Exception, match="Provider"):
+        AIAnalysisService.analyze(
+            "Ollama",
+            "model",
+            "text",
+            "prompt",
+        )
+
+
+def test_save_analysis(analysis_dir):
+    path = AIAnalysisService.save_analysis(
+        filename="video1",
+        analysis_type="summary",
+        content="My analysis",
+    )
+
+    assert os.path.exists(path)
+
+    assert os.path.basename(path).startswith(
+        "video1_summary_"
+    )
+
+    assert path.endswith(".md")
+
+    with open(path, encoding="utf-8") as f:
+        assert f.read() == "My analysis"
+
+
+def test_prompt_contains_transcript(monkeypatch):
+    provider = DummyProvider()
+
+    monkeypatch.setattr(
+        "providers.provider_factory.ProviderFactory.get_provider",
+        lambda name: provider,
+    )
+
+    AIAnalysisService.analyze(
+        "Ollama",
+        "model",
+        "Transcript Text",
+        "Explain",
+    )
+
+    prompt = provider.calls[0]["prompt"]
+
+    assert "Transcript Text" in prompt
+
+
+def test_prompt_contains_instruction(monkeypatch):
+    provider = DummyProvider()
+
+    monkeypatch.setattr(
+        "providers.provider_factory.ProviderFactory.get_provider",
+        lambda name: provider,
+    )
+
+    AIAnalysisService.analyze(
+        "Ollama",
+        "model",
+        "abc",
+        "Summarize",
+    )
+
+    prompt = provider.calls[0]["prompt"]
+
+    assert "Do not invent facts" in prompt
+    assert "Analyze ONLY the transcript" in prompt
+
+
+def test_provider_called_once(monkeypatch):
+    provider = DummyProvider()
+
+    monkeypatch.setattr(
+        "providers.provider_factory.ProviderFactory.get_provider",
+        lambda name: provider,
+    )
+
+    AIAnalysisService.analyze(
+        "Ollama",
+        "model",
+        "text",
+        "prompt",
+    )
+
+    assert len(provider.calls) == 1

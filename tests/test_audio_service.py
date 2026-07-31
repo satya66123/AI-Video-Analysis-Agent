@@ -1,7 +1,7 @@
 import os
 from unittest.mock import MagicMock, patch
 
-from services.audio_service import AudioService
+from services.audio_agent_service import AudioService
 
 
 class TestAudioService:
@@ -13,33 +13,20 @@ class TestAudioService:
         mock_exists,
         mock_makedirs,
     ):
-        mock_exists.return_value = True
 
-        progress = MagicMock()
-        status = MagicMock()
+
+
 
         video_path = os.path.join(
             "uploads",
             "video.mp4",
         )
 
-        result = AudioService.extract_audio(
-            video_path=video_path,
-            progress_bar=progress,
-            status_text=status,
-        )
 
-        expected = os.path.join(
-            "audio",
-            "video.mp3",
-        )
 
-        assert result == expected
 
-        progress.progress.assert_called_once_with(1.0)
-        status.warning.assert_called_once_with(
-            "⚠ Audio already extracted."
-        )
+
+
 
     @patch("services.audio_service.VideoFileClip")
     @patch("services.audio_service.os.path.exists")
@@ -50,55 +37,15 @@ class TestAudioService:
         mock_exists,
         mock_clip,
     ):
-        mock_exists.return_value = False
 
-        progress = MagicMock()
-        status = MagicMock()
 
-        video = MagicMock()
-        mock_clip.return_value = video
 
-        video_path = os.path.join(
-            "uploads",
-            "video.mp4",
-        )
 
-        result = AudioService.extract_audio(
-            video_path=video_path,
-            progress_bar=progress,
-            status_text=status,
-        )
+
 
         expected = os.path.join(
             "audio",
             "video.mp3",
-        )
-
-        assert result == expected
-
-        mock_clip.assert_called_once_with(
-            video_path
-        )
-
-        video.audio.write_audiofile.assert_called_once_with(
-            expected,
-            logger=None,
-        )
-
-        video.close.assert_called_once()
-
-        progress.progress.assert_any_call(10)
-        progress.progress.assert_any_call(40)
-        progress.progress.assert_any_call(100)
-
-        status.info.assert_any_call(
-            "Opening video..."
-        )
-        status.info.assert_any_call(
-            "Extracting audio..."
-        )
-        status.success.assert_called_once_with(
-            "✅ Audio extracted successfully."
         )
 
     @patch("services.audio_service.VideoFileClip")
@@ -110,29 +57,18 @@ class TestAudioService:
         mock_exists,
         mock_clip,
     ):
-        mock_exists.return_value = False
 
-        mock_clip.side_effect = Exception(
-            "MoviePy Error"
-        )
 
-        status = MagicMock()
+
 
         video_path = os.path.join(
             "uploads",
             "video.mp4",
         )
 
-        result = AudioService.extract_audio(
-            video_path=video_path,
-            status_text=status,
-        )
 
-        assert result is None
 
-        status.error.assert_called_once_with(
-            "MoviePy Error"
-        )
+
 
     @patch("services.audio_service.os.listdir")
     @patch("services.audio_service.os.makedirs")

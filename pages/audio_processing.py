@@ -1,8 +1,8 @@
 import os
 import streamlit as st
 
-from services.video_service import VideoService
-from services.audio_service import AudioService
+from services.video_agent_service import VideoService
+from services.audio_agent_service import AudioService
 
 from components.extracted_audio import show_extracted_audio
 

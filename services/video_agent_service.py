@@ -1,11 +1,132 @@
 import os
 import uuid
 import hashlib
+import json
+from pathlib import Path
+
+import cv2
 
 
 class VideoService:
 
     UPLOAD_FOLDER = "uploads"
+    VIDEO_METADATA_FOLDER = Path("metadata/video")
+
+    @classmethod
+    def ensure_metadata_folder(cls):
+
+        cls.VIDEO_METADATA_FOLDER.mkdir(
+            parents=True,
+            exist_ok=True,
+        )
+
+    @classmethod
+    def create_metadata(
+            cls,
+            video_path: str,
+    ):
+
+        path = Path(video_path)
+
+        cap = cv2.VideoCapture(video_path)
+
+        fps = cap.get(
+            cv2.CAP_PROP_FPS
+        )
+
+        frames = cap.get(
+            cv2.CAP_PROP_FRAME_COUNT
+        )
+
+        width = int(
+            cap.get(
+                cv2.CAP_PROP_FRAME_WIDTH
+            )
+        )
+
+        height = int(
+            cap.get(
+                cv2.CAP_PROP_FRAME_HEIGHT
+            )
+        )
+
+        duration = (
+            frames / fps
+            if fps
+            else 0
+        )
+
+        cap.release()
+
+        return {
+
+            "filename": path.name,
+
+            "duration": f"{duration:.2f} sec",
+
+            "fps": round(fps, 2),
+
+            "resolution": f"{width} x {height}",
+
+            "format": path.suffix,
+
+            "size": f"{path.stat().st_size / (1024 * 1024):.2f} MB",
+
+        }
+
+    @classmethod
+    def save_metadata(
+            cls,
+            filename: str,
+            metadata: dict,
+    ):
+
+        cls.ensure_metadata_folder()
+
+        path = (
+                cls.VIDEO_METADATA_FOLDER
+                / f"{Path(filename).stem}.json"
+        )
+
+        with open(
+                path,
+                "w",
+                encoding="utf-8",
+        ) as file:
+            json.dump(
+                metadata,
+                file,
+                indent=4,
+                ensure_ascii=False,
+            )
+
+        return path
+
+    @classmethod
+    def load_metadata(
+            cls,
+            filename: str,
+    ):
+
+        cls.ensure_metadata_folder()
+
+        path = (
+                cls.VIDEO_METADATA_FOLDER
+                / f"{Path(filename).stem}.json"
+        )
+
+        if not path.exists():
+            raise FileNotFoundError(path)
+
+        with open(
+                path,
+                "r",
+                encoding="utf-8",
+        ) as file:
+            return json.load(file)
+
+
+
 
     @classmethod
     def save_video(
@@ -75,7 +196,43 @@ class VideoService:
                 "✅ Upload Complete (100%)"
             )
 
-        return filepath
+        ##################################################
+        # Save Video Metadata
+        ##################################################
+
+        metadata = cls.create_metadata(
+            filepath
+        )
+
+        cls.save_metadata(
+            filepath,
+            metadata,
+        )
+
+        return {
+            "filepath": filepath,
+            "filename": filename,
+            "original_filename": uploaded_file.name,
+            "size": uploaded_file.size,
+        }
+
+    @classmethod
+    def delete_metadata(
+            cls,
+            filename: str,
+    ):
+
+        path = (
+                cls.VIDEO_METADATA_FOLDER
+                / f"{Path(filename).stem}.json"
+        )
+
+        if path.exists():
+            path.unlink()
+
+            return True
+
+        return False
 
     @classmethod
     def list_videos(cls):

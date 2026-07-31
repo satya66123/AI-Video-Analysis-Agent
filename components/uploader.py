@@ -1,6 +1,6 @@
 import streamlit as st
 
-from services.video_service import VideoService
+from services.video_agent_service import VideoService
 from utils.file_validator import FileValidator
 from utils.video_metadata import VideoMetadata
 

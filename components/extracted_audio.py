@@ -1,7 +1,7 @@
 import os
 import streamlit as st
 
-from services.audio_service import AudioService
+from services.audio_agent_service import AudioService
 from utils.audio_metadata import AudioMetadata
 from components.audio_metadata import show_audio_metadata
 

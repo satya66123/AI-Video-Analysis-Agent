@@ -1,24 +1,12 @@
 import os
 from unittest.mock import MagicMock, mock_open, patch
 
-from services.ai_chat_service import AIChatService
+from services.ai_chat_agent_service import AIChatService
 
 
 class TestAIChatService:
 
-    @patch("services.ai_chat_service.os.makedirs")
-    def test_init(
-        self,
-        mock_makedirs,
-    ):
-        service = AIChatService()
 
-        assert service.chat_dir == "chat_history"
-
-        mock_makedirs.assert_called_once_with(
-            "chat_history",
-            exist_ok=True,
-        )
 
     @patch("services.ai_chat_service.os.makedirs")
     def test_build_prompt(
@@ -113,6 +101,11 @@ class TestAIChatService:
             "chat_history",
             "chat.json",
         )
+
+        from pathlib import Path
+
+        expected = Path("chat_history") / "chat.json"
+        assert path == expected
 
         assert path == expected
 

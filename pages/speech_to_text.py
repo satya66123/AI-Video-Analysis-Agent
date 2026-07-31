@@ -1,8 +1,8 @@
 import os
 import streamlit as st
 
-from services.audio_service import AudioService
-from services.speech_service import SpeechService
+from services.audio_agent_service import AudioService
+from services.speech_agent_service import SpeechService
 from components.transcript import show_transcripts
 from components.transcript_stats import show_transcript_stats
 from components.transcript_dashboard import show_transcript_dashboard

@@ -4,7 +4,7 @@ from datetime import datetime
 import streamlit as st
 
 from components.chat_history import ChatHistory
-from services.ai_chat_service import AIChatService
+from services.ai_chat_agent_service import AIChatService
 from utils.chat_export import ChatExport
 
 from utils.chat_title import ChatTitle

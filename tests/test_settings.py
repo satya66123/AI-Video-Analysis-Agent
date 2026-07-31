@@ -1,96 +1,109 @@
-import os
 import importlib
+import os
 
-import pytest
+import config.settings as settings
 
 
 def reload_settings():
-    """
-    Reload config.settings after environment changes.
-    """
-    import config.settings
-    importlib.reload(config.settings)
-    return config.settings.Settings
+    return importlib.reload(settings)
 
 
 def test_app_name():
-    Settings = reload_settings()
-    assert Settings.APP_NAME == "AI Video Analyzer"
+    s = reload_settings()
+    assert s.APP_NAME == "AI Video Analysis Agent"
 
 
 def test_app_version():
-    Settings = reload_settings()
-    assert Settings.APP_VERSION == "1.0.0"
+    s = reload_settings()
+    assert s.APP_VERSION == "1.0.0"
 
 
 def test_default_ollama_url(monkeypatch):
-    monkeypatch.delenv("OLLAMA_BASE_URL", raising=False)
+    monkeypatch.delenv("OLLAMA_URL", raising=False)
 
-    Settings = reload_settings()
+    s = reload_settings()
 
-    assert (
-        Settings.OLLAMA_BASE_URL
-        == "http://localhost:11434"
-    )
+    assert s.OLLAMA_URL == "http://localhost:11434"
 
 
 def test_custom_ollama_url(monkeypatch):
-    monkeypatch.setenv(
-        "OLLAMA_BASE_URL",
-        "http://127.0.0.1:11434"
-    )
+    monkeypatch.setenv("OLLAMA_URL", "http://127.0.0.1:9999")
 
-    Settings = reload_settings()
+    s = reload_settings()
 
-    assert (
-        Settings.OLLAMA_BASE_URL
-        == "http://127.0.0.1:11434"
-    )
+    assert s.OLLAMA_URL == "http://127.0.0.1:9999"
 
 
-def test_default_provider(monkeypatch):
-    monkeypatch.delenv("DEFAULT_PROVIDER", raising=False)
-
-    Settings = reload_settings()
-
-    assert Settings.DEFAULT_PROVIDER == "Ollama"
+def test_default_provider():
+    s = reload_settings()
+    assert s.DEFAULT_PROVIDER == "Ollama"
 
 
-def test_custom_provider(monkeypatch):
-    monkeypatch.setenv(
-        "DEFAULT_PROVIDER",
-        "OpenAI"
-    )
-
-    Settings = reload_settings()
-
-    assert Settings.DEFAULT_PROVIDER == "OpenAI"
+def test_default_model():
+    s = reload_settings()
+    assert s.DEFAULT_MODEL == "qwen2.5:1.5b"
 
 
-def test_default_model(monkeypatch):
-    monkeypatch.delenv("DEFAULT_MODEL", raising=False)
+def test_mysql_defaults(monkeypatch):
+    monkeypatch.delenv("MYSQL_HOST", raising=False)
+    monkeypatch.delenv("MYSQL_PORT", raising=False)
+    monkeypatch.delenv("MYSQL_DATABASE", raising=False)
+    monkeypatch.delenv("MYSQL_USER", raising=False)
+    monkeypatch.delenv("MYSQL_PASSWORD", raising=False)
 
-    Settings = reload_settings()
+    s = reload_settings()
 
-    assert Settings.DEFAULT_MODEL == "qwen2.5:1.5b"
+    assert s.MYSQL_HOST == "localhost"
+    assert s.MYSQL_PORT == 3306
+    assert s.MYSQL_DATABASE == "video_analysis"
+    assert s.MYSQL_USER == "root"
+    assert s.MYSQL_PASSWORD == ""
 
 
-def test_custom_model(monkeypatch):
-    monkeypatch.setenv(
-        "DEFAULT_MODEL",
-        "llama3.1:8b"
-    )
+def test_custom_mysql(monkeypatch):
+    monkeypatch.setenv("MYSQL_HOST", "db")
+    monkeypatch.setenv("MYSQL_PORT", "3307")
+    monkeypatch.setenv("MYSQL_DATABASE", "ai")
+    monkeypatch.setenv("MYSQL_USER", "admin")
+    monkeypatch.setenv("MYSQL_PASSWORD", "secret")
 
-    Settings = reload_settings()
+    s = reload_settings()
 
-    assert Settings.DEFAULT_MODEL == "llama3.1:8b"
+    assert s.MYSQL_HOST == "db"
+    assert s.MYSQL_PORT == 3307
+    assert s.MYSQL_DATABASE == "ai"
+    assert s.MYSQL_USER == "admin"
+    assert s.MYSQL_PASSWORD == "secret"
 
 
 def test_all_required_attributes_exist():
-    Settings = reload_settings()
+    s = reload_settings()
 
-    assert hasattr(Settings, "APP_NAME")
-    assert hasattr(Settings, "APP_VERSION")
-    assert hasattr(Settings, "OLLAMA_BASE_URL")
-    assert hasattr(Settings, "DEFAULT_PROVIDER")
-    assert hasattr(Settings, "DEFAULT_MODEL")
+    required = [
+        "APP_NAME",
+        "APP_VERSION",
+        "BASE_DIR",
+        "UPLOAD_DIR",
+        "AUDIO_DIR",
+        "TRANSCRIPT_DIR",
+        "REPORT_DIR",
+        "EXPORT_DIR",
+        "LOG_DIR",
+        "TEMP_DIR",
+        "MAX_UPLOAD_SIZE",
+        "SUPPORTED_VIDEO_FORMATS",
+        "DEFAULT_PROVIDER",
+        "DEFAULT_MODEL",
+        "DEFAULT_TEMPERATURE",
+        "DEFAULT_MAX_TOKENS",
+        "MYSQL_HOST",
+        "MYSQL_PORT",
+        "MYSQL_DATABASE",
+        "MYSQL_USER",
+        "MYSQL_PASSWORD",
+        "OLLAMA_URL",
+        "WHISPER_MODEL",
+    ]
+
+    for attr in required:
+        assert hasattr(s, attr)
