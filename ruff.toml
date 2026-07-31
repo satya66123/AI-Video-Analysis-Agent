@@ -1,0 +1,23 @@
+line-length = 100
+target-version = "py311"
+
+exclude = [
+    ".git",
+    ".github",
+    ".pytest_cache",
+    "__pycache__",
+    ".venv",
+    "htmlcov",
+]
+
+[lint]
+select = [
+    "E",
+    "F",
+    "I",
+    "W",
+]
+
+ignore = [
+    "E501",
+]

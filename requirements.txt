@@ -1,0 +1,67 @@
+# ==========================
+# AI Video Analyzer v1.0.0
+# ==========================
+
+# UI
+streamlit>=1.46.0
+
+# Data Processing
+pandas>=2.2.2
+numpy>=1.26.4
+
+# AI Providers
+ollama>=0.5.1
+openai>=1.97.0
+anthropic>=0.59.0
+
+# Environment Variables
+python-dotenv>=1.1.1
+
+# HTTP Requests
+requests>=2.32.4
+
+# Audio / Speech Recognition
+openai-whisper>=20250625
+torch>=2.7.1
+torchaudio>=2.7.1
+
+# Video Processing
+moviepy==1.0.3
+opencv-python>=4.12.0.88
+
+# Audio Metadata
+mutagen>=1.47.0
+pydub>=0.25.1
+
+# Image Processing
+Pillow>=11.3.0
+
+# PDF Export
+reportlab>=4.4.3
+
+# Markdown / HTML Export
+markdown>=3.8.2
+
+# HTML Parsing
+beautifulsoup4>=4.13.4
+
+# Progress Bars
+tqdm>=4.67.1
+
+# Utilities
+typing_extensions>=4.14.1
+
+# ==========================
+# Testing
+# ==========================
+
+pytest>=8.4.1
+pytest-cov>=6.2.1
+pytest-mock>=3.14.1
+coverage>=7.10.2
+
+# ==========================
+# Code Quality
+# ==========================
+
+ruff>=0.12.7
