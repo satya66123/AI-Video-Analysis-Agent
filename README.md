@@ -225,59 +225,143 @@ assets/
 ![Dashboard](docs/screenshots-agents/dashboardPageAgent.png)
 
 ---
+# 📸 Application Screenshots
 
-### Upload Agent
-
-![Upload Agent](docs/screenshots-agents/uploadVideoAgent.png)
-
----
-
-### Transcript Agent
-
-![Transcript Agent](docs/screenshots-agents/transcriptAgentPage.png)
+The following screenshots provide a visual overview of the **AI Video Analysis Agent** and its major features.
 
 ---
 
-### AI Analysis Agent
+## 🏠 Dashboard
 
-![Analysis Agent](docs/screenshots-agents/analysisAgent.png)
+The Dashboard provides a centralized overview of the application and quick navigation to all AI modules.
 
----
-
-### AI Chat Agent
-
-![Chat Agent](docs/screenshots-agents/chatAgent.png)
+<p align="center">
+<img src="docs/screenshots-agents/dashboardPageAgent.png" width="900">
+</p>
 
 ---
 
-### Report Agent
+## 📤 Upload Video
 
-![Report Agent](docs/screenshots-agents/ReportAgent.png)
+Upload videos for processing with validation, duplicate detection, and progress tracking.
 
----
-
-### Export Agent
-
-![Export Agent](docs/screenshots-agents/exportAgent.png)
+<p align="center">
+<img src="docs/screenshots-agents/uploadVideoAgent.png" width="900">
+</p>
 
 ---
 
-### History Agent
+## 🎙 Transcript Agent
 
-![History Agent](docs/screenshots-agents/historyAgent.png)
+Generate accurate transcripts using OpenAI Whisper with configurable models and chunk-based processing.
 
----
-
-### Settings
-
-![Settings](docs/screenshots-agents/settingsAgent.png)
+<p align="center">
+<img src="docs/screenshots-agents/transcriptAgentPage.png" width="900">
+</p>
 
 ---
 
-### About
+## 🤖 AI Analysis Agent
 
-![About](docs/screenshots-agents/aboutAgent.png)
+Analyze transcripts using AI providers such as Ollama, OpenAI, and Anthropic to generate intelligent insights.
 
+<p align="center">
+<img src="docs/screenshots-agents/analysisAgent.png" width="900">
+</p>
+
+---
+
+## 💬 AI Chat Agent
+
+Interact with video transcripts using an AI-powered chat interface with conversation history support.
+
+<p align="center">
+<img src="docs/screenshots-agents/chatAgent.png" width="900">
+</p>
+
+---
+
+## 📄 Report Agent
+
+Generate professional AI Video Analysis reports that combine metadata, transcripts, AI analysis, and chat history.
+
+<p align="center">
+<img src="docs/screenshots-agents/ReportAgent.png" width="900">
+</p>
+
+---
+
+## 📤 Export Agent
+
+Export reports in multiple formats including PDF, HTML, Markdown, TXT, and JSON.
+
+<p align="center">
+<img src="docs/screenshots-agents/exportAgent.png" width="900">
+</p>
+
+---
+
+## 🗂 History Agent
+
+Browse and manage previously generated videos, transcripts, analyses, reports, and exported files.
+
+<p align="center">
+<img src="docs/screenshots-agents/historyAgent.png" width="900">
+</p>
+
+---
+
+## ⚙ Settings
+
+Configure AI providers, models, and application settings from a single location.
+
+<p align="center">
+<img src="docs/screenshots-agents/settingsAgent.png" width="900">
+</p>
+
+---
+
+## ℹ About
+
+Displays project information, application version, technologies used, and developer details.
+
+<p align="center">
+<img src="docs/screenshots-agents/aboutAgent.png" width="900">
+</p>
+
+---
+
+# 🎯 Complete Workflow
+
+```text
+Dashboard
+     ↓
+Upload Video
+     ↓
+Transcript Generation
+     ↓
+AI Analysis
+     ↓
+AI Chat
+     ↓
+Report Generation
+     ↓
+Export Reports
+     ↓
+History Management
+     ↓
+Settings
+     ↓
+About
+```
+
+---
+
+<p align="center">
+
+⭐ If you like this project, please consider giving it a **Star** on GitHub!
+
+</p>
 ---
 
 # 🚀 Installation
