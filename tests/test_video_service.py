@@ -3,7 +3,7 @@ import io
 import os
 from unittest.mock import MagicMock, mock_open, patch
 
-from services.video_agent_service import VideoService
+from services.video_service import VideoService
 
 
 class TestVideoService:

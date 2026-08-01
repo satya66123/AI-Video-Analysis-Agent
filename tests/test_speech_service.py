@@ -3,7 +3,7 @@ from unittest.mock import MagicMock, mock_open, patch
 
 import pytest
 
-from services.speech_agent_service import SpeechService
+from services.speech_service import SpeechService
 
 
 class TestSpeechService:

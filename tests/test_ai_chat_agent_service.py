@@ -3,7 +3,6 @@ tests/test_ai_chat_agent_service.py
 """
 
 import json
-from pathlib import Path
 from unittest.mock import MagicMock, patch
 
 import pytest
@@ -11,16 +10,18 @@ import pytest
 from services.ai_chat_agent_service import AIChatService
 
 
+
 @pytest.fixture
 def chat_service(tmp_path):
 
-    service = AIChatService()
+    AIChatService.CHAT_FOLDER = tmp_path
 
-    service.CHAT_FOLDER = tmp_path
-    service.CHAT_FOLDER.mkdir(
+    AIChatService.CHAT_FOLDER.mkdir(
         parents=True,
         exist_ok=True,
     )
+
+    service = AIChatService()
 
     return service
 
@@ -190,9 +191,7 @@ def test_load_missing_chat(
     )
 
 
-def test_list_chats(
-    chat_service,
-):
+def test_list_chats(chat_service):
 
     chat_service.save_chat(
         "a.json",
@@ -204,17 +203,13 @@ def test_list_chats(
         [],
     )
 
-    chats = chat_service.list_chats()
+    chats = AIChatService.list_chats()
 
     assert len(chats) == 2
 
-    assert all(
-        isinstance(
-            item,
-            Path,
-        )
-        for item in chats
-    )
+    assert chats[0].name == "a.json"
+
+    assert chats[1].name == "b.json"
 
 
 def test_delete_chat(

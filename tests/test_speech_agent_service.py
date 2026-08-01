@@ -75,6 +75,7 @@ def test_load_model(mock_load):
     loaded = SpeechService.load_model("base")
 
     assert loaded == model
+    assert SpeechService._model == model
 
     assert SpeechService._model_name == "base"
 
@@ -189,7 +190,17 @@ def test_duplicate_transcript(
         status,
     )
 
-    assert result == "Existing Transcript"
+    assert result["text"] == "Existing Transcript"
+
+    assert result["chunks"] == 0
+
+    assert result["model"] == "base"
+
+    assert result["word_count"] == 2
+
+    assert result["character_count"] == len(
+        "Existing Transcript"
+    )
 
     assert progress.calls[-1] == 100
 
