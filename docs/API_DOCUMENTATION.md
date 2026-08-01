@@ -1,489 +1,255 @@
-# 🔌 AI Video Analyzer - API Documentation
+# API Documentation
 
-<p align="center">
+![Python](https://img.shields.io/badge/Python-3.11+-3776AB?logo=python&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-1.x-FF4B4B?logo=streamlit&logoColor=white)
+![Tests](https://img.shields.io/badge/Tests-531%20Passed-success)
+![Pytest](https://img.shields.io/badge/Pytest-Passing-success?logo=pytest)
+![Version](https://img.shields.io/badge/Version-v1.0.0-blue)
+![License](https://img.shields.io/badge/License-MIT-green)
 
-<img src="https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white"/>
-
-<img src="https://img.shields.io/badge/Streamlit-1.46+-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white"/>
-
-<img src="https://img.shields.io/badge/Ollama-Supported-black?style=for-the-badge"/>
-
-<img src="https://img.shields.io/badge/OpenAI-Supported-10A37F?style=for-the-badge"/>
-
-<img src="https://img.shields.io/badge/Anthropic-Supported-5A4FCF?style=for-the-badge"/>
-
-<img src="https://img.shields.io/badge/Version-v1.0.0-blue?style=for-the-badge"/>
-
-</p>
+> AI Video Analysis Agent API Documentation
 
 ---
 
-# Table of Contents
+# Application
 
-- Introduction
-- Architecture
-- Providers
-- Services
-- Utilities
-- Components
-- Configuration
-- Data Flow
-- Error Handling
-- Developer Notes
+**Entry Point**
 
----
-
-# Introduction
-
-This document describes the internal API used throughout **AI Video Analyzer**.
-
-Unlike a REST API, the project uses a modular Python architecture where services communicate through reusable classes and provider interfaces.
-
----
-
-# Internal Architecture
-
-```
-app.py
-   │
-   ▼
-Pages
-   │
-   ▼
-Components
-   │
-   ▼
-Services
-   │
-   ▼
-Providers
-   │
-   ▼
-AI Models
+```bash
+streamlit run app_agent.py
 ```
 
 ---
 
-# Provider API
-
-Every provider follows the same interface.
-
-```python
-provider.generate(
-    model=model_name,
-    prompt=prompt
-)
-```
-
----
-
-## Supported Providers
-
-| Provider | Purpose |
-|-----------|----------|
-| Ollama | Local AI Models |
-| OpenAI | Cloud LLM |
-| Anthropic | Claude Models |
-
----
-
-## Base Provider
-
-Responsible for defining the common interface.
-
-Example
-
-```python
-class BaseProvider:
-
-    def generate(self, model, prompt):
-        pass
-```
-
----
-
-## Ollama Provider
-
-Responsibilities
-
-- Connect to Ollama
-- List models
-- Generate responses
-- Handle errors
-
----
-
-## OpenAI Provider
-
-Responsibilities
-
-- API communication
-- Authentication
-- Completion generation
-- Exception handling
-
----
-
-## Anthropic Provider
-
-Responsibilities
-
-- Claude API integration
-- Prompt execution
-- Response parsing
-
----
-
-# Service Layer
-
-Business logic is implemented inside services.
-
----
-
-## VideoService
-
-Responsibilities
-
-- Save uploads
-- Validate files
-- Read metadata
-
-Typical methods
+# Application Flow
 
 ```
-save_video()
-
-validate_video()
-
-get_metadata()
-```
-
----
-
-## AudioService
-
-Responsibilities
-
-- Audio extraction
-- Audio conversion
-- Audio validation
-
-Methods
-
-```
-extract_audio()
-
-get_audio_info()
-```
-
----
-
-## SpeechService
-
-Responsibilities
-
-- Whisper loading
-- Speech recognition
-- Transcript generation
-
-Methods
-
-```
-load_model()
-
-transcribe()
-
-save_transcript()
-```
-
----
-
-## AIAnalysisService
-
-Responsibilities
-
-- Prompt preparation
-- Provider selection
-- AI communication
-- Result formatting
-
-Methods
-
-```
-generate_summary()
-
-generate_keywords()
-
-generate_topics()
-
-generate_analysis()
-```
-
----
-
-## ExportService
-
-Responsibilities
-
-Generate
-
-- TXT
-- Markdown
-- HTML
-- PDF
-
-Methods
-
-```
-export_txt()
-
-export_md()
-
-export_html()
-
-export_pdf()
-```
-
----
-
-## MetadataService
-
-Responsibilities
-
-- Read metadata
-- Format metadata
-- Display metadata
-
----
-
-# Utility Modules
-
-Utility modules provide reusable helper functions.
-
-Examples
-
-```
-FileValidator
-
-TranscriptUtils
-
-AudioUtils
-
-ExportUtils
-
-Logger
-
-ConfigManager
-```
-
----
-
-# Components
-
-Reusable Streamlit UI components.
-
-Examples
-
-```
-Sidebar
-
-Header
-
-Footer
-
-TranscriptViewer
-
-ChatComponent
-
-ExportPanel
-
-MetadataViewer
-```
-
----
-
-# Configuration
-
-Configuration is centralized.
-
-Examples
-
-```
-APP_NAME
-
-VERSION
-
-SUPPORTED_FORMATS
-
-MAX_FILE_SIZE
-
-UPLOAD_DIRECTORY
-
-EXPORT_DIRECTORY
-```
-
----
-
-# Data Flow
-
-```
-Video
-
-↓
-
-Validation
-
-↓
-
+Upload Video
+      │
+      ▼
+Metadata Extraction
+      │
+      ▼
 Audio Extraction
-
-↓
-
-Speech Recognition
-
-↓
-
-Transcript
-
-↓
-
+      │
+      ▼
+Speech Transcription
+      │
+      ▼
 AI Analysis
-
-↓
-
-Reports
-
-↓
-
+      │
+      ▼
+AI Chat
+      │
+      ▼
+Report Generation
+      │
+      ▼
 Export
 ```
 
 ---
 
-# Exception Handling
+# Agents
 
-The application should gracefully handle:
+| Agent | Responsibility |
+|--------|----------------|
+| UploadAgent | Upload and validate videos |
+| MetadataAgent | Extract video/audio metadata |
+| AudioAgent | Extract audio from video |
+| TranscriptAgent | Generate transcript using Whisper |
+| AnalysisAgent | Perform AI analysis |
+| ChatAgent | Chat with transcript |
+| ReportAgent | Generate analysis report |
+| ExportAgent | Export reports |
 
-- Invalid file types
+---
 
-- Unsupported video formats
+# Services
 
-- AI provider errors
+| Service | Responsibility |
+|----------|----------------|
+| VideoService | Video upload, duplicate detection, hashing |
+| MetadataService | Video and audio metadata |
+| AudioService | Audio extraction and metadata |
+| SpeechService | Whisper transcription |
+| AIAnalysisService | AI analysis generation |
+| AIChatService | AI chat management |
+| ReportService | Report generation |
+| ExportService | Export reports |
 
-- Missing API keys
+---
 
-- Missing models
+# Providers
 
-- Network failures
+| Provider | Purpose |
+|----------|---------|
+| OllamaProvider | Local LLM support |
+| OpenAIProvider | OpenAI models |
+| AnthropicProvider | Claude models |
+| ProviderFactory | Returns configured provider |
 
+---
+
+# Utilities
+
+- AudioSplitter
+- FileValidator
+- ModelManager
+- ThemeManager
+- Helper Functions
+
+---
+
+# Workflow Context
+
+Common context values
+
+```
+uploaded_file
+video
+video_metadata
+audio
+audio_metadata
+transcript
+transcript_metadata
+analysis
+analysis_metadata
+chat_history
+report
+exports
+provider_name
+model_name
+status
+```
+
+---
+
+# Storage Structure
+
+```
+uploads/
+audio/
+metadata/
+transcripts/
+analysis/
+chat_history/
+reports/
+exports/
+```
+
+---
+
+# Supported Formats
+
+### Video
+
+- MP4
+- AVI
+- MOV
+- MKV
+- WEBM
+
+### Audio
+
+- MP3
+- WAV
+
+### Export
+
+- PDF
+- HTML
+- Markdown
+- TXT
+- JSON
+
+---
+
+# Main Modules
+
+```
+app_agent.py
+agents/
+services/
+providers/
+ui/
+utils/
+workflows/
+tests/
+```
+
+---
+
+# Error Handling
+
+The application handles:
+
+- Invalid uploads
+- Missing files
+- Empty transcripts
+- Provider errors
 - Export failures
+- File system exceptions
 
 ---
 
-# Logging
-
-Recommended logging includes
+# Testing
 
 ```
-INFO
-
-WARNING
-
-ERROR
-
-DEBUG
+Framework : Pytest
+Status    : 531 Passed
+Failures  : 0
 ```
 
-Store logs for troubleshooting and debugging during development.
+Run tests:
+
+```bash
+pytest
+```
 
 ---
 
-# Extension Guide
+# Technology Stack
 
-Adding a new AI provider:
-
-1. Create provider class.
-
-2. Inherit BaseProvider.
-
-3. Implement generate().
-
-4. Register in ProviderFactory.
-
-5. Add tests.
-
----
-
-# Best Practices
-
-✔ Keep business logic inside services.
-
-✔ Keep providers lightweight.
-
-✔ Write unit tests for new modules.
-
-✔ Reuse utility functions.
-
-✔ Avoid duplicated logic.
-
-✔ Handle exceptions consistently.
+- Python
+- Streamlit
+- Whisper
+- Ollama
+- OpenAI
+- Anthropic
+- OpenCV
+- MoviePy
+- ReportLab
+- FFmpeg
 
 ---
 
-# Future API Enhancements
+# GitHub
 
-Potential additions include:
+Repository
 
-- REST API
+```
+https://github.com/satya66123/AI-Video-Analysis-Agent
+```
 
-- FastAPI integration
+Issues
 
-- Authentication
+```
+https://github.com/satya66123/AI-Video-Analysis-Agent/issues
+```
 
-- JWT Support
+Pull Requests
 
-- WebSocket Streaming
+```
+https://github.com/satya66123/AI-Video-Analysis-Agent/pulls
+```
 
-- Plugin API
+Releases
 
-- Batch Processing API
-
-- Cloud Deployment
-
----
-
-# Related Documentation
-
-- INSTALLATION.md
-
-- FEATURES.md
-
-- PROJECT_STRUCTURE.md
-
-- ARCHITECTURE.md
-
-- SYSTEM_DESIGN.md
-
-- PROVIDER_GUIDE.md
-
-- TESTING.md
-
-- README.md
+```
+https://github.com/satya66123/AI-Video-Analysis-Agent/releases
+```
 
 ---
 
-# 👨‍💻 Author
-
-**Nekkanti Satya Srinath**
-
-GitHub Repository
-
-https://github.com/satya66123/AI-Video-Analyzer
-
----
-
-**Version:** v1.0.0
-
-**License:** MIT
-
-⭐ Contributions, feature requests, and feedback are always welcome.
+© 2026 AI Video Analysis Agent

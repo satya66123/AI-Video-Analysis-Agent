@@ -1,53 +1,65 @@
-# RESUME_BULLETS.md
+# Resume Bullets
 
-# AI Video Analyzer – Resume Bullet Points
+## AI Video Analysis Agent
 
-**Tech Stack:** Python, Streamlit, Whisper, FFmpeg, Ollama, OpenAI, Anthropic, Pytest, GitHub Actions
+### Project
 
-## ATS-Friendly Resume Bullets
-
-- Designed and developed an AI-powered Video Analyzer using Python and Streamlit to automate video transcription, AI-powered summarization, and content analysis.
-- Integrated multiple AI providers (Ollama, OpenAI, and Anthropic) through a Factory Pattern and modular provider architecture, enabling flexible model selection.
-- Implemented audio extraction using FFmpeg and speech-to-text transcription using OpenAI Whisper for accurate transcript generation.
-- Built a layered and modular architecture with reusable service modules for video processing, audio processing, transcript management, AI analysis, and report generation.
-- Developed export functionality supporting TXT, HTML, Markdown, and PDF report generation from AI-generated analysis results.
-- Implemented secure file validation, duplicate detection, progress tracking, structured logging, and exception handling to improve application reliability and user experience.
-- Wrote comprehensive unit tests using Pytest and `unittest.mock`, achieving reliable validation of services, providers, and utility modules.
-- Configured GitHub Actions to automate testing through Continuous Integration (CI) workflows for every code push and pull request.
-- Applied Object-Oriented Programming, SOLID principles, Dependency Injection, and clean coding practices to build a scalable and maintainable application.
-- Produced comprehensive technical documentation, including architecture diagrams, API documentation, testing guides, installation instructions, and user documentation.
+AI Video Analysis Agent is an end-to-end AI-powered application developed using Python and Streamlit for automated video processing, transcript generation, AI analysis, intelligent chat, professional report generation, and multi-format export.
 
 ---
 
-## Impact Highlights
+## Resume Highlights
 
-- Built a complete end-to-end AI application integrating video processing, speech recognition, and Large Language Models.
-- Demonstrated practical experience with software architecture, design patterns, automated testing, and CI/CD workflows.
-- Developed a reusable provider abstraction supporting both local and cloud-based AI models.
-- Improved maintainability through modular design and separation of concerns across the application.
+- Developed a modular AI Video Analysis application using Python and Streamlit following an Agent → Service → Provider architecture.
+
+- Implemented automated video upload, validation, duplicate detection, metadata extraction, and audio processing workflows.
+
+- Integrated OpenAI Whisper for speech-to-text transcription with support for long audio chunking and transcript management.
+
+- Built a multi-provider AI framework supporting Ollama, OpenAI, and Anthropic through a unified Provider Factory.
+
+- Designed AI-powered transcript analysis and contextual chat capabilities using Large Language Models.
+
+- Developed a professional reporting system supporting PDF, HTML, Markdown, TXT, and JSON export formats.
+
+- Implemented workflow context management for communication between modular agents.
+
+- Created reusable service and provider layers to improve maintainability and scalability.
+
+- Built a comprehensive history management system for videos, transcripts, analyses, reports, exports, and chat sessions.
+
+- Wrote and maintained 531 automated unit and integration tests using Pytest with a 100% passing test suite.
+
+- Produced complete technical documentation including architecture, API documentation, installation guide, configuration guide, testing guide, and user documentation.
 
 ---
 
-## Key Skills Demonstrated
+## Technologies
 
 - Python
 - Streamlit
 - Whisper
-- FFmpeg
 - Ollama
-- OpenAI API
-- Anthropic API
+- OpenAI
+- Anthropic
+- FFmpeg
+- OpenCV
+- ReportLab
 - Pytest
-- Git & GitHub
-- GitHub Actions
-- REST API Integration
-- Object-Oriented Programming (OOP)
-- SOLID Principles
-- Factory Pattern
-- Dependency Injection
-- Clean Architecture
-- Modular Software Design
-- Error Handling
-- Logging
-- File Processing
-- AI Integration
+- Git
+- GitHub
+
+---
+
+## Skills Demonstrated
+
+- Software Architecture
+- Artificial Intelligence Integration
+- Python Development
+- Speech Recognition
+- Video Processing
+- Report Generation
+- Testing Automation
+- Documentation
+- Clean Code
+- Modular Design

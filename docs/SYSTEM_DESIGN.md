@@ -1,182 +1,60 @@
-# 🏛 AI Video Analyzer - System Design
+# System Design
 
-<p align="center">
-
-<img src="https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white"/>
-
-<img src="https://img.shields.io/badge/Streamlit-1.46+-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white"/>
-
-<img src="https://img.shields.io/badge/Ollama-Supported-black?style=for-the-badge"/>
-
-<img src="https://img.shields.io/badge/OpenAI-Supported-10A37F?style=for-the-badge"/>
-
-<img src="https://img.shields.io/badge/Anthropic-Supported-5A4FCF?style=for-the-badge"/>
-
-<img src="https://github.com/satya66123/AI-Video-Analyzer/actions/workflows/python-tests.yml/badge.svg"/>
-
-<img src="https://img.shields.io/badge/Pytest-Passing-success?style=for-the-badge"/>
-
-<img src="https://img.shields.io/badge/Version-v1.0.0-blue?style=for-the-badge"/>
-
-</p>
+![System Design](https://img.shields.io/badge/System-Design-blue)
+![Architecture](https://img.shields.io/badge/Architecture-Agent--Service--Provider-success)
+![Version](https://img.shields.io/badge/Version-v1.0.0-blue)
 
 ---
 
-# 📖 Table of Contents
+# Overview
 
-- Introduction
-- Design Goals
-- High-Level Design
-- Low-Level Design
-- System Workflow
-- Component Interaction
-- Data Flow
-- Storage Design
-- Error Handling
-- Security Considerations
-- Performance Optimization
-- Scalability
-- Future Enhancements
+AI Video Analysis Agent is a modular Streamlit application designed to automate the complete video analysis workflow. The system follows an **Agent → Service → Provider** architecture, separating workflow execution, business logic, and AI provider integration.
 
 ---
 
-# 🎯 Introduction
+# High-Level Architecture
 
-This document describes the overall system design of **AI Video Analyzer**. The application follows a modular, service-oriented architecture that separates the user interface, business logic, AI providers, and storage layers. This separation improves maintainability, extensibility, testing, and future scalability.
-
----
-
-# 🎯 Design Goals
-
-The system is designed to achieve the following objectives:
-
-- Modular architecture
-- Clean separation of responsibilities
-- Easy integration of AI providers
-- Maintainable codebase
-- Reusable components
-- High testability
-- Extensible feature set
-- Consistent user experience
-
----
-
-# 🏗 High-Level Design (HLD)
-
-```text
-                    +----------------------+
-                    |      End User        |
-                    +----------+-----------+
-                               |
-                               ▼
-                    +----------------------+
-                    |    Streamlit UI      |
-                    +----------+-----------+
-                               |
-                               ▼
-                    +----------------------+
-                    |      Components      |
-                    +----------+-----------+
-                               |
-                               ▼
-                    +----------------------+
-                    |       Services       |
-                    +----------+-----------+
-                               |
-                               ▼
-                    +----------------------+
-                    |      Providers       |
-                    +----------+-----------+
-                               |
-               +---------------+---------------+
-               |               |               |
-               ▼               ▼               ▼
-           Ollama         OpenAI        Anthropic
+```
+                   User
+                     │
+                     ▼
+             Streamlit Interface
+                     │
+                     ▼
+              Workflow Manager
+                     │
+                     ▼
+     ┌────────────────────────────────┐
+     │            Agents              │
+     └────────────────────────────────┘
+                     │
+                     ▼
+     ┌────────────────────────────────┐
+     │           Services             │
+     └────────────────────────────────┘
+                     │
+                     ▼
+     ┌────────────────────────────────┐
+     │        Provider Factory        │
+     └────────────────────────────────┘
+                     │
+          ┌──────────┼──────────┐
+          ▼          ▼          ▼
+      Ollama      OpenAI    Anthropic
+                     │
+                     ▼
+              Local File Storage
 ```
 
 ---
 
-# 🔍 Low-Level Design (LLD)
+# System Workflow
 
-### Presentation Layer
-
-Responsible for:
-
-- User interaction
-- Forms
-- Buttons
-- Navigation
-- Progress indicators
-- Displaying results
-
----
-
-### Component Layer
-
-Contains reusable UI modules.
-
-Examples:
-
-- Sidebar
-- Header
-- Footer
-- Transcript Viewer
-- Metadata Viewer
-- Export Panel
-- Chat Interface
-
----
-
-### Service Layer
-
-Business logic implementation.
-
-Primary services:
-
-- VideoService
-- AudioService
-- SpeechService
-- AIAnalysisService
-- ExportService
-- MetadataService
-- ChatHistoryService
-
-Responsibilities:
-
-- File processing
-- Validation
-- AI request coordination
-- Report generation
-- Export management
-
----
-
-### Provider Layer
-
-Abstracts communication with AI models.
-
-Supported providers:
-
-- Ollama
-- OpenAI
-- Anthropic
-
-Benefits:
-
-- Unified interface
-- Easy provider replacement
-- Reduced code duplication
-- Simplified testing
-
----
-
-# 🔄 System Workflow
-
-```text
-Video Upload
+```
+Upload Video
       │
       ▼
-Validation
+Video Validation
       │
       ▼
 Metadata Extraction
@@ -185,19 +63,202 @@ Metadata Extraction
 Audio Extraction
       │
       ▼
-Speech Recognition
-      │
-      ▼
-Transcript Generation
-      │
-      ▼
-Prompt Creation
+Speech Transcription
       │
       ▼
 AI Analysis
       │
       ▼
+AI Chat
+      │
+      ▼
 Report Generation
+      │
+      ▼
+Export Reports
+```
+
+---
+
+# Layered Architecture
+
+## Presentation Layer
+
+Responsible for:
+
+- Streamlit UI
+- User interaction
+- Navigation
+- Progress display
+- History pages
+
+Folder:
+
+```
+ui/
+```
+
+---
+
+## Workflow Layer
+
+Responsible for:
+
+- Agent execution
+- Workflow sequencing
+- Context management
+
+Folder:
+
+```
+workflows/
+```
+
+---
+
+## Agent Layer
+
+Agents coordinate the workflow by invoking services and updating the workflow context.
+
+Implemented agents:
+
+- UploadAgent
+- MetadataAgent
+- AudioAgent
+- TranscriptAgent
+- AnalysisAgent
+- ChatAgent
+- ReportAgent
+- ExportAgent
+
+Folder:
+
+```
+agents/
+```
+
+---
+
+## Service Layer
+
+Contains the application's business logic.
+
+Implemented services:
+
+- VideoService
+- MetadataService
+- AudioService
+- SpeechService
+- AIAnalysisService
+- AIChatService
+- ReportService
+- ExportService
+
+Folder:
+
+```
+services/
+```
+
+---
+
+## Provider Layer
+
+Provides a common interface for AI providers.
+
+Supported providers:
+
+- Ollama
+- OpenAI
+- Anthropic
+
+Components:
+
+```
+BaseProvider
+
+↓
+
+ProviderFactory
+
+↓
+
+Provider Implementation
+```
+
+Folder:
+
+```
+providers/
+```
+
+---
+
+## Utility Layer
+
+Contains reusable helper modules.
+
+Examples:
+
+- Audio Splitter
+- File Validator
+- Metadata Utilities
+- Report Utilities
+
+Folder:
+
+```
+utils/
+```
+
+---
+
+# Workflow Context
+
+The application uses a shared workflow context to exchange data between agents.
+
+Example:
+
+```
+{
+    video,
+    video_metadata,
+    audio,
+    audio_metadata,
+    transcript,
+    transcript_metadata,
+    analysis,
+    report,
+    exports,
+    chat_history,
+    status
+}
+```
+
+---
+
+# Data Flow
+
+```
+Video Upload
+      │
+      ▼
+Metadata
+      │
+      ▼
+Audio
+      │
+      ▼
+Transcript
+      │
+      ▼
+AI Analysis
+      │
+      ▼
+Chat
+      │
+      ▼
+Report
       │
       ▼
 Export
@@ -205,219 +266,139 @@ Export
 
 ---
 
-# 🔗 Component Interaction
+# Storage Design
 
-```text
-app.py
- │
- ▼
-Pages
- │
- ▼
-Components
- │
- ▼
-Services
- │
- ▼
-Providers
- │
- ▼
-AI Models
- │
- ▼
-Response
-```
-
----
-
-# 📊 Data Flow
+The application uses local folder-based storage.
 
 ```
 uploads/
-      │
-      ▼
 audio/
-      │
-      ▼
+metadata/
 transcripts/
-      │
-      ▼
 analysis/
-      │
-      ▼
+chat_history/
 reports/
-      │
-      ▼
 exports/
 ```
 
-Each stage produces output that serves as the input for the next stage, ensuring a clear and traceable processing pipeline.
+---
+
+# AI Processing
+
+The AI pipeline performs:
+
+1. Load transcript
+2. Generate prompt
+3. Select provider
+4. Generate AI response
+5. Store analysis
+6. Generate report
 
 ---
 
-# 💾 Storage Design
+# Report Pipeline
 
-| Directory | Purpose |
-|-----------|---------|
-| uploads | Uploaded video files |
-| audio | Extracted audio |
-| transcripts | Speech-to-text output |
-| analysis | AI-generated analysis |
-| reports | Structured reports |
-| exports | Exported documents |
-| chat_history | Conversation history |
-| assets | Images and logos |
-| docs | Documentation |
-| tests | Automated tests |
-
----
-
-# ⚠ Error Handling Strategy
-
-The application uses structured error handling throughout the processing pipeline.
-
-Common scenarios:
-
-- Invalid file format
-- Corrupted video
-- Audio extraction failure
-- Speech recognition failure
-- AI provider unavailable
-- Export failure
-- Missing configuration
-- Network connectivity issues
-
-Recommended approach:
-
-- Validate inputs before processing.
-- Catch and log exceptions.
-- Display user-friendly error messages.
-- Allow recovery without restarting the application.
+```
+Video Metadata
+        │
+Audio Metadata
+        │
+Transcript
+        │
+AI Analysis
+        │
+Chat History
+        │
+        ▼
+Complete Report
+        │
+        ▼
+Export Module
+```
 
 ---
 
-# 🔒 Security Considerations
+# Export Pipeline
 
-The application follows several security best practices.
+Supported formats:
 
-### Input Validation
+- PDF
+- HTML
+- Markdown
+- TXT
+- JSON
 
-- Validate file type
-- Validate file size
-- Prevent unsupported uploads
-
-### API Key Protection
-
-- Store credentials in `.env`
-- Never commit secrets to version control
-
-### File Management
-
-- Organize generated files into dedicated directories
-- Avoid overwriting existing data without confirmation
-
-### Dependencies
-
-- Keep third-party libraries updated
-- Review dependency vulnerabilities periodically
+```
+Report
+   │
+   ▼
+Export Service
+   │
+   ▼
+Generate Files
+   │
+   ▼
+exports/
+```
 
 ---
 
-# ⚡ Performance Optimization
+# Error Handling
 
-Performance improvements include:
+The system validates:
 
-- Efficient file handling
-- Modular services
-- Reusable components
-- Lazy loading where appropriate
-- Background processing opportunities
-- Reduced duplicate AI requests
-- Organized file storage
+- Uploaded files
+- Duplicate uploads
+- Missing transcripts
+- AI provider availability
+- Export operations
+- File operations
 
----
-
-# 📈 Scalability
-
-The modular design allows future expansion without significant architectural changes.
-
-Potential enhancements:
-
-- Additional AI providers
-- Cloud storage integration
-- Database-backed history
-- Batch processing
-- Distributed processing
-- REST API
-- User authentication
-- Team collaboration
-- Plugin architecture
+Errors are handled within the appropriate service and propagated to the workflow when necessary.
 
 ---
 
-# 🧩 Design Advantages
+# Design Principles
 
-| Feature | Benefit |
-|----------|----------|
-| Modular Design | Easier maintenance |
-| Provider Abstraction | Multiple AI backends |
-| Service Layer | Centralized business logic |
-| Reusable Components | Less duplicated code |
-| Automated Testing | Improved reliability |
-| CI/CD Support | Continuous validation |
-| Organized Storage | Simplified file management |
-| Extensible Structure | Easier future development |
+The system is built using:
+
+- Modular Design
+- Separation of Concerns
+- Single Responsibility Principle
+- Reusability
+- Extensibility
+- Maintainability
 
 ---
 
-# 🚀 Future Roadmap
+# Advantages
 
-Planned improvements may include:
-
-- OCR support
-- Speaker diarization
-- Subtitle generation
-- Timeline visualization
-- Multi-language translation
-- Semantic transcript search
-- Batch video analysis
-- Cloud deployment
-- Analytics dashboard
-- Role-based access control
+- Modular architecture
+- Easy maintenance
+- Easy testing
+- Multiple AI provider support
+- Reusable services
+- Scalable workflow
+- Simple local storage
+- Clear separation of responsibilities
 
 ---
 
-# 📚 Related Documentation
+# Technology Stack
 
-- 01_INSTALLATION.md
-- 02_FEATURES.md
-- 03_PROJECT_STRUCTURE.md
-- 04_ARCHITECTURE.md
-- 06_USER_GUIDE.md
-- 09_TESTING.md
-- README.md
-
----
-
-# 👨‍💻 Author
-
-**Nekkanti Satya Srinath**
-
-GitHub Repository
-
-https://github.com/satya66123/AI-Video-Analyzer
+| Layer | Technology |
+|--------|------------|
+| Frontend | Streamlit |
+| Language | Python |
+| Speech Recognition | Whisper |
+| AI Providers | Ollama, OpenAI, Anthropic |
+| Audio Processing | FFmpeg |
+| Reporting | ReportLab |
+| Testing | Pytest |
+| Storage | Local Files & JSON |
 
 ---
 
-## 📄 License
+# Summary
 
-This project is released under the **MIT License**.
-
-See the `LICENSE` file for details.
-
----
-
-**Version:** v1.0.0
-
-⭐ If you find this project useful, consider giving it a **GitHub Star** and contributing through Issues or Pull Requests.
+The AI Video Analysis Agent uses a clean **Agent → Service → Provider** architecture to separate workflow management, business logic, and AI integration. This layered design makes the application modular, maintainable, testable, and easy to extend with new AI providers, workflow agents, services, and export formats while supporting an end-to-end AI-powered video analysis pipeline.

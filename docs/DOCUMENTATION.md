@@ -1,264 +1,168 @@
-# DOCUMENTATION.md
+# Documentation
 
-# AI Video Analyzer – Project Documentation 
+![Documentation](https://img.shields.io/badge/Documentation-Complete-success)
+![Version](https://img.shields.io/badge/Version-v1.0.0-blue)
+![Tests](https://img.shields.io/badge/Tests-531%20Passed-success)
 
-## Project Overview
+Welcome to the **AI Video Analysis Agent** documentation.
 
-# AI Video Analyzer
-
-![Python](https://img.shields.io/badge/Python-3.11+-blue?logo=python)
-![Streamlit](https://img.shields.io/badge/Streamlit-App-red?logo=streamlit)
-![Whisper](https://img.shields.io/badge/OpenAI-Whisper-green)
-![FFmpeg](https://img.shields.io/badge/FFmpeg-Media-orange)
-![Pytest](https://img.shields.io/badge/Pytest-Tested-success?logo=pytest)
-![GitHub Actions](https://img.shields.io/badge/CI-GitHub%20Actions-blue?logo=githubactions)
-![License](https://img.shields.io/badge/License-MIT-yellow)
-![Status](https://img.shields.io/badge/Status-Stable-brightgreen)
-
-AI Video Analyzer is an AI-powered desktop/web application developed using **Python** and **Streamlit** that automates video understanding by extracting audio, generating transcripts, and producing AI-powered summaries and insights. The application supports multiple Large Language Model (LLM) providers, allowing users to choose between local and cloud-based AI models for analysis.
+This project is a Streamlit-based application that automates the complete video analysis workflow using artificial intelligence. It supports video upload, metadata extraction, audio extraction, speech transcription, AI-powered analysis, transcript-based chat, report generation, and exporting reports in multiple formats.
 
 ---
 
-## Objectives
+# Features
 
-- Automate video transcription and analysis.
-- Support multiple AI providers.
-- Provide accurate speech-to-text conversion.
-- Generate AI-powered summaries and insights.
-- Export analysis reports in multiple formats.
-- Demonstrate clean software architecture and engineering best practices.
+- Video Upload
+- Duplicate Video Detection
+- Video Metadata Extraction
+- Audio Extraction
+- Audio Metadata Generation
+- Whisper Speech-to-Text
+- AI Transcript Analysis
+- AI Chat Assistant
+- Professional Report Generation
+- Export Reports (PDF, HTML, Markdown, TXT, JSON)
+- History Management
+- Multi-AI Provider Support
+- Local JSON Storage
 
 ---
 
-## Tech Stack
+# Workflow
 
-### Languages
+```
+Upload Video
+      │
+      ▼
+Metadata Extraction
+      │
+      ▼
+Audio Extraction
+      │
+      ▼
+Speech Transcription
+      │
+      ▼
+AI Analysis
+      │
+      ▼
+AI Chat
+      │
+      ▼
+Report Generation
+      │
+      ▼
+Export
+```
+
+---
+
+# Run the Application
+
+Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+Start the application
+
+```bash
+streamlit run app_agent.py
+```
+
+---
+
+# Project Structure
+
+```
+app_agent.py
+agents/
+services/
+providers/
+ui/
+utils/
+workflows/
+uploads/
+audio/
+metadata/
+transcripts/
+analysis/
+chat_history/
+reports/
+exports/
+tests/
+docs/
+```
+
+---
+
+# Supported AI Providers
+
+- Ollama
+- OpenAI
+- Anthropic
+
+---
+
+# Supported Export Formats
+
+- PDF
+- HTML
+- Markdown
+- TXT
+- JSON
+
+---
+
+# Technology Stack
+
 - Python
-
-### Framework
 - Streamlit
-
-### AI & Machine Learning
 - Whisper
 - Ollama
 - OpenAI
 - Anthropic
-
-### Multimedia
+- OpenCV
+- MoviePy
 - FFmpeg
-
-### Testing
-- Pytest
-- unittest.mock
-
-### Version Control
-- Git
-- GitHub
-- GitHub Actions
+- ReportLab
 
 ---
 
-## Key Features
-
-- Video Upload
-- File Validation
-- Audio Extraction
-- Speech-to-Text Transcription
-- AI Summary Generation
-- Key Points Extraction
-- Action Items Generation
-- Multi-Provider AI Support
-- Progress Tracking
-- Export Reports (TXT, HTML, Markdown, PDF)
-- Error Handling
-- Logging
-- Responsive Streamlit Interface
-
----
-
-## Architecture
+# Testing
 
 ```
-User
-   │
-   ▼
-Streamlit UI
-   │
-   ▼
-UI Components
-   │
-   ▼
-Service Layer
- ├── VideoService
- ├── AudioService
- ├── SpeechService
- ├── AIAnalysisService
- └── ExportService
-   │
-   ▼
-Provider Factory
- ├── Ollama Provider
- ├── OpenAI Provider
- └── Anthropic Provider
+Framework : Pytest
+Status    : 531 Passed
+Failures  : 0
+```
+
+Run tests
+
+```bash
+pytest
 ```
 
 ---
 
-## Design Principles
+# Documentation
 
-- Layered Architecture
-- SOLID Principles
-- Object-Oriented Programming
-- Factory Pattern
-- Dependency Injection
-- Separation of Concerns
-- Clean Code
+Additional project documentation is available in the `docs/` directory.
 
----
-
-## Development Workflow
-
-1. Project Planning
-2. Environment Setup
-3. UI Development
-4. Video Processing
-5. Audio Processing
-6. Speech Recognition
-7. AI Integration
-8. Report Export
-9. Testing
-10. Documentation
-11. GitHub Release
+- API_DOCUMENTATION.md
+- ARCHITECTURE.md
+- CONFIGURATION.md
+- CONTRIBUTING.md
+- CHANGELOG.md
+- RELEASE_NOTES.md
+- ROADMAP.md
+- SECURITY.md
+- USER_GUIDE.md
+- TESTING.md
 
 ---
 
-## Testing
+# Summary
 
-- Unit Testing with Pytest
-- Mock Testing using unittest.mock
-- Provider Testing
-- Service Testing
-- Utility Testing
-- Continuous Integration using GitHub Actions
-
----
-
-## Skills Demonstrated
-
-- Python Development
-- AI Integration
-- Streamlit Application Development
-- Multimedia Processing
-- REST API Integration
-- Software Architecture
-- Design Patterns
-- Unit Testing
-- CI/CD
-- Technical Documentation
-
----
-
-# PROJECT_NOTES.md
-
-## Project Summary
-
-AI Video Analyzer is a modular AI application that processes uploaded videos, converts speech into text using Whisper, analyzes the transcript with multiple AI providers, and exports structured reports.
-
----
-
-## Problem Statement
-
-Watching long videos to extract useful information is time-consuming. This project automates transcription, summarization, and content analysis using Artificial Intelligence.
-
----
-
-## Solution
-
-The application extracts audio using FFmpeg, transcribes speech using Whisper, sends the transcript to an AI provider for analysis, and generates downloadable reports.
-
----
-
-## Modules
-
-- Video Processing
-- Audio Processing
-- Speech Recognition
-- Transcript Management
-- AI Analysis
-- Export System
-- Provider Management
-- Utilities
-
----
-
-## AI Providers
-
-- Ollama
-- OpenAI
-- Anthropic
-
----
-
-## Software Engineering Concepts Used
-
-- Object-Oriented Programming
-- SOLID Principles
-- Factory Pattern
-- Dependency Injection
-- Layered Architecture
-- Modular Design
-- Exception Handling
-- Logging
-- Unit Testing
-
----
-
-## Challenges Faced
-
-- Multi-provider AI integration
-- Handling large video files
-- Audio extraction reliability
-- Transcript management
-- Export compatibility
-- Automated testing
-
----
-
-## Solutions Implemented
-
-- Provider Factory abstraction
-- Reusable service modules
-- Robust validation
-- Structured logging
-- Mock-based unit testing
-- Continuous Integration using GitHub Actions
-
----
-
-## Outcomes
-
-- Built a complete end-to-end AI application.
-- Improved understanding of software architecture and AI integration.
-- Gained hands-on experience with testing, CI/CD, and documentation.
-- Developed reusable, scalable, and maintainable software components.
-
----
-
-## Future Enhancements
-
-- User Authentication
-- Database Integration
-- Cloud Deployment
-- OCR Support
-- Speaker Diarization
-- Real-time Video Analysis
-- Batch Processing
-- Docker Support
-- Kubernetes Deployment
-- Analytics Dashboard
-
----
-
-## Conclusion
-
-AI Video Analyzer demonstrates practical experience in Python development, AI integration, multimedia processing, software architecture, automated testing, and technical documentation while following modern software engineering best practices.
+AI Video Analysis Agent provides an end-to-end workflow for analyzing videos with AI. Its modular architecture, agent-based workflow, provider abstraction, and comprehensive testing make it suitable for learning, development, and real-world AI-powered video analysis applications.

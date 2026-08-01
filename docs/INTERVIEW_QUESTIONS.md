@@ -1,269 +1,351 @@
-# 🎯 AI Video Analyzer - Interview Questions
+# Interview Questions
 
-<p align="center">
+![Interview](https://img.shields.io/badge/Interview-Questions-blue)
+![Python](https://img.shields.io/badge/Python-Project-success)
+![AI](https://img.shields.io/badge/AI-Video%20Analysis-purple)
 
-<img src="https://img.shields.io/github/license/satya66123/AI-Video-Analyzer?style=for-the-badge"/>
-
-<img src="https://img.shields.io/github/actions/workflow/status/satya66123/AI-Video-Analyzer/python-app.yml?style=for-the-badge&label=Build"/>
-
-<img src="https://img.shields.io/badge/Interview-Preparation-success?style=for-the-badge"/>
-
-<img src="https://img.shields.io/badge/Python-3.11-blue?style=for-the-badge"/>
-
-<img src="https://img.shields.io/badge/Version-v1.0.0-blue?style=for-the-badge"/>
-
-</p>
+This document contains common interview questions and sample answers related to the **AI Video Analysis Agent** project.
 
 ---
 
-# 📑 Table of Contents
+# Project Overview
 
-1. Project Overview
-2. Python
-3. Streamlit
-4. Video Processing
-5. Audio Processing
-6. Whisper
-7. AI Providers
-8. AI Analysis
-9. Architecture
-10. Testing
-11. Git & GitHub
-12. Deployment
-13. HR Questions
+### 1. What is AI Video Analysis Agent?
+
+AI Video Analysis Agent is a Streamlit-based application that automates video analysis using artificial intelligence. It extracts metadata, converts speech to text, performs AI analysis, enables transcript-based chat, generates reports, and exports results in multiple formats.
 
 ---
 
-# 🚀 Project Overview
+### 2. Why did you build this project?
 
-### Q1. Tell me about your AI Video Analyzer project.
-
-### Q2. Why did you build this project?
-
-### Q3. What problem does it solve?
-
-### Q4. What are the major features?
-
-### Q5. Which technologies did you use?
-
-### Q6. What challenges did you face?
-
-### Q7. What did you learn?
-
-### Q8. What improvements would you make in Version 2?
+To automate video understanding using AI while demonstrating modular software architecture, local AI integration, and real-world Python development.
 
 ---
 
-# 🐍 Python
+### 3. What problem does this project solve?
 
-### Q9. Why did you choose Python?
-
-### Q10. Explain your project structure.
-
-### Q11. What are decorators?
-
-### Q12. Explain exception handling.
-
-### Q13. What are context managers?
-
-### Q14. Difference between List and Tuple?
-
-### Q15. Explain OOP concepts used.
-
-### Q16. Explain inheritance.
-
-### Q17. Explain polymorphism.
-
-### Q18. Explain abstraction.
+It reduces manual effort by automatically processing videos and generating structured insights, transcripts, reports, and AI-assisted answers.
 
 ---
 
-# 🎨 Streamlit
+# Architecture
 
-### Q19. Why Streamlit?
+### 4. Which architecture did you use?
 
-### Q20. Explain Streamlit session_state.
-
-### Q21. How did you manage navigation?
-
-### Q22. How were components organized?
-
-### Q23. How did you improve UI responsiveness?
+Agent → Service → Provider Architecture
 
 ---
 
-# 🎥 Video Processing
+### 5. Why Agent Architecture?
 
-### Q24. How does video upload work?
-
-### Q25. How is video validated?
-
-### Q26. Which formats are supported?
-
-### Q27. How is metadata extracted?
-
-### Q28. How do you handle large files?
+Because each workflow step has a single responsibility, making the project modular, maintainable, scalable, and easy to test.
 
 ---
 
-# 🔊 Audio Processing
+### 6. What is the difference between Agents and Services?
 
-### Q29. Why use FFmpeg?
+Agents manage workflow execution and update context.
 
-### Q30. Explain audio extraction.
-
-### Q31. How is audio metadata generated?
-
-### Q32. What happens if extraction fails?
+Services contain the business logic.
 
 ---
 
-# 🎙 Whisper
+### 7. Why use ProviderFactory?
 
-### Q33. Why Whisper?
-
-### Q34. How does transcription work?
-
-### Q35. What factors affect transcription quality?
-
-### Q36. How do you handle transcription failures?
+ProviderFactory abstracts AI providers so the application can switch between Ollama, OpenAI, and Anthropic without changing business logic.
 
 ---
 
-# 🤖 AI Providers
+# Workflow
 
-### Q37. Why support multiple providers?
+### 8. Explain the project workflow.
 
-### Q38. Explain Provider Factory.
-
-### Q39. Difference between Ollama and OpenAI?
-
-### Q40. Why use local LLMs?
-
-### Q41. How are providers switched?
-
----
-
-# 🧠 AI Analysis
-
-### Q42. How is the summary generated?
-
-### Q43. Explain prompt engineering.
-
-### Q44. What analyses are available?
-
-### Q45. How does transcript analysis work?
-
-### Q46. How does AI Chat work?
-
----
-
-# 🏛 Architecture
-
-### Q47. Why use a service layer?
-
-### Q48. Explain modular architecture.
-
-### Q49. Explain folder organization.
-
-### Q50. What design principles did you follow?
-
-### Q51. Explain Provider Factory.
-
-### Q52. Explain dependency separation.
+```
+Upload Video
+      │
+      ▼
+Metadata
+      │
+      ▼
+Audio Extraction
+      │
+      ▼
+Transcription
+      │
+      ▼
+AI Analysis
+      │
+      ▼
+AI Chat
+      │
+      ▼
+Report Generation
+      │
+      ▼
+Export
+```
 
 ---
 
-# 🧪 Testing
+### 9. What is Workflow Context?
 
-### Q53. Why use Pytest?
-
-### Q54. What is mocking?
-
-### Q55. Explain fixtures.
-
-### Q56. How many tests did you write?
-
-### Q57. Explain GitHub Actions.
-
-### Q58. How do you ensure code quality?
+A shared dictionary used by all agents to exchange data during execution.
 
 ---
 
-# 🌐 Git & GitHub
+# AI
 
-### Q59. Explain Git workflow.
+### 10. Which AI providers are supported?
 
-### Q60. What is branching?
-
-### Q61. What is a Pull Request?
-
-### Q62. What is Continuous Integration?
-
-### Q63. Why use GitHub Actions?
+- Ollama
+- OpenAI
+- Anthropic
 
 ---
 
-# 🚀 Deployment
+### 11. Why use Ollama?
 
-### Q64. How would you deploy this project?
-
-### Q65. What environment variables are required?
-
-### Q66. How do you manage dependencies?
-
-### Q67. What security measures are included?
+It enables local AI inference without relying on cloud services.
 
 ---
 
-# 💼 HR Questions
+### 12. Which speech recognition model is used?
 
-### Q68. What was your biggest challenge?
-
-### Q69. What are you most proud of?
-
-### Q70. What would you improve?
-
-### Q71. What role did you personally contribute?
-
-### Q72. Why should we hire you?
-
-### Q73. What did this project teach you?
-
-### Q74. What is your favorite feature?
-
-### Q75. Explain this project in one minute.
+OpenAI Whisper.
 
 ---
 
-# 🎯 Interview Tips
+### 13. Why is audio split into chunks?
 
-✔ Understand the architecture.
-
-✔ Explain every module confidently.
-
-✔ Focus on problem-solving.
-
-✔ Describe challenges honestly.
-
-✔ Mention future improvements.
-
-✔ Demonstrate your GitHub repository.
-
-✔ Be prepared to explain design decisions.
+To process long audio files efficiently and avoid memory or model limitations.
 
 ---
 
-# 👨‍💻 Author
+# Video Processing
 
-**Nekkanti Satya Srinath**
+### 14. Which video formats are supported?
 
-GitHub Repository
-
-https://github.com/satya66123/AI-Video-Analyzer
+- MP4
+- AVI
+- MOV
+- MKV
+- WEBM
 
 ---
 
-Released under the **MIT License**
+### 15. How do you detect duplicate uploads?
 
-**Version:** v1.0.0
+By calculating file hashes and comparing them with previously uploaded videos.
+
+---
+
+### 16. Why extract metadata?
+
+To capture useful information such as duration, resolution, FPS, format, and file size.
+
+---
+
+# Reporting
+
+### 17. What information is included in reports?
+
+- Video details
+- Audio details
+- Transcript
+- AI analysis
+- Chat history
+- Processing metadata
+
+---
+
+### 18. Which export formats are supported?
+
+- PDF
+- HTML
+- Markdown
+- TXT
+- JSON
+
+---
+
+# Testing
+
+### 19. Which testing framework did you use?
+
+Pytest.
+
+---
+
+### 20. How many tests does the project have?
+
+531 automated tests.
+
+---
+
+### 21. What types of tests were written?
+
+- Agent Tests
+- Service Tests
+- Workflow Tests
+- Utility Tests
+- Integration Tests
+
+---
+
+# Python
+
+### 22. Why use class methods?
+
+To provide shared functionality without requiring object instances.
+
+---
+
+### 23. Why use type hints?
+
+They improve readability, IDE support, and code maintainability.
+
+---
+
+### 24. Why use datetimes in metadata?
+
+To record processing timestamps for generated files and workflow events.
+
+---
+
+# Streamlit
+
+### 25. Why choose Streamlit?
+
+It enables rapid development of interactive Python web applications with minimal frontend code.
+
+---
+
+### 26. How is the UI organized?
+
+Using pages, sidebar navigation, forms, and progress indicators.
+
+---
+
+# Storage
+
+### 27. Where is data stored?
+
+Local folders such as:
+
+- uploads/
+- audio/
+- metadata/
+- transcripts/
+- analysis/
+- chat_history/
+- reports/
+- exports/
+
+---
+
+### 28. Why use JSON storage?
+
+It is lightweight, portable, human-readable, and suitable for local project data.
+
+---
+
+# Design Decisions
+
+### 29. What software engineering principles are used?
+
+- Single Responsibility Principle
+- Separation of Concerns
+- Modular Design
+- Reusability
+- Maintainability
+
+---
+
+### 30. How can this project be extended?
+
+- Add new AI providers
+- Add new export formats
+- Add cloud storage
+- Add authentication
+- Add REST API
+- Add database support
+- Add real-time processing
+
+---
+
+# Challenges
+
+### 31. What challenges did you face?
+
+- Long audio transcription
+- Duplicate detection
+- Multi-provider integration
+- Export management
+- Test maintenance
+
+---
+
+### 32. How were these challenges solved?
+
+By introducing:
+
+- Audio chunking
+- Provider abstraction
+- Modular services
+- Workflow context
+- Comprehensive automated tests
+
+---
+
+# Project Outcome
+
+### 33. What was the final result?
+
+A fully functional AI-powered video analysis application with:
+
+- Modular architecture
+- Multi-provider AI support
+- Local processing
+- Professional reports
+- Multiple export formats
+- Comprehensive documentation
+- **531 passing automated tests**
+
+---
+
+# Future Improvements
+
+### 34. What features would you add next?
+
+- User authentication
+- Database backend
+- Cloud storage
+- REST API
+- Real-time video analysis
+- Docker support
+- CI/CD pipeline
+- Multi-user support
+
+---
+
+# Key Takeaways
+
+This project demonstrates practical experience with:
+
+- Python
+- Streamlit
+- Artificial Intelligence
+- Whisper
+- Ollama
+- OpenAI Integration
+- Software Architecture
+- Testing with Pytest
+- File Processing
+- Report Generation
+- Export Systems
+- Documentation
+- Git & GitHub
+
+---
+
+**Tip:** During interviews, focus on explaining *why* you chose the architecture, *how* the workflow operates, the challenges you encountered, and how your design decisions improved maintainability and extensibility. This demonstrates both technical knowledge and software engineering reasoning.

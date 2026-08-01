@@ -1,401 +1,141 @@
-# 🔒 AI Video Analyzer - Security Guide
+# Security Policy
 
-<p align="center">
+![Security](https://img.shields.io/badge/Security-Policy-success)
+![Version](https://img.shields.io/badge/Version-v1.0.0-blue)
 
-<img src="https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white"/>
+## Supported Versions
 
-<img src="https://img.shields.io/badge/Security-Best%20Practices-red?style=for-the-badge"/>
-
-<img src="https://img.shields.io/badge/OWASP-Guidelines-orange?style=for-the-badge"/>
-
-<img src="https://img.shields.io/badge/API%20Keys-Protected-success?style=for-the-badge"/>
-
-<img src="https://img.shields.io/badge/MIT-License-blue?style=for-the-badge"/>
-
-<img src="https://img.shields.io/badge/Version-v1.0.0-blue?style=for-the-badge"/>
-
-</p>
+| Version | Supported |
+|----------|-----------|
+| v1.0.x | ✅ Yes |
 
 ---
 
-# Table of Contents
+# Reporting a Security Issue
 
-- Introduction
-- Security Objectives
-- Security Architecture
-- API Key Security
-- File Upload Security
-- Data Protection
-- Authentication
-- Error Handling
-- Dependency Management
-- Logging
-- Best Practices
-- Security Checklist
-- Future Enhancements
+If you discover a security vulnerability in this project, please report it responsibly.
+
+Please include:
+
+- Description of the issue
+- Steps to reproduce
+- Potential impact
+- Suggested mitigation (if available)
+
+Please avoid publicly disclosing security vulnerabilities until they have been reviewed.
 
 ---
 
-# Introduction
+# Security Best Practices
 
-Security is an important aspect of AI Video Analyzer. The application is designed to protect user data, AI provider credentials, uploaded media, generated transcripts, and exported reports while maintaining a reliable development experience.
+When using this project:
 
-This guide outlines the recommended security practices for development and deployment.
-
----
-
-# Security Objectives
-
-The application aims to provide:
-
-- Secure file handling
-- Protected API credentials
-- Safe AI provider communication
-- Reliable input validation
-- Controlled error reporting
-- Secure dependency management
-- Organized storage
+- Keep Python updated.
+- Keep project dependencies updated.
+- Install packages only from trusted sources.
+- Use supported AI provider SDK versions.
+- Store API keys securely.
+- Do not commit secrets to Git.
+- Regularly update project dependencies.
 
 ---
 
-# Security Architecture
+# API Keys
 
-```
-User
+If using cloud AI providers:
 
-↓
+- OpenAI
+- Anthropic
 
-Input Validation
+Store API keys using environment variables or a local `.env` file.
 
-↓
-
-Application Layer
-
-↓
-
-Service Layer
-
-↓
-
-Provider Layer
-
-↓
-
-AI Provider
-
-↓
-
-Generated Output
-```
-
-Every layer performs validation before passing data to the next stage.
-
----
-
-# API Key Security
-
-Cloud providers require API credentials.
-
-Supported providers:
-
-| Provider | API Key Required |
-|-----------|------------------|
-| Ollama | ❌ |
-| OpenAI | ✅ |
-| Anthropic | ✅ |
-
-Store credentials inside:
-
-```
-.env
-```
+Never hard-code credentials into source code.
 
 Example:
 
-```env
-OPENAI_API_KEY=your_openai_key
-
-ANTHROPIC_API_KEY=your_anthropic_key
+```text
+OPENAI_API_KEY=your_api_key
+ANTHROPIC_API_KEY=your_api_key
 ```
-
-Never:
-
-- Commit API keys
-- Share credentials publicly
-- Store secrets inside source code
 
 ---
 
-# File Upload Security
+# Local Storage
 
-Uploaded files should always be validated.
+The application stores generated files locally, including:
 
-Validation includes:
+- Uploaded videos
+- Audio files
+- Metadata
+- Transcripts
+- AI analysis
+- Chat history
+- Reports
+- Exported files
 
-- Allowed extension
-- Maximum size
-- Read permissions
-- File integrity
-- Empty file detection
-
-Supported formats:
-
-- MP4
-- AVI
-- MOV
-- MKV
-- WEBM
+Ensure appropriate file permissions are configured for these directories.
 
 ---
 
-# Directory Security
+# File Validation
 
-Organize generated files into dedicated directories.
-
-```
-uploads/
-
-audio/
-
-transcripts/
-
-analysis/
-
-reports/
-
-exports/
-
-chat_history/
-```
-
-Benefits:
-
-- Easier cleanup
-- Better organization
-- Reduced accidental overwrites
-
----
-
-# Input Validation
-
-Validate all user input before processing.
-
-Examples:
-
-- Uploaded files
-- Export filenames
-- Configuration values
-- AI prompts
-- Directory paths
-
-Recommended checks:
-
-- Empty values
-- Invalid characters
-- Unsupported formats
-- File existence
-
----
-
-# AI Provider Security
-
-Recommendations:
-
-✔ Validate provider availability.
-
-✔ Verify selected model.
-
-✔ Handle connection failures.
-
-✔ Protect API credentials.
-
-✔ Avoid exposing provider errors directly to users.
-
----
-
-# Error Handling
-
-Instead of exposing internal exceptions:
-
-```
-Internal Error
-
-↓
-
-Log Error
-
-↓
-
-Display Friendly Message
-
-↓
-
-Allow Retry
-```
-
-Example:
-
-Instead of:
-
-```
-Traceback...
-```
-
-Display:
-
-```
-Unable to generate analysis.
-
-Please verify your AI provider configuration and try again.
-```
+The application validates uploaded files before processing to reduce the risk of invalid or unsupported inputs.
 
 ---
 
 # Dependency Management
 
-Keep dependencies updated.
+Recommended practices:
 
-Useful commands:
+- Update dependencies regularly.
+- Review dependency changes before upgrading.
+- Remove unused packages.
+
+Install dependencies using:
 
 ```bash
-pip list
+pip install -r requirements.txt
 ```
 
-```bash
-pip install --upgrade package_name
-```
+---
 
-Regularly review dependencies for known vulnerabilities.
+# Third-Party Components
+
+This project uses several third-party libraries, including:
+
+- Streamlit
+- Whisper
+- FFmpeg
+- OpenCV
+- ReportLab
+- Pytest
+
+Refer to the respective projects for their security updates and advisories.
 
 ---
 
-# Logging
+# Responsible Disclosure
 
-Log useful events without exposing sensitive information.
+Security reports will be reviewed and addressed as quickly as possible.
 
-Recommended log events:
-
-- Application startup
-- Video upload
-- Audio extraction
-- Transcript generation
-- AI analysis
-- Export completion
-- Warning messages
-- Errors
-
-Avoid logging:
-
-- API keys
-- User secrets
-- Authentication tokens
+Please provide sufficient technical detail to reproduce the issue.
 
 ---
 
-# Backup Strategy
+# Security Recommendations
 
-Recommended directories for backup:
-
-```
-analysis/
-
-reports/
-
-exports/
-
-transcripts/
-```
-
-Temporary directories may be excluded if they can be regenerated.
+- Protect API keys and credentials.
+- Keep your operating system updated.
+- Use the latest supported Python version.
+- Run the application in a trusted environment.
+- Verify AI provider configurations before deployment.
 
 ---
 
-# Best Practices
+# Contact
 
-✔ Store secrets in environment variables.
-
-✔ Validate uploaded files.
-
-✔ Restrict supported formats.
-
-✔ Keep dependencies updated.
-
-✔ Review logs regularly.
-
-✔ Remove temporary files.
-
-✔ Handle exceptions safely.
-
-✔ Test security-related functionality.
+For security-related questions or vulnerability reports, please use the GitHub repository's issue tracker or contact the project maintainer through GitHub.
 
 ---
 
-# Security Checklist
-
-Before deployment verify:
-
-✅ API keys stored securely
-
-✅ No secrets committed to Git
-
-✅ Upload validation enabled
-
-✅ Error handling implemented
-
-✅ Required directories exist
-
-✅ Dependencies updated
-
-✅ Application tested
-
-✅ GitHub Actions passing
-
----
-
-# Future Security Enhancements
-
-Potential improvements include:
-
-- User authentication
-- Role-based access control
-- Encrypted storage
-- Audit logging
-- Secure cloud deployment
-- HTTPS enforcement
-- Digital signatures
-- Malware scanning for uploads
-- Secure backup encryption
-
----
-
-# Related Documentation
-
-- INSTALLATION.md
-- CONFIGURATION.md
-- PROVIDER_GUIDE.md
-- API_DOCUMENTATION.md
-- TESTING.md
-- TROUBLESHOOTING.md
-- README.md
-
----
-
-# 👨‍💻 Author
-
-**Nekkanti Satya Srinath**
-
-GitHub Repository
-
-https://github.com/satya66123/AI-Video-Analyzer
-
----
-
-## License
-
-Released under the **MIT License**.
-
----
-
-**Version:** v1.0.0
-
-⭐ Following these security practices helps ensure AI Video Analyzer remains reliable, maintainable, and secure across development and deployment environments.
+Thank you for helping improve the security of AI Video Analysis Agent.

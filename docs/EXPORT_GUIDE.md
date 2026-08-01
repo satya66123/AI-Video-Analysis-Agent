@@ -1,382 +1,241 @@
-# 📤 AI Video Analyzer - Export Guide
+# Export Guide
 
-<p align="center">
+![Export](https://img.shields.io/badge/Export-Guide-blue)
+![Formats](https://img.shields.io/badge/Formats-PDF%20%7C%20HTML%20%7C%20Markdown%20%7C%20TXT%20%7C%20JSON-success)
+![Version](https://img.shields.io/badge/Version-v1.0.0-blue)
 
-<img src="https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white"/>
-
-<img src="https://img.shields.io/badge/Streamlit-1.46+-FF4B4B?style=for-the-badge&logo=streamlit"/>
-
-<img src="https://img.shields.io/badge/TXT-Supported-success?style=for-the-badge"/>
-
-<img src="https://img.shields.io/badge/HTML-Supported-orange?style=for-the-badge"/>
-
-<img src="https://img.shields.io/badge/PDF-Supported-red?style=for-the-badge"/>
-
-<img src="https://img.shields.io/badge/Markdown-Supported-blue?style=for-the-badge"/>
-
-<img src="https://img.shields.io/badge/Version-v1.0.0-blue?style=for-the-badge"/>
-
-</p>
+The **Export** feature allows you to save generated AI reports in multiple formats for sharing, documentation, or future reference.
 
 ---
 
-# Table of Contents
+# Overview
 
-- Introduction
-- Export Overview
-- Supported Formats
-- Export Workflow
-- TXT Export
-- Markdown Export
-- HTML Export
-- PDF Export
-- Export Directory
-- Error Handling
-- Best Practices
-- Future Improvements
+The Export module converts the generated report into different file formats and stores them locally.
 
----
+Supported export formats:
 
-# Introduction
-
-The Export Module enables users to save transcripts, AI-generated analysis, reports, and chat history in multiple formats.
-
-This allows results to be shared, archived, printed, or integrated into external workflows.
-
----
-
-# Export Overview
-
-```
-Transcript
-
-+
-
-AI Analysis
-
-+
-
-Metadata
-
-+
-
-Reports
-
-↓
-
-Export Service
-
-↓
-
-Selected Format
-
-↓
-
-Saved File
-```
-
----
-
-# Supported Export Formats
-
-| Format | Extension | Purpose |
-|---------|-----------|----------|
-| Text | .txt | Plain text |
-| Markdown | .md | Documentation |
-| HTML | .html | Browser viewing |
-| PDF | .pdf | Printing & Sharing |
+- PDF
+- HTML
+- Markdown (.md)
+- Text (.txt)
+- JSON
 
 ---
 
 # Export Workflow
 
 ```
-Generate Transcript
-
-↓
-
-Generate AI Analysis
-
-↓
-
-Create Report
-
-↓
-
-Choose Export Format
-
-↓
-
-Save File
-
-↓
-
-Open Export Folder
+Generate Report
+       │
+       ▼
+Choose Export Format(s)
+       │
+       ▼
+Generate Files
+       │
+       ▼
+Save to exports/
 ```
 
 ---
 
-# TXT Export
-
-Plain text exports are useful for:
-
-- Documentation
-- Notes
-- Archiving
-- Further processing
-
-Example:
-
-```
-Meeting Summary
-
-------------------
-
-Project Status
-
-Completed testing
-
-Documentation finished
-
-Next Steps
-
-Release Version 1.0.0
-```
-
----
-
-# Markdown Export
-
-Markdown exports are ideal for:
-
-- GitHub
-- Documentation
-- Wikis
-- Knowledge Bases
-
-Example:
-
-```markdown
-# Meeting Summary
-
-## Key Points
-
-- Documentation completed
-
-- Testing completed
-
-- Release prepared
-```
-
----
-
-# HTML Export
-
-HTML exports can be opened directly in any web browser.
-
-Benefits include:
-
-- Rich formatting
-- Tables
-- Headings
-- Easy sharing
-- Browser compatibility
-
-Typical structure
-
-```
-<html>
-
-<head>
-
-<title>
-
-<body>
-
-Report
-
-</body>
-
-</html>
-```
-
----
-
-# PDF Export
-
-PDF exports are suitable for:
-
-- Reports
-- Printing
-- Academic work
-- Client delivery
-- Presentations
-
-Advantages
-
-- Portable
-- Professional appearance
-- Platform independent
-- Print friendly
-
----
-
-# Export Directory
-
-Generated files are stored inside:
+# Export Folder Structure
 
 ```
 exports/
 
-├── summary.txt
-
-├── meeting.md
-
-├── report.html
-
-├── analysis.pdf
-
-└── transcript.txt
+├── pdf/
+├── html/
+├── markdown/
+├── txt/
+└── json/
 ```
 
-Keeping exported files in one location makes retrieval easier.
+Each exported report is automatically saved into its corresponding folder.
 
 ---
 
-# Export Components
+# Supported Formats
 
-The Export Service is responsible for:
+## PDF
 
-- File creation
-- Formatting
-- Encoding
-- Saving
-- Error reporting
+- Professional printable report
+- Easy to share
+- Suitable for documentation
 
-Supported exports include:
+Extension
 
+```
+.pdf
+```
+
+---
+
+## HTML
+
+- View in any web browser
+- Preserves formatting
+- Easy to publish online
+
+Extension
+
+```
+.html
+```
+
+---
+
+## Markdown
+
+- GitHub compatible
+- Easy to edit
+- Suitable for documentation
+
+Extension
+
+```
+.md
+```
+
+---
+
+## Text
+
+- Plain text report
+- Lightweight
+- Maximum compatibility
+
+Extension
+
+```
+.txt
+```
+
+---
+
+## JSON
+
+- Machine-readable format
+- Stores structured report data
+- Useful for integration and automation
+
+Extension
+
+```
+.json
+```
+
+---
+
+# Export Process
+
+1. Complete video processing.
+2. Generate the AI report.
+3. Open the **Export** section.
+4. Select one or more export formats.
+5. Click **Export**.
+6. Files are saved automatically.
+
+---
+
+# Generated File Name
+
+Reports are automatically named using the following format:
+
+```
+video_name_reportType_timestamp
+```
+
+Example
+
+```
+meeting_analysis_20260801_101530.pdf
+```
+
+---
+
+# Exported Information
+
+Depending on the report, exported files may include:
+
+- Video Information
+- Audio Information
 - Transcript
 - AI Analysis
 - Chat History
-- Metadata
-- Reports
+- Processing Metadata
 
 ---
 
-# Export Sequence
+# Export Location
+
+All exported reports are stored inside:
 
 ```
-Generate Content
+exports/
+```
 
-↓
+Subfolders:
 
-Validate Output
-
-↓
-
-Choose Format
-
-↓
-
-Create File
-
-↓
-
-Save
-
-↓
-
-Notify User
+```
+pdf/
+html/
+markdown/
+txt/
+json/
 ```
 
 ---
 
-# Error Handling
+# Managing Exports
 
-Common export issues include:
+The application supports:
 
-| Error | Possible Cause | Solution |
-|--------|----------------|----------|
-| Permission Denied | Folder locked | Choose another directory |
-| Invalid Filename | Unsupported characters | Rename file |
-| Export Failed | Unexpected exception | Retry export |
-| PDF Generation Error | Missing dependency | Install required packages |
-| Empty Output | No generated content | Generate analysis first |
-
----
-
-# Performance Considerations
-
-Recommended optimizations:
-
-- Export only finalized results.
-- Avoid duplicate exports.
-- Compress large reports if needed.
-- Validate content before saving.
-- Use UTF-8 encoding for text-based formats.
+- View exported reports
+- Load exported reports
+- Delete exported reports
+- Clear all exported reports
 
 ---
 
 # Best Practices
 
-✔ Export completed analyses.
-
-✔ Use Markdown for documentation.
-
-✔ Use PDF for presentations.
-
-✔ Use HTML for browser viewing.
-
-✔ Store exports in dedicated folders.
-
-✔ Keep meaningful filenames.
+- Use **PDF** for sharing reports.
+- Use **Markdown** for GitHub documentation.
+- Use **HTML** for browser viewing.
+- Use **TXT** for simple text archives.
+- Use **JSON** for integrations and automation.
 
 ---
 
-# Future Improvements
+# Troubleshooting
 
-Future enhancements may include:
+### Export Failed
 
-- DOCX export
-- Excel export
-- PowerPoint export
-- JSON export
-- XML export
-- ZIP package export
-- Batch export
-- Cloud export
-- Email export
-- One-click report sharing
+Possible causes:
+
+- Invalid report data
+- Missing export directory
+- Insufficient file permissions
+- Disk space unavailable
 
 ---
 
-# Related Documentation
+### PDF Not Generated
 
-- USER_GUIDE.md
-- WORKFLOW.md
-- AI_ANALYSIS.md
-- API_DOCUMENTATION.md
-- CONFIGURATION.md
-- README.md
+Verify:
+
+- ReportLab is installed.
+- The export directory is writable.
 
 ---
 
-# 👨‍💻 Author
+### JSON Export Error
 
-**Nekkanti Satya Srinath**
-
-GitHub Repository
-
-https://github.com/satya66123/AI-Video-Analyzer
+Ensure the report data contains valid JSON-serializable values.
 
 ---
 
-## License
+# Summary
 
-Released under the **MIT License**.
-
----
-
-**Version:** v1.0.0
-
-⭐ The Export Module makes it easy to save, share, and archive AI-generated results in multiple professional formats.
+The Export module provides a simple and flexible way to save AI-generated reports in multiple formats. It supports PDF, HTML, Markdown, TXT, and JSON exports, organizing all generated files into dedicated folders under the `exports/` directory for easy access and management.

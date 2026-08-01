@@ -1,100 +1,73 @@
-# 👤 AI Video Analyzer - User Guide
+# User Guide
 
-<p align="center">
-
-<img src="https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white"/>
-
-<img src="https://img.shields.io/badge/Streamlit-1.46+-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white"/>
-
-<img src="https://img.shields.io/badge/Ollama-Supported-black?style=for-the-badge"/>
-
-<img src="https://img.shields.io/badge/OpenAI-Supported-10A37F?style=for-the-badge"/>
-
-<img src="https://img.shields.io/badge/Anthropic-Supported-5A4FCF?style=for-the-badge"/>
-
-<img src="https://img.shields.io/badge/Version-v1.0.0-blue?style=for-the-badge"/>
-
-</p>
-
----
-
-# Table of Contents
-
-- Introduction
-- Getting Started
-- Dashboard
-- Uploading Videos
-- Transcript Generation
-- AI Analysis
-- AI Chat
-- Reports
-- Export Center
-- Settings
-- Keyboard Tips
-- Best Practices
-- Frequently Asked Questions
+![User Guide](https://img.shields.io/badge/User-Guide-blue)
+![Version](https://img.shields.io/badge/Version-v1.0.0-success)
+![Platform](https://img.shields.io/badge/Platform-Streamlit-red)
 
 ---
 
 # Introduction
 
-Welcome to **AI Video Analyzer**.
+Welcome to the **AI Video Analysis Agent**.
 
-This guide explains every major feature of the application and provides step-by-step instructions for processing videos, generating transcripts, interacting with AI, and exporting results.
+This application automates video processing using Artificial Intelligence. It extracts audio, generates transcripts, performs AI-powered analysis, enables transcript-based chat, generates professional reports, and exports results in multiple formats.
 
 ---
 
-# Getting Started
+# Features
 
-Launch the application:
+The application includes:
+
+- Video Upload
+- Video Metadata Extraction
+- Audio Extraction
+- Speech-to-Text (Whisper)
+- AI Analysis
+- AI Chat
+- Report Generation
+- Export Reports
+- History Management
+- Multiple AI Provider Support
+
+---
+
+# Launching the Application
+
+Run the application using:
 
 ```bash
-streamlit run app.py
+streamlit run app_agent.py
 ```
 
-Open your browser:
-
-```
-http://localhost:8501
-```
-
-The sidebar provides access to all application modules.
+The application opens automatically in your default web browser.
 
 ---
 
-# Dashboard
+# Home Page
 
-The dashboard is the central hub of the application.
+The home page provides access to all major modules through the sidebar navigation.
 
-It provides quick access to:
+Available sections include:
 
-- Upload Video
-- Transcript Viewer
+- Upload
+- Metadata
+- Audio
+- Transcript
 - AI Analysis
 - AI Chat
 - Reports
-- Export Center
+- Export
+- History
 - Settings
-
-> 📷 **Screenshot Placeholder**
->
-> `assets/screenshots/dashboard.png`
 
 ---
 
-# Uploading Videos
+# Uploading a Video
 
-## Step 1
-
-Open **Upload Video**.
-
-## Step 2
-
-Click **Browse**.
-
-## Step 3
-
-Select a supported video.
+1. Open the **Upload** page.
+2. Click **Browse**.
+3. Select a supported video.
+4. Wait for the upload to complete.
 
 Supported formats:
 
@@ -104,202 +77,208 @@ Supported formats:
 - MKV
 - WEBM
 
-## Step 4
-
-Wait for upload completion.
-
-The application validates:
-
-- File format
-- File size
-- Video integrity
+The application automatically checks for duplicate videos before processing.
 
 ---
 
-# Transcript Generation
+# Viewing Metadata
 
-After uploading:
+After uploading a video, metadata is extracted automatically.
 
-1. Audio is extracted.
-2. Whisper converts speech to text.
-3. Transcript is saved.
-4. Transcript becomes available for AI analysis.
+Available information includes:
 
-> 📷 **Screenshot Placeholder**
->
-> `assets/screenshots/transcript.png`
+- File Name
+- Duration
+- Resolution
+- FPS
+- Format
+- File Size
 
 ---
 
-# AI Analysis
+# Audio Extraction
 
-Select one of the available analysis options.
+The application extracts audio from the uploaded video automatically.
 
-Examples:
+Extracted audio is stored for transcription and future processing.
 
-- Summary
-- Key Points
-- Keywords
-- Topics
-- Meeting Notes
-- Study Notes
-- Sentiment Analysis
+---
 
-Choose:
+# Generating a Transcript
+
+1. Open the **Transcript** page.
+2. Select a Whisper model.
+3. Click **Generate Transcript**.
+4. Wait until processing completes.
+
+The generated transcript is saved automatically.
+
+---
+
+# Performing AI Analysis
+
+1. Open the **AI Analysis** page.
+2. Select:
 
 - AI Provider
 - AI Model
-- Temperature (if available)
 
-Click **Generate Analysis**.
+3. Enter an optional custom prompt.
+4. Click **Analyze**.
+
+The generated analysis is stored for reporting.
 
 ---
 
 # AI Chat
 
-The AI Chat feature allows you to ask questions about the generated transcript.
+The AI Chat page allows you to ask questions about the generated transcript.
 
-Example questions:
+Steps:
 
-- Summarize this meeting.
-- What decisions were made?
-- List all action items.
-- Explain the technical discussion.
-- Identify important dates.
+1. Open **AI Chat**.
+2. Enter your question.
+3. Click **Send**.
+4. View the AI response.
 
-The conversation history is stored for later reference.
-
-> 📷 **Screenshot Placeholder**
->
-> `assets/screenshots/chat.png`
+Conversation history is saved automatically.
 
 ---
 
-# Reports
+# Report Generation
 
-Generate structured reports from processed content.
+Open the **Reports** page.
 
-Available reports include:
+Click:
 
-- Transcript Report
-- Metadata Report
-- AI Analysis Report
-- Chat History Report
+```
+Generate Report
+```
 
-Reports can be reviewed before export.
+The report contains:
 
----
-
-# Export Center
-
-Export generated content in multiple formats.
-
-| Format | Supported |
-|----------|-----------|
-| TXT | ✅ |
-| Markdown | ✅ |
-| HTML | ✅ |
-| PDF | ✅ |
-
-Select the desired format and click **Export**.
+- Video Information
+- Audio Information
+- Transcript
+- AI Analysis
+- Chat History
+- Processing Metadata
 
 ---
 
-# Settings
+# Export Reports
 
-Configure application behavior.
+Navigate to the **Export** page.
 
-Available options may include:
+Choose one or more formats:
 
-- AI Provider Selection
-- Model Selection
-- Theme Preferences
-- Export Directory
-- Processing Options
+- PDF
+- HTML
+- Markdown
+- TXT
+- JSON
 
----
+Click:
 
-# Keyboard Tips
+```
+Export
+```
 
-| Shortcut | Action |
-|----------|--------|
-| Ctrl + O | Open File |
-| Ctrl + S | Save Export |
-| Ctrl + C | Copy Selected Text |
-| Ctrl + F | Search Transcript |
+The generated files are saved automatically.
 
 ---
 
-# Best Practices
+# History
 
-✔ Use clear audio for accurate transcription.
+The History page allows you to manage previously generated data.
 
-✔ Keep FFmpeg installed and accessible.
+Available sections:
 
-✔ Verify AI provider availability before generating analysis.
+- Videos
+- Audio
+- Metadata
+- Transcripts
+- Analysis
+- Chat History
+- Reports
+- Exports
 
-✔ Regularly update dependencies.
-
-✔ Store API keys securely using environment variables.
-
----
-
-# Frequently Asked Questions
-
-### Which video formats are supported?
-
-MP4, AVI, MOV, MKV, and WEBM.
+Users can view, load, or delete stored files.
 
 ---
 
-### Which AI providers are supported?
+# AI Providers
+
+Supported providers:
 
 - Ollama
 - OpenAI
 - Anthropic
 
----
-
-### Can I export reports?
-
-Yes. Supported formats include TXT, Markdown, HTML, and PDF.
+Select the desired provider and model before running AI analysis or chat.
 
 ---
 
-### Where are transcripts stored?
+# Folder Structure
 
-Inside the `transcripts/` directory.
+Generated files are stored in:
 
----
-
-### Can I continue previous AI chats?
-
-Yes, if chat history is enabled and preserved.
-
----
-
-# Related Documentation
-
-- INSTALLATION.md
-- FEATURES.md
-- PROJECT_STRUCTURE.md
-- ARCHITECTURE.md
-- SYSTEM_DESIGN.md
-- TESTING.md
-- README.md
+```
+uploads/
+audio/
+metadata/
+transcripts/
+analysis/
+chat_history/
+reports/
+exports/
+```
 
 ---
 
-# 👨‍💻 Author
+# Tips
 
-**Nekkanti Satya Srinath**
-
-GitHub Repository:
-
-https://github.com/satya66123/AI-Video-Analyzer
+- Upload clear videos with good audio quality.
+- Generate a transcript before using AI Analysis or AI Chat.
+- Use local AI providers (Ollama) for offline processing.
+- Export reports after analysis for sharing or documentation.
+- Regularly review the History page to manage stored files.
 
 ---
 
-**Version:** v1.0.0
+# Troubleshooting
 
-⭐ Thank you for using AI Video Analyzer!
+If you encounter issues:
+
+- Verify Python and dependencies are installed.
+- Ensure FFmpeg is available.
+- Confirm AI providers are configured correctly.
+- Check that the uploaded video is in a supported format.
+- Refer to the **Troubleshooting Guide** for detailed solutions.
+
+---
+
+# Best Practices
+
+- Process one video at a time for optimal performance.
+- Keep dependencies updated.
+- Organize exported reports by project.
+- Run the test suite after major changes.
+- Back up important reports and transcripts.
+
+---
+
+# Getting Help
+
+If you need assistance:
+
+- Review the project documentation.
+- Check the FAQ.
+- Read the Installation Guide.
+- Open an issue on the GitHub repository if you encounter a bug.
+
+---
+
+# Summary
+
+The AI Video Analysis Agent provides a complete workflow for AI-powered video processing. From video upload to transcript generation, AI analysis, chat, report creation, and export, the application is designed to be simple, modular, and efficient for users who need automated video understanding and documentation.

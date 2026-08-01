@@ -1,316 +1,453 @@
-# 🏗️ AI Video Analyzer - Project Structure
+# Project Structure
 
-<p align="center">
+![Structure](https://img.shields.io/badge/Project-Structure-blue)
+![Architecture](https://img.shields.io/badge/Architecture-Agent--Service--Provider-success)
+![Version](https://img.shields.io/badge/Version-v1.0.0-blue)
 
-<img src="https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white"/>
-
-<img src="https://img.shields.io/badge/Streamlit-1.46+-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white"/>
-
-<img src="https://img.shields.io/badge/Ollama-Supported-black?style=for-the-badge"/>
-
-<img src="https://img.shields.io/badge/OpenAI-Supported-10A37F?style=for-the-badge"/>
-
-<img src="https://img.shields.io/badge/Anthropic-Supported-5A4FCF?style=for-the-badge"/>
-
-<img src="https://github.com/satya66123/AI-Video-Analyzer/actions/workflows/python-tests.yml/badge.svg"/>
-
-<img src="https://img.shields.io/badge/Pytest-Passing-success?style=for-the-badge"/>
-
-<img src="https://img.shields.io/badge/Version-v1.0.0-blue?style=for-the-badge"/>
-
-</p>
+This document describes the directory structure of the AI Video Analysis Agent project.
 
 ---
 
-# 📖 Table of Contents
-
-- Introduction
-- Project Layout
-- Directory Structure
-- Folder Description
-- Architecture Layers
-- Data Flow
-- Development Guidelines
-- Related Documentation
-
----
-
-# 🎯 Introduction
-
-AI Video Analyzer follows a modular architecture designed for scalability, maintainability, and ease of testing.
-
-Each module has a single responsibility, making it easier to develop, test, and extend.
-
----
-
-# 📂 Project Layout
+# Root Directory
 
 ```
-AI-Video-Analyzer/
+AI-Video-Analysis-Agent/
 │
-├── .github/
-│   └── workflows/
-│
-├── analysis/
-├── assets/
-├── audio/
-├── chat_history/
-├── components/
-├── config/
-├── docs/
-├── exports/
-├── pages/
-├── prompts/
-├── providers/
-├── reports/
-├── services/
-├── tests/
-├── transcripts/
-├── uploads/
-├── utils/
-│
-├── app.py
+├── app_agent.py
 ├── requirements.txt
-├── requirements_test.txt
-├── pytest.ini
+├── README.md
 ├── LICENSE
-└── README.md
+├── .gitignore
+│
+├── agents/
+├── services/
+├── providers/
+├── workflows/
+├── ui/
+├── utils/
+├── tests/
+├── docs/
+│
+├── uploads/
+├── audio/
+├── metadata/
+├── transcripts/
+├── analysis/
+├── chat_history/
+├── reports/
+├── exports/
+│
+└── assets/
 ```
 
 ---
 
-# 📁 Directory Overview
+# Folder Description
 
-| Folder | Purpose |
-|----------|----------|
-| analysis | Stores AI-generated analysis files |
-| assets | Images, logos, icons and screenshots |
-| audio | Extracted audio files |
-| chat_history | AI chat history |
-| components | Reusable Streamlit components |
-| config | Application configuration |
-| docs | Project documentation |
-| exports | Exported TXT, HTML, PDF, Markdown files |
-| pages | Streamlit pages |
-| prompts | AI prompt templates |
-| providers | AI provider implementations |
-| reports | Generated reports |
-| services | Business logic |
-| tests | Pytest test suite |
-| transcripts | Generated transcripts |
-| uploads | Uploaded videos |
-| utils | Utility/helper functions |
+## app_agent.py
+
+Main entry point of the application.
+
+Responsible for:
+
+- Streamlit initialization
+- Navigation
+- Workflow execution
+- UI rendering
 
 ---
 
-# 🏛 Layered Architecture
+## agents/
+
+Contains workflow agents.
+
+Example:
 
 ```
-Presentation Layer
-        │
-        ▼
-Component Layer
-        │
-        ▼
-Service Layer
-        │
-        ▼
-Provider Layer
-        │
-        ▼
-External AI Models
+agents/
+
+base_agent.py
+upload_agent.py
+metadata_agent.py
+audio_agent.py
+transcript_agent.py
+analysis_agent.py
+chat_agent.py
+report_agent.py
+export_agent.py
 ```
 
----
+Responsibilities
 
-# 🧩 Folder Responsibilities
-
-## components/
-
-Contains reusable Streamlit UI components.
-
-Examples:
-
-- Header
-- Footer
-- Sidebar
-- AI Chat
-- Metadata Viewer
-- Transcript Viewer
-- Export Panel
-
----
-
-## pages/
-
-Contains individual application pages.
-
-Examples:
-
-- Dashboard
-- Upload Video
-- Speech to Text
-- AI Analysis
-- Reports
-- Settings
+- Execute workflow
+- Update workflow context
+- Call services
 
 ---
 
 ## services/
 
-Implements the business logic.
+Contains business logic.
 
-Examples:
+Example
 
-- AudioService
-- SpeechService
-- AIAnalysisService
-- ExportService
-- MetadataService
-- VideoService
+```
+services/
+
+video_agent_service.py
+metadata_agent_service.py
+audio_agent_service.py
+speech_agent_service.py
+ai_analysis_agent_service.py
+ai_chat_agent_service.py
+report_agent_service.py
+export_agent_service.py
+```
+
+Responsibilities
+
+- Business logic
+- File operations
+- AI integration
+- Report generation
 
 ---
 
 ## providers/
 
-Implements AI provider integrations.
+Contains AI provider implementations.
 
-Supported providers:
+Example
 
-- Ollama
-- OpenAI
-- Anthropic
+```
+providers/
+
+base_provider.py
+provider_factory.py
+ollama_provider.py
+openai_provider.py
+anthropic_provider.py
+```
+
+Responsibilities
+
+- AI provider abstraction
+- Model communication
+- Response generation
 
 ---
 
-## prompts/
+## workflows/
 
-Stores reusable prompt templates.
+Contains workflow execution logic.
 
-Examples:
+Example
 
-- Summary Prompt
-- Keywords Prompt
-- Topics Prompt
-- Sentiment Prompt
-- Meeting Notes Prompt
-- Study Notes Prompt
+```
+workflows/
+
+workflow_context.py
+workflow_manager.py
+```
+
+Responsibilities
+
+- Execute agents
+- Share workflow context
+- Manage execution flow
+
+---
+
+## ui/
+
+Contains Streamlit user interface pages.
+
+Example
+
+```
+ui/
+
+upload_page_agent.py
+metadata_page_agent.py
+audio_page_agent.py
+transcript_page_agent.py
+analysis_page_agent.py
+chat_page_agent.py
+report_page_agent.py
+history_page_agent.py
+settings_page_agent.py
+```
+
+Responsibilities
+
+- User interface
+- Forms
+- Navigation
+- Progress display
 
 ---
 
 ## utils/
 
-Contains shared utility modules.
+Utility modules.
 
-Examples:
+Example
 
-- Audio Splitter
-- File Validator
-- Transcript Utilities
-- Metadata Helpers
+```
+utils/
+
+audio_splitter.py
+file_validator.py
+metadata_utils.py
+report_utils.py
+```
+
+Responsibilities
+
+- Helper functions
+- Validation
+- Common utilities
+
+---
+
+## uploads/
+
+Stores uploaded videos.
+
+Example
+
+```
+uploads/
+
+video1.mp4
+meeting.mov
+demo.mkv
+```
+
+---
+
+## audio/
+
+Stores extracted audio files.
+
+Example
+
+```
+audio/
+
+video1.wav
+meeting.wav
+```
+
+---
+
+## metadata/
+
+Stores metadata files.
+
+Example
+
+```
+metadata/
+
+video1.json
+meeting.json
+```
+
+---
+
+## transcripts/
+
+Stores generated transcripts.
+
+Example
+
+```
+transcripts/
+
+video1.txt
+meeting.txt
+```
+
+---
+
+## analysis/
+
+Stores AI-generated analysis.
+
+Example
+
+```
+analysis/
+
+video_summary.md
+meeting_analysis.md
+```
+
+---
+
+## chat_history/
+
+Stores AI chat conversations.
+
+Example
+
+```
+chat_history/
+
+video_chat.json
+meeting_chat.json
+```
+
+---
+
+## reports/
+
+Stores generated reports.
+
+Example
+
+```
+reports/
+
+video_report.md
+meeting_report.md
+```
+
+---
+
+## exports/
+
+Stores exported reports.
+
+Example
+
+```
+exports/
+
+pdf/
+html/
+markdown/
+txt/
+json/
+```
 
 ---
 
 ## tests/
 
-Contains automated Pytest test cases.
+Contains automated tests.
 
-Coverage includes:
+Example
 
-- Components
-- Services
-- Providers
-- Utilities
-- Configuration
-- Prompt Templates
+```
+tests/
+
+test_upload_agent.py
+test_metadata_agent.py
+test_audio_agent.py
+test_transcript_agent.py
+test_analysis_agent.py
+test_chat_agent.py
+test_report_agent.py
+test_export_agent.py
+
+test_video_agent_service.py
+test_metadata_agent_service.py
+test_audio_agent_service.py
+test_speech_agent_service.py
+test_ai_analysis_agent_service.py
+test_ai_chat_agent_service.py
+test_report_agent_service.py
+test_export_agent_service.py
+```
+
+Responsibilities
+
+- Unit Tests
+- Integration Tests
+- Service Tests
+- Agent Tests
 
 ---
 
-# 🔄 Data Flow
+## docs/
+
+Project documentation.
+
+Example
 
 ```
-Upload Video
-      │
-      ▼
-Video Validation
-      │
-      ▼
-Audio Extraction
-      │
-      ▼
-Speech Recognition
-      │
-      ▼
-Transcript Generation
-      │
-      ▼
-AI Analysis
-      │
-      ▼
-Reports
-      │
-      ▼
-Export
-```
+docs/
 
----
-
-# 💼 Development Guidelines
-
-✔ Keep UI code inside `components/`
-
-✔ Keep business logic inside `services/`
-
-✔ Keep AI communication inside `providers/`
-
-✔ Keep prompts inside `prompts/`
-
-✔ Keep helper functions inside `utils/`
-
-✔ Add corresponding tests inside `tests/`
-
----
-
-# 📊 Module Relationship
-
-```
-pages
- │
- ▼
-components
- │
- ▼
-services
- │
- ▼
-providers
- │
- ▼
-AI Models
+API_DOCUMENTATION.md
+ARCHITECTURE.md
+CHANGELOG.md
+CODE_OF_CONDUCT.md
+CONFIGURATION.md
+CONTRIBUTING.md
+DOCUMENTATION.md
+EXPORT_GUIDE.md
+FAQ.md
+FEATURES.md
+IMPLEMENTATION_STEPS.md
+INSTALLATION.md
+INTERVIEW_ANSWERS.md
+INTERVIEW_QUESTIONS.md
+PROJECT_NOTES.md
+PROJECT_PLANNER.md
+PROJECT_STRUCTURE.md
+ROADMAP.md
+SECURITY.md
+TESTING.md
+USER_GUIDE.md
 ```
 
 ---
 
-# 📚 Related Documentation
+## assets/
 
-- 01_INSTALLATION.md
-- 02_FEATURES.md
-- 04_ARCHITECTURE.md
-- 05_SYSTEM_DESIGN.md
-- 09_TESTING.md
+Project assets.
 
----
+Example
 
-# 👨‍💻 Author
+```
+assets/
 
-**Nekkanti Satya Srinath**
-
-GitHub Repository
-
-https://github.com/satya66123/AI-Video-Analyzer
+logo.png
+banner.png
+screenshots/
+icons/
+```
 
 ---
 
-**AI Video Analyzer v1.0.0**
+# Architecture Overview
 
-⭐ Star the repository if you found it useful.
+```
+User
+   │
+   ▼
+Streamlit UI
+   │
+   ▼
+Workflow
+   │
+   ▼
+Agents
+   │
+   ▼
+Services
+   │
+   ▼
+Providers
+   │
+   ▼
+Local Storage
+```
+
+---
+
+# Summary
+
+The AI Video Analysis Agent follows a clean and modular directory structure based on the **Agent → Service → Provider** architecture. Responsibilities are clearly separated across folders, making the project easy to understand, maintain, test, and extend with new features.

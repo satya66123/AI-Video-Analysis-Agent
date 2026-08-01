@@ -1,349 +1,315 @@
-# 🤝 Contributing to AI Video Analyzer
+# Contributing Guide
 
-<p align="center">
+![Contributions](https://img.shields.io/badge/Contributions-Welcome-brightgreen)
+![Pull Requests](https://img.shields.io/badge/Pull%20Requests-Welcome-success)
+![Python](https://img.shields.io/badge/Python-3.11+-3776AB?logo=python&logoColor=white)
+![Tests](https://img.shields.io/badge/Tests-Required-success)
 
-<img src="https://img.shields.io/github/contributors/satya66123/AI-Video-Analyzer?style=for-the-badge"/>
+First off, thank you for your interest in contributing to the **AI Video Analysis Agent** project!
 
-<img src="https://img.shields.io/github/forks/satya66123/AI-Video-Analyzer?style=for-the-badge"/>
-
-<img src="https://img.shields.io/github/issues/satya66123/AI-Video-Analyzer?style=for-the-badge"/>
-
-<img src="https://img.shields.io/github/issues-pr/satya66123/AI-Video-Analyzer?style=for-the-badge"/>
-
-<img src="https://img.shields.io/github/actions/workflow/status/satya66123/AI-Video-Analyzer/python-app.yml?style=for-the-badge&label=Build"/>
-
-<img src="https://img.shields.io/github/license/satya66123/AI-Video-Analyzer?style=for-the-badge"/>
-
-<img src="https://img.shields.io/badge/Version-v1.0.0-blue?style=for-the-badge"/>
-
-</p>
+Whether you're fixing bugs, improving documentation, adding features, or optimizing performance, your contributions are appreciated.
 
 ---
 
-# 📑 Table of Contents
+# Table of Contents
 
-- Welcome
-- Ways to Contribute
+- Getting Started
 - Development Setup
 - Project Structure
-- Coding Standards
 - Branch Strategy
-- Commit Messages
+- Coding Standards
+- Testing
 - Pull Requests
 - Reporting Bugs
-- Feature Requests
+- Suggesting Features
 - Documentation
 - Community Guidelines
 
 ---
 
-# 👋 Welcome
+# Getting Started
 
-Thank you for your interest in contributing to **AI Video Analyzer**.
-
-Contributions of all sizes are appreciated, including:
-
-- Bug fixes
-- New features
-- Performance improvements
-- Documentation enhancements
-- Test cases
-- UI improvements
-- Code reviews
-
-Every contribution helps improve the project for the community.
+1. Fork the repository.
+2. Clone your fork.
+3. Create a feature branch.
+4. Make your changes.
+5. Run all tests.
+6. Commit your work.
+7. Push to GitHub.
+8. Open a Pull Request.
 
 ---
 
-# 🚀 Ways to Contribute
-
-You can contribute by:
-
-- Fixing bugs
-- Improving documentation
-- Adding unit tests
-- Optimizing existing code
-- Improving UI/UX
-- Adding AI features
-- Enhancing export functionality
-- Improving accessibility
-- Reviewing pull requests
-
----
-
-# 💻 Development Setup
-
-## 1. Fork the Repository
-
-Fork the repository on GitHub.
-
----
-
-## 2. Clone Your Fork
+# Clone Repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/AI-Video-Analyzer.git
+git clone https://github.com/satya66123/AI-Video-Analysis-Agent.git
+```
+
+Move into the project directory.
+
+```bash
+cd AI-Video-Analysis-Agent
 ```
 
 ---
 
-## 3. Navigate to the Project
+# Create Virtual Environment
 
 ```bash
-cd AI-Video-Analyzer
+python -m venv venv
 ```
-
----
-
-## 4. Create a Virtual Environment
-
-```bash
-python -m venv .venv
-```
-
-Activate it.
 
 Windows
 
 ```bash
-.venv\Scripts\activate
+venv\Scripts\activate
 ```
 
 Linux/macOS
 
 ```bash
-source .venv/bin/activate
+source venv/bin/activate
 ```
 
 ---
 
-## 5. Install Dependencies
+# Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Testing dependencies
+---
+
+# Run Application
 
 ```bash
-pip install -r requirements_test.txt
+streamlit run app_agent.py
 ```
 
 ---
 
-## 6. Start the Application
+# Project Structure
 
-```bash
-streamlit run app.py
+```
+AI-Video-Analysis-Agent/
+
+app_agent.py
+
+agents/
+
+services/
+
+providers/
+
+ui/
+
+utils/
+
+workflows/
+
+uploads/
+
+audio/
+
+metadata/
+
+transcripts/
+
+analysis/
+
+chat_history/
+
+reports/
+
+exports/
+
+tests/
+
+docs/
 ```
 
 ---
 
-# 📂 Project Structure
+# Branch Naming
+
+Use descriptive branch names.
+
+Examples
 
 ```
-AI-Video-Analyzer/
+feature/add-export-format
 
-├── app.py
-├── components/
-├── config/
-├── pages/
-├── prompts/
-├── providers/
-├── services/
-├── tests/
-├── utils/
-├── docs/
-└── requirements.txt
-```
+feature/chat-improvements
 
----
+bugfix/fix-history-page
 
-# 🧹 Coding Standards
-
-Please follow these guidelines:
-
-- Use Python 3.11+
-- Follow PEP 8
-- Write descriptive variable names
-- Keep functions focused
-- Add docstrings where appropriate
-- Prefer reusable components
-- Remove unused code before submitting
-
----
-
-# 🌿 Branch Strategy
-
-Recommended branch names:
-
-```
-feature/add-export-option
-
-feature/provider-support
-
-bugfix/audio-processing
-
-bugfix/transcript-error
+bugfix/audio-extraction
 
 docs/update-readme
 
-test/add-provider-tests
+test/add-export-tests
 
-refactor/service-layer
+refactor/provider-factory
 ```
 
 ---
 
-# 📝 Commit Messages
+# Coding Standards
 
-Use clear and concise commit messages.
+Please follow these guidelines.
 
-Examples:
-
-```
-feat: add HTML export support
-
-fix: resolve transcript generation issue
-
-docs: improve installation guide
-
-test: add provider unit tests
-
-refactor: simplify audio service
-```
+- Follow PEP 8.
+- Write readable code.
+- Keep functions focused on a single responsibility.
+- Use descriptive variable and function names.
+- Add docstrings for public classes and methods.
+- Keep business logic inside the Service layer.
+- Keep workflow orchestration inside Agents.
+- Avoid duplicate code.
+- Use type hints where appropriate.
 
 ---
 
-# 🔄 Pull Request Process
+# Testing
 
-Before submitting a pull request:
-
-- Create a feature branch
-- Keep changes focused
-- Run all tests
-- Update documentation if required
-- Resolve merge conflicts
-- Ensure GitHub Actions pass
-
-Include in your pull request:
-
-- Description of changes
-- Screenshots (if UI changes)
-- Testing information
-- Related issue number
-
----
-
-# 🐞 Reporting Bugs
-
-Please include:
-
-- Operating System
-- Python Version
-- Application Version
-- Error Message
-- Stack Trace
-- Steps to Reproduce
-- Screenshots
-- Expected Behavior
-
----
-
-# 💡 Feature Requests
-
-Feature requests should include:
-
-- Problem description
-- Proposed solution
-- Use case
-- Expected benefits
-- Mockups (optional)
-
----
-
-# 🧪 Testing Contributions
-
-All new functionality should include appropriate tests.
-
-Recommended:
-
-- Unit tests
-- Mock tests
-- Edge case testing
-- Error handling tests
-
-Run tests:
+Run the complete test suite before submitting changes.
 
 ```bash
 pytest
 ```
 
+Current project status
+
+```
+531 Tests Passed
+```
+
+New features should include:
+
+- Unit tests
+- Regression tests (if applicable)
+- Updated documentation (if behavior changes)
+
 ---
 
-# 📚 Documentation Contributions
+# Commit Messages
+
+Use clear and meaningful commit messages.
+
+Examples
+
+```
+feat: add export history support
+
+fix: resolve transcript loading issue
+
+docs: update API documentation
+
+test: add speech service tests
+
+refactor: simplify report generation
+```
+
+---
+
+# Pull Requests
+
+Before opening a Pull Request, ensure that:
+
+- The application runs successfully.
+- All tests pass.
+- No unnecessary files are included.
+- Documentation is updated if needed.
+- Code follows the project's coding standards.
+
+Provide a clear description of:
+
+- What changed
+- Why it changed
+- How it was tested
+
+---
+
+# Reporting Bugs
+
+When reporting a bug, include:
+
+- Operating System
+- Python version
+- Steps to reproduce
+- Expected behavior
+- Actual behavior
+- Error messages or logs
+- Screenshots (if applicable)
+
+---
+
+# Feature Requests
+
+Feature requests should include:
+
+- Problem statement
+- Proposed solution
+- Expected benefits
+- Possible implementation details (optional)
+
+---
+
+# Documentation Contributions
 
 Documentation improvements are always welcome.
 
-Examples:
+Examples include:
 
-- Installation improvements
-- API updates
-- Better examples
-- Architecture diagrams
-- Screenshots
-- Tutorials
+- Fixing typos
+- Improving explanations
+- Adding examples
+- Updating screenshots
+- Enhancing setup instructions
 
 ---
 
-# 🌍 Community Guidelines
+# Code Review
+
+All contributions may be reviewed before merging.
+
+Reviews typically focus on:
+
+- Code quality
+- Readability
+- Performance
+- Maintainability
+- Test coverage
+- Documentation
+
+---
+
+# Community Guidelines
 
 Please:
 
-- Be respectful
-- Be constructive
-- Welcome newcomers
-- Review code professionally
-- Follow the Code of Conduct
-- Help improve documentation
+- Be respectful.
+- Provide constructive feedback.
+- Help other contributors.
+- Follow the Code of Conduct.
+- Keep discussions professional.
 
 ---
 
-# 🙏 Recognition
+# Need Help?
 
-All contributors are appreciated and help make AI Video Analyzer better for everyone.
+If you have questions about contributing:
 
-Thank you for contributing!
-
----
-
-# 📚 Related Documentation
-
-- README.md
-- CODE_OF_CONDUCT.md
-- INSTALLATION.md
-- TESTING.md
-- ARCHITECTURE.md
-- CHANGELOG.md
+- Open a GitHub Issue.
+- Start a GitHub Discussion (if enabled).
+- Review the project documentation in the `docs/` directory.
 
 ---
 
-# 👨‍💻 Author
+# Thank You
 
-**Nekkanti Satya Srinath**
+Thank you for contributing to the **AI Video Analysis Agent** project. Your time, effort, and ideas help improve the project for the entire community.
 
-GitHub Repository
-
-https://github.com/satya66123/AI-Video-Analyzer
-
----
-
-## License
-
-Released under the **MIT License**
-
----
-
-**Version:** v1.0.0
-
-⭐ Contributions of every size are welcome and appreciated.
+Happy coding! 🚀

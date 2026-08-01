@@ -1,93 +1,118 @@
-# 🧪 AI Video Analyzer - Testing Guide
+# Testing Guide
 
-<p align="center">
-
-<img src="https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white"/>
-
-<img src="https://img.shields.io/badge/PyTest-Tested-success?style=for-the-badge&logo=pytest"/>
-
-<img src="https://img.shields.io/badge/GitHub%20Actions-CI-blue?style=for-the-badge&logo=githubactions"/>
-
-<img src="https://img.shields.io/badge/Coverage-Unit%20Tests-green?style=for-the-badge"/>
-
-<img src="https://img.shields.io/badge/Version-v1.0.0-blue?style=for-the-badge"/>
-
-</p>
+![Testing](https://img.shields.io/badge/Testing-Guide-blue)
+![Pytest](https://img.shields.io/badge/Pytest-Framework-success)
+![Tests](https://img.shields.io/badge/Tests-531%20Passed-success)
+![Version](https://img.shields.io/badge/Version-v1.0.0-blue)
 
 ---
 
-# Table of Contents
+# Overview
 
-- Introduction
-- Testing Strategy
-- Test Structure
-- Running Tests
-- Test Coverage
-- Fixtures
-- Mocking
-- Continuous Integration
-- Writing New Tests
-- Best Practices
-- Troubleshooting
+The AI Video Analysis Agent uses **Pytest** for automated testing to ensure application reliability, correctness, and maintainability.
 
----
-
-# Introduction
-
-AI Video Analyzer uses **Pytest** for automated testing to ensure reliability, maintainability, and code quality.
-
-The project includes unit tests covering services, providers, utilities, components, prompts, and configuration modules.
+The project includes comprehensive tests covering agents, services, workflows, and utility modules.
 
 ---
 
 # Testing Goals
 
-The testing framework is designed to:
-
-- Verify application behavior
+- Verify application functionality
 - Detect regressions
 - Validate business logic
-- Ensure provider compatibility
-- Improve maintainability
-- Support continuous integration
+- Ensure workflow correctness
+- Improve code quality
+- Support continuous development
 
 ---
 
-# Testing Stack
+# Testing Framework
 
-| Tool | Purpose |
-|-------|----------|
-| Pytest | Unit Testing |
-| unittest.mock | Mock Objects |
-| pytest Fixtures | Test Setup |
-| GitHub Actions | Continuous Integration |
+- Pytest
+- unittest.mock
+- Fixtures
+- MonkeyPatch
+- Temporary directories
 
 ---
 
-# Test Directory Structure
+# Test Categories
+
+## Agent Tests
+
+Tests workflow agents including:
+
+- UploadAgent
+- MetadataAgent
+- AudioAgent
+- TranscriptAgent
+- AnalysisAgent
+- ChatAgent
+- ReportAgent
+- ExportAgent
+
+---
+
+## Service Tests
+
+Tests business logic including:
+
+- VideoService
+- MetadataService
+- AudioService
+- SpeechService
+- AIAnalysisService
+- AIChatService
+- ReportService
+- ExportService
+
+---
+
+## Workflow Tests
+
+Tests:
+
+- Workflow execution
+- Context updates
+- Agent communication
+- Error handling
+
+---
+
+## Utility Tests
+
+Tests utility modules such as:
+
+- Audio Splitter
+- File Validator
+- Metadata Utilities
+- Report Utilities
+
+---
+
+# Test Directory
 
 ```
 tests/
 
-├── conftest.py
-├── test_requirements.py
-├── test_app.py
-├── test_audio_service.py
-├── test_video_service.py
-├── test_speech_service.py
-├── test_export_service.py
-├── test_ai_analysis_service.py
-├── test_metadata_service.py
-├── test_provider_factory.py
-├── test_ollama_provider.py
-├── test_openai_provider.py
-├── test_anthropic_provider.py
-├── test_file_validator.py
-├── test_transcript_utils.py
-├── ...
-```
+test_upload_agent.py
+test_metadata_agent.py
+test_audio_agent.py
+test_transcript_agent.py
+test_analysis_agent.py
+test_chat_agent.py
+test_report_agent.py
+test_export_agent.py
 
-> Continue adding test files following the same naming convention as new modules are introduced.
+test_video_agent_service.py
+test_metadata_agent_service.py
+test_audio_agent_service.py
+test_speech_agent_service.py
+test_ai_analysis_agent_service.py
+test_ai_chat_agent_service.py
+test_report_agent_service.py
+test_export_agent_service.py
+```
 
 ---
 
@@ -99,255 +124,134 @@ Run all tests:
 pytest
 ```
 
-Verbose output:
+Run with verbose output:
 
 ```bash
 pytest -v
 ```
 
-Run a specific test file:
+Run a single test file:
 
 ```bash
-pytest tests/test_audio_service.py
+pytest tests/test_speech_agent_service.py
 ```
 
-Run a specific test case:
+Run a single test function:
 
 ```bash
-pytest tests/test_audio_service.py::test_extract_audio
+pytest tests/test_speech_agent_service.py::test_transcribe_success
 ```
-
-Generate a coverage report:
-
-```bash
-pytest --cov=. --cov-report=html
-```
-
----
-
-# Test Coverage
-
-The following modules should be covered by automated tests.
-
-| Module | Tested |
-|----------|:------:|
-| Components | ✅ |
-| Services | ✅ |
-| Providers | ✅ |
-| Utilities | ✅ |
-| Configuration | ✅ |
-| Prompt Templates | ✅ |
-| Export Logic | ✅ |
-| Validation Logic | ✅ |
-
----
-
-# Fixtures
-
-Fixtures reduce duplicate setup code.
-
-Example:
-
-```python
-@pytest.fixture
-def sample_video():
-    return "sample.mp4"
-```
-
-Advantages:
-
-- Reusability
-- Cleaner tests
-- Consistent setup
-- Easier maintenance
 
 ---
 
 # Mocking
 
-External dependencies should be mocked to isolate application logic.
+The test suite uses mocks to isolate components.
+
+Commonly mocked components include:
+
+- AI providers
+- Whisper model
+- File operations
+- Audio processing
+- Export functions
+- Progress bars
+- Status messages
+
+---
+
+# Fixtures
+
+Fixtures are used for reusable test setup.
 
 Examples:
 
-- AI Providers
-- Whisper Models
-- File System
-- Network Requests
-- Export Operations
-
-Example:
-
-```python
-from unittest.mock import patch
-
-@patch("services.audio_service.extract_audio")
-def test_audio(mock_extract):
-    mock_extract.return_value = True
-```
+- Temporary directories
+- Sample files
+- Mock services
+- Workflow context
+- Test data
 
 ---
 
-# Continuous Integration
+# Test Coverage
 
-GitHub Actions automatically validates the project.
+The tests validate:
 
-Workflow:
+- Input validation
+- Successful execution
+- Error handling
+- File operations
+- Metadata generation
+- AI provider interaction
+- Report generation
+- Export functionality
+- History management
+
+---
+
+# Testing Workflow
 
 ```
-Push Code
-
-↓
-
-Install Dependencies
-
-↓
-
+Write Code
+     │
+     ▼
+Write Tests
+     │
+     ▼
 Run Pytest
-
-↓
-
-Generate Results
-
-↓
-
-Pass / Fail
+     │
+     ▼
+Fix Issues
+     │
+     ▼
+Re-run Tests
+     │
+     ▼
+All Tests Pass
 ```
-
-Benefits:
-
-- Automated verification
-- Early bug detection
-- Consistent testing
-- Reliable releases
 
 ---
 
-# Writing New Tests
+# Test Results
 
-When adding a new module:
+Current project status:
 
-1. Create a matching test file inside `tests/`.
-2. Use descriptive test names.
-3. Test both successful and failure scenarios.
-4. Mock external dependencies where appropriate.
-5. Ensure tests are independent and repeatable.
-
-Example naming convention:
-
-```
-module.py
-
-↓
-
-test_module.py
-```
+| Metric | Result |
+|--------|--------|
+| Framework | Pytest |
+| Total Tests | 531 |
+| Passed | 531 |
+| Failed | 0 |
+| Success Rate | 100% |
 
 ---
 
 # Best Practices
 
-✔ Write one test for one behavior.
-
-✔ Keep tests independent.
-
-✔ Use fixtures for reusable setup.
-
-✔ Mock external services.
-
-✔ Test expected failures.
-
-✔ Avoid hard-coded paths.
-
-✔ Keep test names descriptive.
-
-✔ Run tests before every commit.
+- Write tests for every new feature.
+- Keep tests independent and repeatable.
+- Use mocks for external dependencies.
+- Test both success and failure scenarios.
+- Keep fixtures reusable.
+- Run the full test suite before releasing changes.
 
 ---
 
-# Common Test Scenarios
+# Continuous Testing
 
-Recommended scenarios include:
+Recommended workflow:
 
-- Valid input
-- Invalid input
-- Missing files
-- Empty responses
-- Exception handling
-- Provider failures
-- Export failures
-- Configuration errors
-- Boundary conditions
+1. Implement feature.
+2. Write unit tests.
+3. Run Pytest locally.
+4. Fix failures.
+5. Commit changes.
+6. Push to GitHub.
+7. Verify CI pipeline (if configured).
 
 ---
 
-# Troubleshooting
+# Summary
 
-### Module Not Found
-
-Install project dependencies:
-
-```bash
-pip install -r requirements.txt
-```
-
----
-
-### Import Errors
-
-Verify that the virtual environment is activated.
-
----
-
-### Failed Assertions
-
-Check expected values and update assertions if application behavior has changed.
-
----
-
-### Mock Failures
-
-Confirm the correct import path is being patched.
-
----
-
-### GitHub Actions Failure
-
-Verify:
-
-- Dependencies are listed in `requirements.txt`
-- Test dependencies are listed in `requirements_test.txt`
-- Workflow file is up to date
-- Tests pass locally before pushing
-
----
-
-# Related Documentation
-
-- INSTALLATION.md
-- PROJECT_STRUCTURE.md
-- API_DOCUMENTATION.md
-- PROVIDER_GUIDE.md
-- TROUBLESHOOTING.md
-- README.md
-
----
-
-# 👨‍💻 Author
-
-**Nekkanti Satya Srinath**
-
-GitHub Repository
-
-https://github.com/satya66123/AI-Video-Analyzer
-
----
-
-## License
-
-Released under the **MIT License**.
-
----
-
-**Version:** v1.0.0
-
-⭐ High-quality software starts with reliable testing. Contributions to improve the test suite are always appreciated.
+The AI Video Analysis Agent is backed by a comprehensive automated test suite using **Pytest**. The project includes **531 passing tests** covering agents, services, workflows, and utilities, ensuring stability, reliability, and maintainability for the v1.0.0 release.

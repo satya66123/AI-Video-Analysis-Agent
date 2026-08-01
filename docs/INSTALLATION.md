@@ -1,329 +1,255 @@
-# 🚀 AI Video Analyzer - Installation Guide
+# Installation Guide
 
-<p align="center">
+![Installation](https://img.shields.io/badge/Installation-Guide-blue)
+![Python](https://img.shields.io/badge/Python-3.11+-3776AB?logo=python&logoColor=white)
+![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux%20%7C%20macOS-success)
+![Version](https://img.shields.io/badge/Version-v1.0.0-blue)
 
-<img src="https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white"/>
-
-<img src="https://img.shields.io/badge/Streamlit-1.46+-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white"/>
-
-<img src="https://img.shields.io/badge/Ollama-Supported-black?style=for-the-badge"/>
-
-<img src="https://img.shields.io/badge/OpenAI-Supported-10A37F?style=for-the-badge"/>
-
-<img src="https://img.shields.io/badge/Anthropic-Supported-5A4FCF?style=for-the-badge"/>
-
-<img src="https://github.com/satya66123/AI-Video-Analyzer/actions/workflows/python-tests.yml/badge.svg"/>
-
-<img src="https://img.shields.io/badge/Pytest-Passing-success?style=for-the-badge"/>
-
-<img src="https://img.shields.io/badge/Version-v1.0.0-blue?style=for-the-badge"/>
-
-</p>
+This guide explains how to install and run the **AI Video Analysis Agent**.
 
 ---
 
-# 📖 Table of Contents
+# System Requirements
 
-- Introduction
-- System Requirements
-- Prerequisites
-- Clone Repository
-- Project Structure
-- Virtual Environment
-- Install Dependencies
-- Configure Environment
-- Install Ollama
-- Download AI Models
-- Running the Application
-- Running Tests
-- GitHub Actions
-- Troubleshooting
-- Related Documentation
+| Component | Requirement |
+|-----------|-------------|
+| Python | 3.11 or later |
+| RAM | Minimum 8 GB |
+| Storage | Minimum 5 GB Free |
+| FFmpeg | Required |
+| Git | Recommended |
 
 ---
 
-# 🎯 Introduction
-
-Welcome to the **AI Video Analyzer** installation guide.
-
-AI Video Analyzer is a modular **Streamlit** application that extracts audio from videos, generates transcripts using Whisper, performs AI-powered analysis, allows conversational interaction with transcripts, and exports results into multiple formats.
-
-The application follows a layered architecture using reusable components, service classes, provider abstraction, and automated testing.
-
----
-
-# 💻 System Requirements
-
-| Component | Minimum | Recommended |
-|-----------|----------|-------------|
-| Python | 3.11 | Latest 3.11.x |
-| RAM | 8 GB | 16 GB |
-| CPU | 4 Cores | 8+ Cores |
-| Storage | 5 GB | 20 GB SSD |
-| Internet | Optional | Required for cloud providers |
-
----
-
-# 📦 Prerequisites
-
-Install the following software before starting.
-
-| Software | Required |
-|----------|----------|
-| Git | ✅ |
-| Python 3.11+ | ✅ |
-| pip | ✅ |
-| FFmpeg | ✅ |
-| Ollama | Optional |
-| VS Code / PyCharm | Recommended |
-
-Verify installation:
+# Step 1 — Clone the Repository
 
 ```bash
-python --version
-pip --version
-git --version
-ffmpeg -version
+git clone https://github.com/satya66123/AI-Video-Analysis-Agent.git
+```
+
+Move into the project folder.
+
+```bash
+cd AI-Video-Analysis-Agent
 ```
 
 ---
 
-# 📥 Clone Repository
-
-Clone the repository from GitHub.
+# Step 2 — Create a Virtual Environment
 
 ```bash
-git clone https://github.com/satya66123/AI-Video-Analyzer.git
-```
-
-Navigate to the project directory.
-
-```bash
-cd AI-Video-Analyzer
+python -m venv venv
 ```
 
 ---
 
-# 📂 Project Structure
+# Step 3 — Activate the Virtual Environment
 
+### Windows
+
+```bash
+venv\Scripts\activate
 ```
-AI-Video-Analyzer/
-│
-├── analysis/
-├── audio/
-├── chat_history/
-├── components/
-├── config/
-├── docs/
-├── exports/
-├── pages/
-├── prompts/
-├── providers/
-├── reports/
-├── services/
-├── tests/
-├── transcripts/
-├── uploads/
-├── utils/
-│
-├── app.py
-├── requirements.txt
-├── requirements_test.txt
-├── pytest.ini
-└── README.md
+
+### Linux / macOS
+
+```bash
+source venv/bin/activate
 ```
 
 ---
 
-# 🐍 Create Virtual Environment
-
-## Windows
-
-```bash
-python -m venv .venv
-```
-
-Activate
-
-```bash
-.venv\Scripts\activate
-```
-
----
-
-## Linux
-
-```bash
-python3 -m venv .venv
-```
-
-```bash
-source .venv/bin/activate
-```
-
----
-
-## macOS
-
-```bash
-python3 -m venv .venv
-```
-
-```bash
-source .venv/bin/activate
-```
-
----
-
-# 📚 Install Dependencies
-
-Install application dependencies.
+# Step 4 — Install Project Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Install testing dependencies.
+---
+
+# Step 5 — Install FFmpeg
+
+FFmpeg is required for audio extraction.
+
+### Windows
+
+Download FFmpeg and add it to your system PATH.
+
+Verify installation:
 
 ```bash
-pip install -r requirements_test.txt
+ffmpeg -version
 ```
 
-Verify installation.
+### Linux
 
 ```bash
-pip list
+sudo apt install ffmpeg
+```
+
+### macOS
+
+```bash
+brew install ffmpeg
 ```
 
 ---
 
-# ⚙ Configure Environment
+# Step 6 — Install Ollama (Optional)
 
-Create a `.env` file in the project root if you intend to use cloud AI providers.
+If using local AI models:
 
-Example:
+Install Ollama from:
 
-```env
-OPENAI_API_KEY=your_api_key
-ANTHROPIC_API_KEY=your_api_key
-```
+https://ollama.com
 
-> **Note:** Ollama users do not require API keys.
-
----
-
-# 🤖 Install Ollama
-
-Download Ollama from:
-
-https://ollama.com/download
-
-Verify installation.
-
-```bash
-ollama --version
-```
-
-Start the Ollama server.
-
-```bash
-ollama serve
-```
-
----
-
-# 📥 Download Supported Models
-
-Examples:
+Pull a model:
 
 ```bash
 ollama pull llama3.1
 ```
 
-```bash
-ollama pull qwen2.5:1.5b
-```
+Verify installation:
 
 ```bash
-ollama pull gemma3:4b
-```
-
-```bash
-ollama pull mistral
+ollama list
 ```
 
 ---
 
-# ▶ Running the Application
+# Step 7 — Configure API Keys (Optional)
 
-Launch the Streamlit application.
+If using cloud AI providers, configure environment variables.
 
-```bash
-streamlit run app.py
+OpenAI
+
+```text
+OPENAI_API_KEY=your_api_key
 ```
 
-Open your browser:
+Anthropic
 
-```
-http://localhost:8501
+```text
+ANTHROPIC_API_KEY=your_api_key
 ```
 
 ---
 
-# 🧪 Running Tests
+# Step 8 — Run the Application
 
-Run all tests.
+Start the Streamlit application.
+
+```bash
+streamlit run app_agent.py
+```
+
+The application will automatically open in your default web browser.
+
+---
+
+# Project Structure
+
+```
+AI-Video-Analysis-Agent/
+
+app_agent.py
+
+agents/
+
+services/
+
+providers/
+
+ui/
+
+utils/
+
+workflows/
+
+uploads/
+
+audio/
+
+metadata/
+
+transcripts/
+
+analysis/
+
+chat_history/
+
+reports/
+
+exports/
+
+tests/
+
+docs/
+
+requirements.txt
+```
+
+---
+
+# Verify Installation
+
+Run the automated test suite.
 
 ```bash
 pytest
 ```
 
-Verbose mode.
+Expected result:
 
-```bash
-pytest -v
 ```
-
-Coverage report.
-
-```bash
-pytest --cov=. --cov-report=html
+531 Tests Passed
 ```
 
 ---
 
-# ⚙ Continuous Integration
+# Supported AI Providers
 
-The project includes GitHub Actions for automated testing.
-
-The workflow automatically:
-
-- Installs dependencies
-- Runs the complete Pytest suite
-- Generates coverage reports
-- Validates every push and pull request
-
-Workflow location:
-
-```
-.github/workflows/python-tests.yml
-```
+- Ollama
+- OpenAI
+- Anthropic
 
 ---
 
-# 🛠 Troubleshooting
+# Supported Video Formats
 
-## Missing Dependency
+- MP4
+- AVI
+- MOV
+- MKV
+- WEBM
+
+---
+
+# Supported Export Formats
+
+- PDF
+- HTML
+- Markdown
+- TXT
+- JSON
+
+---
+
+# Troubleshooting
+
+### Python Not Found
+
+Verify your Python installation.
 
 ```bash
-pip install -r requirements.txt
+python --version
 ```
 
 ---
 
-## FFmpeg Not Found
+### FFmpeg Not Found
 
-Verify installation.
+Verify FFmpeg is installed and available in your system PATH.
 
 ```bash
 ffmpeg -version
@@ -331,51 +257,44 @@ ffmpeg -version
 
 ---
 
-## Ollama Connection Error
+### Ollama Connection Error
 
-Start the Ollama server.
+Ensure the Ollama service is running.
 
 ```bash
-ollama serve
+ollama list
 ```
 
 ---
 
-## Test Failures
+### Missing Dependencies
 
-Install test dependencies.
+Reinstall project dependencies.
 
 ```bash
-pip install -r requirements_test.txt
+pip install -r requirements.txt
 ```
 
 ---
 
-# 📚 Related Documentation
+### Streamlit Not Found
 
-- FEATURES.md
-- PROJECT_STRUCTURE.md
-- ARCHITECTURE.md
-- SYSTEM_DESIGN.md
-- TESTING.md
-- USER_GUIDE.md
+Install Streamlit.
 
----
-
-# 👨‍💻 Author
-
-**Nekkanti Satya Srinath**
-
-GitHub Repository:
-
-https://github.com/satya66123/AI-Video-Analyzer
+```bash
+pip install streamlit
+```
 
 ---
 
-## ⭐ Support the Project
+# Installation Complete
 
-If you find this project helpful, consider giving it a **GitHub Star** and sharing feedback through Issues or Pull Requests.
+Your AI Video Analysis Agent is now ready to use.
 
----
+Launch the application anytime with:
 
-**Version:** v1.0.0
+```bash
+streamlit run app_agent.py
+```
+
+Enjoy building and analyzing videos with AI!

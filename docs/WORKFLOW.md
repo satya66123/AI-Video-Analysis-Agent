@@ -1,464 +1,453 @@
-# 🔄 AI Video Analyzer - Workflow Guide
+# Workflow Guide
 
-<p align="center">
-
-<img src="https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white"/>
-
-<img src="https://img.shields.io/badge/Streamlit-1.46+-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white"/>
-
-<img src="https://img.shields.io/badge/Whisper-Speech%20Recognition-blue?style=for-the-badge"/>
-
-<img src="https://img.shields.io/badge/Ollama-Local%20LLM-black?style=for-the-badge"/>
-
-<img src="https://img.shields.io/badge/GitHub%20Actions-Passing-success?style=for-the-badge"/>
-
-<img src="https://img.shields.io/badge/Version-v1.0.0-blue?style=for-the-badge"/>
-
-</p>
+![Workflow](https://img.shields.io/badge/Workflow-Guide-blue)
+![Architecture](https://img.shields.io/badge/Architecture-Agent--Service--Provider-success)
+![Version](https://img.shields.io/badge/Version-v1.0.0-blue)
 
 ---
 
-# Table of Contents
+# Overview
 
-- Introduction
-- Workflow Overview
-- Video Processing Workflow
-- AI Analysis Workflow
-- Chat Workflow
-- Export Workflow
-- Complete System Flow
-- Error Recovery
-- Workflow Benefits
+The AI Video Analysis Agent follows a sequential workflow where each stage processes data and passes the results to the next stage. The workflow is coordinated through a shared workflow context using the **Agent → Service → Provider** architecture.
 
 ---
 
-# Introduction
-
-This document explains how AI Video Analyzer processes a video from upload to final export. Understanding these workflows helps developers extend the application and helps users understand how each module interacts.
-
----
-
-# Complete Workflow Overview
+# Complete Workflow
 
 ```
-User
- │
- ▼
-Upload Video
- │
- ▼
-Video Validation
- │
- ▼
-Metadata Extraction
- │
- ▼
-Audio Extraction
- │
- ▼
-Speech Recognition
- │
- ▼
-Transcript Generation
- │
- ▼
-AI Analysis
- │
- ▼
-AI Chat
- │
- ▼
-Report Generation
- │
- ▼
-Export
-```
-
----
-
-# Video Upload Workflow
-
-## Step 1 — User Upload
-
-The user uploads a supported video file.
-
-Supported formats:
-
-- MP4
-- AVI
-- MOV
-- MKV
-- WEBM
-
----
-
-## Step 2 — Validation
-
-The application verifies:
-
-- File exists
-- Supported extension
-- Maximum size
-- Readability
-- Duplicate detection (if implemented)
-
-```
-Video
-
-↓
-
-Validation
-
-↓
-
-Accepted
+                User
+                  │
+                  ▼
+          Upload Video
+                  │
+                  ▼
+        UploadAgent
+                  │
+                  ▼
+        VideoService
+                  │
+                  ▼
+      Video Saved Successfully
+                  │
+                  ▼
+      MetadataAgent
+                  │
+                  ▼
+     MetadataService
+                  │
+                  ▼
+      Video Metadata
+                  │
+                  ▼
+       AudioAgent
+                  │
+                  ▼
+       AudioService
+                  │
+                  ▼
+      Audio Extracted
+                  │
+                  ▼
+     TranscriptAgent
+                  │
+                  ▼
+      SpeechService
+                  │
+                  ▼
+     Whisper Transcript
+                  │
+                  ▼
+      AnalysisAgent
+                  │
+                  ▼
+    AIAnalysisService
+                  │
+                  ▼
+ Provider Factory
+                  │
+      ┌───────────┼───────────┐
+      ▼           ▼           ▼
+   Ollama      OpenAI    Anthropic
+                  │
+                  ▼
+        AI Analysis
+                  │
+                  ▼
+        ChatAgent
+                  │
+                  ▼
+      AIChatService
+                  │
+                  ▼
+        AI Conversation
+                  │
+                  ▼
+       ReportAgent
+                  │
+                  ▼
+      ReportService
+                  │
+                  ▼
+     Complete Report
+                  │
+                  ▼
+       ExportAgent
+                  │
+                  ▼
+      ExportService
+                  │
+                  ▼
+    PDF / HTML / MD / TXT / JSON
 ```
 
 ---
 
-# Metadata Workflow
+# Step 1 — Video Upload
 
-After validation, metadata is collected.
-
-Examples:
-
-- File Name
-- File Size
-- Duration
-- Resolution
-- FPS
-- Codec
+**Agent**
 
 ```
-Video
+UploadAgent
+```
 
-↓
+**Service**
 
-Metadata Extraction
+```
+VideoService
+```
 
-↓
+Responsibilities:
 
-Metadata Report
+- Validate video
+- Detect duplicates
+- Save uploaded file
+- Generate upload metadata
+
+Output:
+
+```
+uploads/
 ```
 
 ---
 
-# Audio Processing Workflow
+# Step 2 — Metadata Extraction
 
-The uploaded video is converted into an audio stream.
+**Agent**
 
 ```
-Video
+MetadataAgent
+```
 
-↓
+**Service**
 
-Extract Audio
+```
+MetadataService
+```
 
-↓
+Responsibilities:
 
-Save Audio
+- Read video information
+- Generate metadata
+- Store metadata
 
-↓
+Output:
 
-Audio Metadata
+```
+metadata/
+```
+
+---
+
+# Step 3 — Audio Extraction
+
+**Agent**
+
+```
+AudioAgent
+```
+
+**Service**
+
+```
+AudioService
 ```
 
 Responsibilities:
 
 - Extract audio
-- Save audio
-- Verify extraction
-- Read audio information
-
----
-
-# Speech Recognition Workflow
-
-The extracted audio is processed using Whisper.
-
-```
-Audio
-
-↓
-
-Whisper Model
-
-↓
-
-Speech Recognition
-
-↓
-
-Transcript
-```
+- Save WAV file
+- Generate audio metadata
 
 Output:
 
-- Transcript text
-- Processing status
-- Saved transcript file
+```
+audio/
+```
 
 ---
 
-# AI Analysis Workflow
+# Step 4 — Speech Recognition
 
-The transcript becomes the input for AI processing.
+**Agent**
+
+```
+TranscriptAgent
+```
+
+**Service**
+
+```
+SpeechService
+```
+
+Responsibilities:
+
+- Load Whisper
+- Split long audio
+- Generate transcript
+- Save transcript
+
+Output:
+
+```
+transcripts/
+```
+
+---
+
+# Step 5 — AI Analysis
+
+**Agent**
+
+```
+AnalysisAgent
+```
+
+**Service**
+
+```
+AIAnalysisService
+```
+
+Responsibilities:
+
+- Load transcript
+- Build prompt
+- Select AI provider
+- Generate analysis
+- Save analysis
+
+Output:
+
+```
+analysis/
+```
+
+---
+
+# Step 6 — AI Chat
+
+**Agent**
+
+```
+ChatAgent
+```
+
+**Service**
+
+```
+AIChatService
+```
+
+Responsibilities:
+
+- Ask questions
+- Build conversation context
+- Generate AI responses
+- Save chat history
+
+Output:
+
+```
+chat_history/
+```
+
+---
+
+# Step 7 — Report Generation
+
+**Agent**
+
+```
+ReportAgent
+```
+
+**Service**
+
+```
+ReportService
+```
+
+Responsibilities:
+
+- Combine project data
+- Generate report
+- Create report metadata
+
+Output:
+
+```
+reports/
+```
+
+---
+
+# Step 8 — Export
+
+**Agent**
+
+```
+ExportAgent
+```
+
+**Service**
+
+```
+ExportService
+```
+
+Supported Formats:
+
+- PDF
+- HTML
+- Markdown
+- TXT
+- JSON
+
+Output:
+
+```
+exports/
+```
+
+---
+
+# Workflow Context
+
+Each agent shares data through a common workflow context.
+
+Example:
+
+```python
+{
+    "video": "...",
+    "video_metadata": {},
+    "audio": "...",
+    "audio_metadata": {},
+    "transcript": "...",
+    "transcript_metadata": {},
+    "analysis": "...",
+    "analysis_metadata": {},
+    "chat_history": [],
+    "report": "...",
+    "exports": {},
+    "status": "...",
+    "current_agent": "..."
+}
+```
+
+---
+
+# AI Processing Workflow
 
 ```
 Transcript
-
-↓
-
-Prompt Builder
-
-↓
-
+      │
+      ▼
+Build Prompt
+      │
+      ▼
+Provider Factory
+      │
+      ▼
 Selected Provider
-
-↓
-
-Selected Model
-
-↓
-
-Generated Analysis
+      │
+      ▼
+AI Model
+      │
+      ▼
+AI Response
 ```
-
-Available analysis types include:
-
-- Summary
-- Key Points
-- Keywords
-- Topics
-- Meeting Notes
-- Study Notes
-- Sentiment Analysis
 
 ---
 
-# AI Chat Workflow
-
-The transcript provides context for interactive conversations.
+# Report Workflow
 
 ```
-User Question
-
-↓
-
-Transcript Context
-
-↓
-
-AI Provider
-
-↓
-
-Response
-
-↓
-
-Chat History
-```
-
-Benefits:
-
-- Context-aware answers
-- Conversation history
-- Interactive learning
-
----
-
-# Report Generation Workflow
-
-Generated content is organized into reports.
-
-```
+Video Metadata
+        │
+Audio Metadata
+        │
 Transcript
-
-+
-
-Metadata
-
-+
-
+        │
 AI Analysis
-
-↓
-
-Reports
+        │
+Chat History
+        │
+        ▼
+Complete Report
 ```
-
-Available reports:
-
-- Transcript Report
-- Metadata Report
-- AI Analysis Report
-- Chat Report
 
 ---
 
 # Export Workflow
 
-Reports can be exported into multiple formats.
-
 ```
-Generated Report
-
-↓
-
+Report
+   │
+   ▼
 Export Service
-
-├── TXT
-├── Markdown
-├── HTML
-└── PDF
+   │
+   ▼
+Generate Files
+   │
+   ▼
+exports/
 ```
 
 ---
 
-# Complete Processing Pipeline
+# Workflow Storage
+
+Generated files are stored in:
 
 ```
-Upload
-
-↓
-
-Validate
-
-↓
-
-Metadata
-
-↓
-
-Extract Audio
-
-↓
-
-Speech Recognition
-
-↓
-
-Transcript
-
-↓
-
-AI Analysis
-
-↓
-
-Reports
-
-↓
-
-Export
+uploads/
+audio/
+metadata/
+transcripts/
+analysis/
+chat_history/
+reports/
+exports/
 ```
 
 ---
 
-# Error Recovery Workflow
+# Workflow Benefits
 
-The application should recover gracefully whenever possible.
-
-Examples:
-
-```
-Upload Error
-
-↓
-
-Display Message
-
-↓
-
-Retry Upload
-```
-
-```
-Provider Error
-
-↓
-
-Switch Provider
-
-↓
-
-Retry Analysis
-```
-
-```
-Export Failure
-
-↓
-
-Display Error
-
-↓
-
-Retry Export
-```
+- Modular architecture
+- Independent agents
+- Reusable services
+- Multiple AI providers
+- Shared workflow context
+- Easy testing
+- Easy maintenance
+- Simple extensibility
 
 ---
 
-# Workflow Advantages
+# Summary
 
-- Modular processing
-- Easy debugging
-- Independent services
-- Reusable components
-- Provider flexibility
-- Scalable architecture
-- Reliable processing pipeline
-
----
-
-# Best Practices
-
-✔ Validate inputs before processing.
-
-✔ Keep intermediate files organized.
-
-✔ Save transcripts before AI analysis.
-
-✔ Handle provider failures gracefully.
-
-✔ Export only verified results.
-
-✔ Log important processing events.
-
----
-
-# Related Documentation
-
-- INSTALLATION.md
-- FEATURES.md
-- PROJECT_STRUCTURE.md
-- ARCHITECTURE.md
-- SYSTEM_DESIGN.md
-- USER_GUIDE.md
-- API_DOCUMENTATION.md
-- PROVIDER_GUIDE.md
-- TESTING.md
-- README.md
-
----
-
-# 👨‍💻 Author
-
-**Nekkanti Satya Srinath**
-
-GitHub Repository
-
-https://github.com/satya66123/AI-Video-Analyzer
-
----
-
-## License
-
-This project is licensed under the **MIT License**.
-
----
-
-**Version:** v1.0.0
-
-⭐ Thank you for using **AI Video Analyzer**.
+The AI Video Analysis Agent executes a complete end-to-end workflow beginning with video upload and ending with report export. Each processing stage is handled by a dedicated agent that delegates business logic to services while using a shared workflow context to pass data between stages. This design results in a clean, scalable, and maintainable AI-powered video analysis pipeline.

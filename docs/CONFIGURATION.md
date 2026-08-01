@@ -1,361 +1,379 @@
-# ⚙️ AI Video Analyzer - Configuration Guide
+# Configuration Guide
 
-<p align="center">
+![Configuration](https://img.shields.io/badge/Configuration-Guide-blue)
+![Python](https://img.shields.io/badge/Python-3.11+-3776AB?logo=python&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-Configured-FF4B4B?logo=streamlit)
+![Status](https://img.shields.io/badge/Status-Stable-success)
 
-<img src="https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white"/>
-
-<img src="https://img.shields.io/badge/Configuration-Project%20Settings-blue?style=for-the-badge"/>
-
-<img src="https://img.shields.io/badge/Ollama-Supported-black?style=for-the-badge"/>
-
-<img src="https://img.shields.io/badge/OpenAI-Supported-10A37F?style=for-the-badge"/>
-
-<img src="https://img.shields.io/badge/Anthropic-Supported-5A4FCF?style=for-the-badge"/>
-
-<img src="https://img.shields.io/badge/Environment-.env-success?style=for-the-badge"/>
-
-<img src="https://img.shields.io/badge/Version-v1.0.0-blue?style=for-the-badge"/>
-
-</p>
+> This document describes the configuration options for the AI Video Analysis Agent.
 
 ---
 
 # Table of Contents
 
-- Introduction
-- Configuration Overview
-- Project Settings
-- Environment Variables
+- Overview
+- System Requirements
+- Python Environment
+- Project Configuration
 - AI Provider Configuration
-- Directory Configuration
-- Application Settings
-- Logging Configuration
-- Security Recommendations
-- Best Practices
+- Whisper Configuration
+- Streamlit Configuration
+- Storage Configuration
+- Export Configuration
+- Environment Variables
+- Folder Structure
+- Recommended Settings
 - Troubleshooting
 
 ---
 
-# Introduction
+# Overview
 
-The Configuration Module centralizes all application settings used by AI Video Analyzer.
+The AI Video Analysis Agent uses local configuration files and environment variables to control application behavior.
 
-Keeping configuration separate from business logic improves maintainability, simplifies deployment, and makes future updates easier.
+Configuration areas include:
 
----
-
-# Configuration Overview
-
-```
-Application
-
-↓
-
-Configuration
-
-├── Environment Variables
-
-├── Provider Settings
-
-├── Directories
-
-├── Constants
-
-└── Application Options
-```
+- Python environment
+- Streamlit
+- AI Providers
+- Whisper
+- Export settings
+- Storage folders
+- Logging
 
 ---
 
-# Configuration Files
+# System Requirements
 
-Typical configuration files include:
+| Component | Requirement |
+|-----------|-------------|
+| Python | 3.11+ |
+| RAM | 8 GB Minimum |
+| Recommended RAM | 16 GB |
+| Disk Space | 5 GB+ |
+| FFmpeg | Required |
+| Git | Recommended |
 
+---
+
+# Python Environment
+
+Create a virtual environment.
+
+```bash
+python -m venv venv
 ```
-config/
 
-├── settings.py
+Activate
 
-├── constants.py
+Windows
 
-├── models.py
-
-├── providers.py
-
-└── themes.py
+```bash
+venv\Scripts\activate
 ```
 
-Project root:
+Linux / macOS
 
+```bash
+source venv/bin/activate
 ```
-.env
 
-requirements.txt
+Install dependencies
 
-requirements_test.txt
-
-pytest.ini
+```bash
+pip install -r requirements.txt
 ```
 
 ---
 
-# Environment Variables
+# Project Configuration
 
-Sensitive information should be stored in a `.env` file.
+Main application
 
-Example:
-
-```env
-OPENAI_API_KEY=your_openai_api_key
-
-ANTHROPIC_API_KEY=your_anthropic_api_key
+```
+app_agent.py
 ```
 
-> Never commit API keys to version control.
+Launch
+
+```bash
+streamlit run app_agent.py
+```
 
 ---
 
 # AI Provider Configuration
 
-Supported providers:
+Supported Providers
 
-| Provider | API Key Required |
-|-----------|------------------|
-| Ollama | ❌ |
-| OpenAI | ✅ |
-| Anthropic | ✅ |
+- Ollama
+- OpenAI
+- Anthropic
 
-Example workflow:
+Provider selection is available from the application interface.
+
+---
+
+# Ollama Configuration
+
+Example models
 
 ```
-User
+llama3.1
 
-↓
+qwen3
 
-Select Provider
+qwen2.5
 
-↓
+mistral
 
-Load Configuration
+gemma3
 
-↓
+phi3
+```
 
-Initialize Provider
+Ensure Ollama is installed and running before using local models.
 
-↓
+---
 
-Generate Response
+# OpenAI Configuration
+
+Set the API key as an environment variable.
+
+Example
+
+```
+OPENAI_API_KEY=your_api_key
 ```
 
 ---
 
-# Directory Configuration
+# Anthropic Configuration
 
-The application organizes files into dedicated directories.
+Set the API key as an environment variable.
+
+Example
+
+```
+ANTHROPIC_API_KEY=your_api_key
+```
+
+---
+
+# Whisper Configuration
+
+Default Model
+
+```
+base
+```
+
+Available models
+
+```
+tiny
+
+base
+
+small
+
+medium
+
+large
+```
+
+Model selection can be changed from the application.
+
+---
+
+# Streamlit Configuration
+
+Run
+
+```bash
+streamlit run app_agent.py
+```
+
+Optional configuration
+
+```
+Dark Theme
+
+Wide Layout
+
+Sidebar Navigation
+```
+
+---
+
+# Storage Configuration
+
+Default folders
 
 ```
 uploads/
 
 audio/
 
+metadata/
+
 transcripts/
 
 analysis/
+
+chat_history/
+
+reports/
+
+exports/
+```
+
+Folders are automatically created if they do not exist.
+
+---
+
+# Export Configuration
+
+Supported formats
+
+- PDF
+- HTML
+- Markdown
+- TXT
+- JSON
+
+Export files are stored in
+
+```
+exports/
+```
+
+---
+
+# Environment Variables
+
+Optional environment variables
+
+```
+OPENAI_API_KEY
+
+ANTHROPIC_API_KEY
+
+OLLAMA_HOST
+```
+
+Example
+
+```
+OPENAI_API_KEY=xxxxxxxx
+
+ANTHROPIC_API_KEY=xxxxxxxx
+
+OLLAMA_HOST=http://localhost:11434
+```
+
+---
+
+# Logging
+
+Application logging includes
+
+- Upload status
+- Metadata generation
+- Audio extraction
+- Transcript generation
+- AI analysis
+- Chat execution
+- Report generation
+- Export operations
+
+---
+
+# Folder Structure
+
+```
+AI-Video-Analysis-Agent/
+
+app_agent.py
+
+agents/
+
+services/
+
+providers/
+
+ui/
+
+utils/
+
+uploads/
+
+audio/
+
+metadata/
+
+transcripts/
+
+analysis/
+
+chat_history/
 
 reports/
 
 exports/
 
-chat_history/
-
-assets/
+tests/
 
 docs/
 ```
 
-Benefits:
-
-- Organized storage
-- Easier maintenance
-- Simpler backups
-- Faster debugging
-
 ---
 
-# Application Settings
+# Recommended Settings
 
-Typical configurable values include:
-
-| Setting | Description |
-|----------|-------------|
-| Application Name | Display title |
-| Version | Current release |
-| Upload Directory | Video storage |
-| Export Directory | Generated files |
-| Maximum Upload Size | File limit |
-| Supported Formats | Allowed video types |
-| Default Provider | Selected AI provider |
-| Default Model | Preferred AI model |
-
----
-
-# Logging Configuration
-
-Recommended log levels:
-
-```
-DEBUG
-
-INFO
-
-WARNING
-
-ERROR
-
-CRITICAL
-```
-
-Suggested log information:
-
-- Application startup
-- Video upload
-- Audio extraction
-- Transcript generation
-- AI analysis
-- Export completion
-- Errors
-
----
-
-# Configuration Loading
-
-```
-Start Application
-
-↓
-
-Load Configuration
-
-↓
-
-Validate Settings
-
-↓
-
-Initialize Providers
-
-↓
-
-Initialize Services
-
-↓
-
-Ready
-```
-
----
-
-# Security Recommendations
-
-Follow these best practices:
-
-- Store secrets in `.env`
-- Never expose API keys
-- Validate uploaded files
-- Restrict supported file types
-- Use dedicated storage folders
-- Keep dependencies updated
-
----
-
-# Deployment Checklist
-
-Before deployment, verify:
-
-✅ Configuration files exist
-
-✅ Environment variables are configured
-
-✅ Required directories are present
-
-✅ Dependencies are installed
-
-✅ AI providers are available
-
-✅ FFmpeg is installed
-
-✅ Ollama is running (if used)
-
----
-
-# Best Practices
-
-✔ Keep configuration centralized.
-
-✔ Avoid hard-coded values.
-
-✔ Use environment variables for secrets.
-
-✔ Validate configuration during startup.
-
-✔ Document every configurable option.
-
-✔ Maintain separate development and production configurations if needed.
+| Component | Recommended |
+|-----------|-------------|
+| Python | 3.11+ |
+| Whisper Model | base |
+| AI Provider | Ollama |
+| Export Format | PDF + HTML |
+| Storage | Local JSON |
+| Streamlit | Wide Layout |
 
 ---
 
 # Troubleshooting
 
-### Missing API Key
+### FFmpeg not found
 
-Verify the `.env` file and restart the application.
-
----
-
-### Invalid Configuration
-
-Check for missing or incorrect values in the configuration files.
+Install FFmpeg and ensure it is available in your system PATH.
 
 ---
 
-### Provider Initialization Failed
+### Whisper model download fails
 
-Ensure the selected provider is correctly configured and available.
-
----
-
-### Missing Directories
-
-Create the required folders or allow the application to generate them automatically.
+Check your internet connection and retry downloading the selected model.
 
 ---
 
-# Related Documentation
+### Ollama connection error
 
-- INSTALLATION.md
-- PROVIDER_GUIDE.md
-- API_DOCUMENTATION.md
-- WORKFLOW.md
-- SECURITY.md
-- README.md
+Verify that the Ollama service is running.
 
 ---
 
-# 👨‍💻 Author
+### OpenAI or Anthropic authentication error
 
-**Nekkanti Satya Srinath**
-
-GitHub Repository
-
-https://github.com/satya66123/AI-Video-Analyzer
+Confirm that the corresponding API key is correctly configured.
 
 ---
 
-## License
+### Export generation fails
 
-Released under the **MIT License**.
+Verify write permissions for the `exports/` directory and ensure sufficient disk space.
 
 ---
 
-**Version:** v1.0.0
+# Summary
 
-⭐ Proper configuration is the foundation of a secure, reliable, and maintainable AI Video Analyzer deployment.
+The AI Video Analysis Agent is designed with minimal configuration requirements. Most directories are created automatically, AI providers can be selected through the application, and environment variables are only needed for cloud-based providers. Local execution with Ollama and Whisper provides a straightforward setup for offline AI-powered video analysis.

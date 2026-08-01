@@ -1,409 +1,283 @@
-# 🤖 AI Video Analyzer - Provider Guide
+# Provider Guide
 
-<p align="center">
+![Providers](https://img.shields.io/badge/Providers-Guide-blue)
+![Architecture](https://img.shields.io/badge/Architecture-Provider%20Layer-success)
+![Version](https://img.shields.io/badge/Version-v1.0.0-blue)
 
-<img src="https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white"/>
-
-<img src="https://img.shields.io/badge/Streamlit-1.46+-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white"/>
-
-<img src="https://img.shields.io/badge/Ollama-Supported-black?style=for-the-badge"/>
-
-<img src="https://img.shields.io/badge/OpenAI-Supported-10A37F?style=for-the-badge"/>
-
-<img src="https://img.shields.io/badge/Anthropic-Supported-5A4FCF?style=for-the-badge"/>
-
-<img src="https://img.shields.io/badge/Version-v1.0.0-blue?style=for-the-badge"/>
-
-</p>
+This guide explains how AI providers are integrated into the AI Video Analysis Agent.
 
 ---
 
-# Table of Contents
+# Overview
 
-- Introduction
-- Provider Architecture
-- Supported Providers
-- Provider Factory
-- Base Provider
-- Ollama Provider
-- OpenAI Provider
-- Anthropic Provider
-- Model Management
-- Provider Selection
-- Error Handling
-- Adding a New Provider
-- Best Practices
+The Provider layer abstracts different Large Language Model (LLM) providers behind a common interface. This allows the application to switch between providers without changing the business logic.
 
----
+Currently supported providers:
 
-# Introduction
-
-AI Video Analyzer supports multiple AI providers through a common abstraction layer.
-
-Instead of writing provider-specific logic throughout the application, all AI communication is centralized inside the **providers** package. This design simplifies maintenance and allows new providers to be added with minimal code changes.
+- Ollama
+- OpenAI
+- Anthropic
 
 ---
 
 # Provider Architecture
 
 ```
-                AIAnalysisService
-                        │
-                        ▼
-                ProviderFactory
-                        │
-        ┌───────────────┼────────────────┐
-        │               │                │
-        ▼               ▼                ▼
- OllamaProvider   OpenAIProvider   AnthropicProvider
-        │               │                │
-        ▼               ▼                ▼
- Local Models     OpenAI API      Anthropic API
+Streamlit UI
+      │
+      ▼
+Agents
+      │
+      ▼
+Services
+      │
+      ▼
+ProviderFactory
+      │
+      ▼
+Provider
+      │
+      ▼
+AI Model
 ```
 
 ---
 
-# Supported Providers
+# Provider Components
 
-| Provider | Type | Internet Required |
-|-----------|------|------------------|
-| Ollama | Local | ❌ |
-| OpenAI | Cloud | ✅ |
-| Anthropic | Cloud | ✅ |
+```
+providers/
+
+base_provider.py
+provider_factory.py
+ollama_provider.py
+openai_provider.py
+anthropic_provider.py
+```
 
 ---
 
 # Base Provider
 
-Every provider inherits from a common base interface.
+The Base Provider defines the common interface that every provider must implement.
 
-Example:
+Typical responsibilities:
 
-```python
-class BaseProvider:
-
-    def generate(self, model, prompt):
-        raise NotImplementedError
-```
-
-Benefits:
-
-- Common API
-- Consistent implementation
-- Easy testing
-- Provider interchangeability
+- Generate AI responses
+- Stream AI responses
+- Handle provider-specific communication
 
 ---
 
 # Provider Factory
 
-The Provider Factory creates the requested provider at runtime.
-
-Example flow:
-
-```
-User selects Provider
-
-↓
-
-ProviderFactory
-
-↓
-
-Creates Provider Object
-
-↓
-
-Returns Provider Instance
-```
+The Provider Factory is responsible for returning the correct provider instance.
 
 Example:
 
-```python
-provider = ProviderFactory.get_provider(provider_name)
+```
+User selects provider
+        │
+        ▼
+ProviderFactory
+        │
+        ▼
+Returns Provider Instance
 ```
 
-Advantages:
+Benefits:
 
-- Centralized creation
-- No duplicate initialization
-- Cleaner application architecture
+- Centralized provider management
+- Easy provider switching
+- Simplified application code
 
 ---
 
 # Ollama Provider
 
-The Ollama provider enables local AI inference without requiring external API keys.
+Purpose:
 
-### Responsibilities
+Provides local AI model support using Ollama.
 
-- Connect to Ollama
-- Detect installed models
-- Generate responses
-- Handle local inference errors
+Features:
 
-### Example Workflow
+- Local inference
+- Multiple models
+- Offline support
+- Streaming responses
+
+Typical workflow:
 
 ```
-Prompt
-
-↓
-
+Application
+     │
+     ▼
 Ollama Provider
-
-↓
-
+     │
+     ▼
 Ollama Server
-
-↓
-
-Selected Model
-
-↓
-
-Generated Response
+     │
+     ▼
+AI Response
 ```
-
-### Recommended Models
-
-- llama3.1
-- qwen2.5
-- qwen3
-- gemma3
-- mistral
-- phi3
-- deepseek-coder
 
 ---
 
 # OpenAI Provider
 
-The OpenAI provider communicates with OpenAI models using an API key.
+Purpose:
 
-Responsibilities:
+Connects the application to OpenAI models.
 
-- Authentication
-- Request creation
-- Response parsing
-- Error handling
+Features:
 
-Typical process:
+- Cloud-based AI
+- Chat completion
+- Streaming support
 
-```
-Prompt
+Requirements:
 
-↓
-
-OpenAI Provider
-
-↓
-
-OpenAI API
-
-↓
-
-Generated Response
-```
+- OpenAI API Key
 
 ---
 
 # Anthropic Provider
 
-The Anthropic provider integrates Claude models into the application.
+Purpose:
 
-Responsibilities:
+Connects the application to Anthropic models.
 
-- API communication
-- Request validation
-- Response formatting
-- Exception handling
+Features:
 
----
+- Claude models
+- Streaming responses
+- Cloud AI
 
-# Model Management
+Requirements:
 
-Models are selected dynamically based on the chosen provider.
-
-Example:
-
-```
-Select Provider
-
-↓
-
-Load Available Models
-
-↓
-
-User Selects Model
-
-↓
-
-Generate Response
-```
-
-Recommended behavior:
-
-- Display only compatible models.
-- Validate model availability before generation.
-- Handle unavailable models gracefully.
+- Anthropic API Key
 
 ---
 
 # Provider Selection
 
-Users can switch providers from the application interface.
+The user selects:
 
-Example workflow:
+- Provider
+- Model
 
-```
-Settings
-
-↓
-
-Select Provider
-
-↓
-
-Choose Model
-
-↓
-
-Generate Analysis
-```
-
-The service layer remains unchanged regardless of the selected provider.
-
----
-
-# Error Handling
-
-Common provider-related errors include:
-
-| Error | Recommended Action |
-|--------|--------------------|
-| API Key Missing | Prompt user to configure `.env` |
-| Model Not Found | Select another available model |
-| Ollama Server Offline | Start `ollama serve` |
-| Network Failure | Retry request |
-| Rate Limit | Wait and retry |
-| Timeout | Display informative message |
-
----
-
-# Configuration
-
-Cloud providers require environment variables.
+The application automatically loads the selected provider through the Provider Factory.
 
 Example:
 
-```env
-OPENAI_API_KEY=your_api_key
+```
+Provider
 
-ANTHROPIC_API_KEY=your_api_key
+Ollama
+
+Model
+
+llama3.1
 ```
 
-Ollama does not require API credentials.
+---
+
+# Provider Workflow
+
+```
+User Request
+      │
+      ▼
+Chat / Analysis Service
+      │
+      ▼
+ProviderFactory
+      │
+      ▼
+Selected Provider
+      │
+      ▼
+Generate Response
+      │
+      ▼
+Return Result
+```
+
+---
+
+# Features
+
+Supported features include:
+
+- AI Analysis
+- AI Chat
+- Prompt Processing
+- Response Generation
+- Streaming Responses
+- Multi-model Support
 
 ---
 
 # Adding a New Provider
 
-Steps:
+To integrate another AI provider:
 
 1. Create a new provider class.
-
-2. Inherit `BaseProvider`.
-
-3. Implement required methods.
-
-4. Register the provider in `ProviderFactory`.
-
-5. Add unit tests.
-
-6. Update documentation.
-
-Example:
-
-```
-providers/
-
-└── custom_provider.py
-```
+2. Implement the Base Provider interface.
+3. Register the provider in `provider_factory.py`.
+4. Add provider configuration.
+5. Test the provider integration.
 
 ---
 
-# Best Practices
+# Benefits of Provider Abstraction
 
-✔ Use the provider abstraction instead of direct API calls.
-
-✔ Keep provider classes focused on communication logic only.
-
-✔ Validate provider availability before generating responses.
-
-✔ Store secrets in environment variables.
-
-✔ Write tests for every new provider implementation.
-
-✔ Log provider-specific errors for easier debugging.
+- Modular design
+- Easy maintenance
+- Easy provider replacement
+- Consistent API
+- Scalable architecture
+- Reusable code
 
 ---
 
-# Provider Comparison
+# Error Handling
 
-| Feature | Ollama | OpenAI | Anthropic |
-|----------|:------:|:------:|:---------:|
-| Local Execution | ✅ | ❌ | ❌ |
-| Internet Required | ❌ | ✅ | ✅ |
-| API Key Required | ❌ | ✅ | ✅ |
-| Offline Support | ✅ | ❌ | ❌ |
-| Easy Setup | ✅ | ✅ | ✅ |
+Providers should handle:
 
----
+- Invalid API keys
+- Network failures
+- Missing models
+- Timeout errors
+- Invalid responses
 
-# Future Enhancements
-
-Possible provider improvements:
-
-- Streaming responses
-- Automatic provider fallback
-- Multi-provider orchestration
-- Provider benchmarking
-- Response caching
-- Cost estimation
-- Token usage dashboard
-- Model recommendation system
+Errors are propagated back to the service layer for appropriate handling.
 
 ---
 
-# Related Documentation
+# Configuration
 
-- INSTALLATION.md
-- API_DOCUMENTATION.md
-- ARCHITECTURE.md
-- SYSTEM_DESIGN.md
-- CONFIGURATION.md
-- TESTING.md
-- README.md
+Typical provider configuration includes:
 
----
-
-# 👨‍💻 Author
-
-**Nekkanti Satya Srinath**
-
-GitHub Repository
-
-https://github.com/satya66123/AI-Video-Analyzer
+- Provider name
+- Model name
+- API key (if required)
+- Temperature
+- Maximum tokens
 
 ---
 
-## License
+# Supported Operations
 
-This project is licensed under the **MIT License**.
+Providers support:
+
+- Generate AI response
+- Stream AI response
+- Model selection
+- Prompt execution
 
 ---
 
-**Version:** v1.0.0
+# Summary
 
-⭐ Thank you for using **AI Video Analyzer**. Contributions and suggestions are always welcome.
+The Provider layer enables the AI Video Analysis Agent to work with multiple AI backends through a unified interface. By separating provider-specific logic from the rest of the application, the project remains modular, extensible, and easy to maintain while allowing users to choose the AI provider and model that best fits their needs.

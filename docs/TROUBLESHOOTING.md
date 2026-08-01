@@ -1,63 +1,28 @@
-# 🛠️ AI Video Analyzer - Troubleshooting Guide
+# Troubleshooting Guide
 
-<p align="center">
+![Troubleshooting](https://img.shields.io/badge/Troubleshooting-Guide-orange)
+![Version](https://img.shields.io/badge/Version-v1.0.0-blue)
+![Support](https://img.shields.io/badge/Support-Available-success)
 
-<img src="https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white"/>
-
-<img src="https://img.shields.io/badge/Troubleshooting-Solutions-red?style=for-the-badge"/>
-
-<img src="https://img.shields.io/badge/PyTest-Tested-success?style=for-the-badge&logo=pytest"/>
-
-<img src="https://img.shields.io/badge/GitHub-Actions-blue?style=for-the-badge&logo=github"/>
-
-<img src="https://img.shields.io/badge/Version-v1.0.0-blue?style=for-the-badge"/>
-
-</p>
+This guide provides solutions to common issues encountered while using the AI Video Analysis Agent.
 
 ---
 
-# Table of Contents
-
-- Introduction
-- Installation Problems
-- Application Startup Issues
-- Video Processing Issues
-- Audio Processing Issues
-- Speech Recognition Issues
-- AI Provider Issues
-- Export Issues
-- Testing Issues
-- GitHub Actions Issues
-- Frequently Encountered Errors
-- Getting Support
-
----
-
-# Introduction
-
-This guide provides solutions for common problems encountered while installing, configuring, and using **AI Video Analyzer**.
-
-Before reporting a bug, review the solutions below, as many issues can be resolved with a few simple checks.
-
----
-
-# Installation Problems
+# Installation Issues
 
 ## Python Not Found
 
-### Error
+### Problem
 
-```text
-python is not recognized as an internal or external command
+```
+'python' is not recognized as an internal or external command.
 ```
 
 ### Solution
 
-- Install Python 3.11+
-- Enable **Add Python to PATH**
-- Restart the terminal
-
-Verify:
+- Install Python 3.11 or later.
+- Add Python to your system PATH.
+- Verify installation:
 
 ```bash
 python --version
@@ -65,49 +30,33 @@ python --version
 
 ---
 
-## pip Not Found
+## Missing Dependencies
 
-### Error
+### Problem
 
-```text
-pip is not recognized
+```
+ModuleNotFoundError
 ```
 
 ### Solution
 
-```bash
-python -m ensurepip
-
-python -m pip install --upgrade pip
-```
-
----
-
-## Dependency Installation Failed
-
-Install all dependencies again.
+Install project dependencies.
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Install testing dependencies.
-
-```bash
-pip install -r requirements_test.txt
-```
-
 ---
 
-# Application Startup Issues
+## Streamlit Not Installed
 
-## Streamlit Not Found
+### Problem
 
-```text
+```
 ModuleNotFoundError: streamlit
 ```
 
-Install Streamlit.
+### Solution
 
 ```bash
 pip install streamlit
@@ -115,25 +64,37 @@ pip install streamlit
 
 ---
 
-## App Does Not Start
+# FFmpeg Issues
 
-Run
+## FFmpeg Not Found
 
-```bash
-streamlit run app.py
+### Problem
+
+```
+ffmpeg not found
 ```
 
-Check for:
+### Solution
 
-- Missing dependencies
-- Incorrect virtual environment
-- Syntax errors
+Install FFmpeg and verify:
+
+```bash
+ffmpeg -version
+```
+
+Add FFmpeg to the system PATH if necessary.
 
 ---
 
-# Video Processing Issues
+# Video Upload Issues
 
-## Unsupported Video Format
+## Invalid Video Format
+
+### Problem
+
+Video cannot be uploaded.
+
+### Solution
 
 Supported formats:
 
@@ -145,98 +106,89 @@ Supported formats:
 
 ---
 
-## Video Upload Failed
+## Duplicate Video
 
-Possible causes:
+### Problem
 
-- Unsupported extension
-- Corrupted file
-- File too large
-- Permission denied
+The application reports a duplicate upload.
 
----
+### Solution
 
-## Video Metadata Missing
-
-Verify:
-
-- Video is readable
-- File is not corrupted
-- Upload completed successfully
+Rename the file or upload a different video. Duplicate detection uses file hashing.
 
 ---
 
-# Audio Processing Issues
+# Audio Issues
 
 ## Audio Extraction Failed
 
-Verify FFmpeg installation.
+### Problem
 
-```bash
-ffmpeg -version
-```
+Audio could not be extracted.
 
----
+### Solution
 
-## Audio File Not Generated
-
-Possible reasons:
-
-- Invalid video
-- FFmpeg missing
-- Permission denied
+- Verify FFmpeg installation.
+- Confirm the video file is valid.
+- Try another video.
 
 ---
 
-## Audio Duration Incorrect
+# Whisper Issues
 
-Re-upload the original video and regenerate audio.
+## Whisper Model Download Error
 
----
+### Problem
 
-# Speech Recognition Issues
+Whisper model cannot be loaded.
 
-## Whisper Model Failed
+### Solution
 
-Check:
-
-- Whisper installation
-- Audio validity
-- Available system memory
+Check your internet connection for the initial model download and ensure sufficient disk space.
 
 ---
 
 ## Empty Transcript
 
-Possible causes:
+### Problem
 
-- Silent audio
-- Corrupted audio
-- Unsupported encoding
+No transcript is generated.
+
+### Solution
+
+- Verify the video contains speech.
+- Check audio quality.
+- Try another Whisper model.
 
 ---
 
-## Poor Transcription Quality
+## Long Audio Processing
 
-Recommendations:
+### Problem
 
-- Use clear audio
-- Reduce background noise
-- Avoid heavily compressed recordings
+Transcription is slow.
+
+### Solution
+
+- Use a smaller Whisper model.
+- Reduce audio duration.
+- Increase system memory if available.
 
 ---
 
 # AI Provider Issues
 
-## Ollama Connection Failed
+## Ollama Not Running
 
-Verify:
+### Problem
 
-```bash
-ollama serve
-```
+Cannot connect to Ollama.
 
-Check available models.
+### Solution
+
+Start the Ollama service.
+
+Verify installation:
 
 ```bash
 ollama list
@@ -244,37 +196,85 @@ ollama list
 
 ---
 
-## Model Not Found
-
-Download the required model.
-
-Example:
-
-```bash
-ollama pull llama3.1
-```
-
----
-
 ## OpenAI Authentication Error
+
+### Problem
+
+Invalid API key.
+
+### Solution
 
 Verify:
 
-```
+```text
 OPENAI_API_KEY
 ```
 
-inside the `.env` file.
+is configured correctly.
 
 ---
 
 ## Anthropic Authentication Error
 
+### Problem
+
+Authentication failed.
+
+### Solution
+
 Verify:
 
-```
+```text
 ANTHROPIC_API_KEY
 ```
+
+is configured correctly.
+
+---
+
+## Provider Not Found
+
+### Problem
+
+Selected provider is unavailable.
+
+### Solution
+
+- Verify provider configuration.
+- Check Provider Factory registration.
+- Confirm required dependencies are installed.
+
+---
+
+# AI Analysis Issues
+
+## Analysis Failed
+
+### Problem
+
+No AI response returned.
+
+### Solution
+
+- Verify provider connection.
+- Confirm selected model exists.
+- Check transcript availability.
+
+---
+
+# Chat Issues
+
+## AI Chat Not Responding
+
+### Problem
+
+Chat returns no answer.
+
+### Solution
+
+- Generate a transcript first.
+- Verify AI provider.
+- Confirm model availability.
 
 ---
 
@@ -282,188 +282,149 @@ ANTHROPIC_API_KEY
 
 ## PDF Export Failed
 
-Possible causes:
+### Problem
 
-- Missing dependencies
-- Invalid output directory
-- Permission issues
+PDF generation failed.
 
----
+### Solution
 
-## HTML Export Failed
-
-Verify:
-
-- Write permissions
-- Available disk space
+- Verify ReportLab installation.
+- Check write permissions.
+- Ensure the report was generated successfully.
 
 ---
 
-## Empty Export
+## Export Folder Missing
 
-Generate transcript and AI analysis before exporting.
+### Problem
+
+Exported files are not found.
+
+### Solution
+
+Create the folder if necessary:
+
+```
+exports/
+```
+
+---
+
+# File Permission Issues
+
+### Problem
+
+Permission denied.
+
+### Solution
+
+- Close files opened by other applications.
+- Run the application with appropriate permissions.
+- Verify folder write access.
 
 ---
 
 # Testing Issues
 
-## Pytest Not Found
+## Test Failure
 
-Install:
+### Problem
+
+One or more tests fail.
+
+### Solution
+
+Run:
 
 ```bash
-pip install pytest
+pytest
 ```
 
----
-
-## Tests Failing
-
-Recommended steps:
-
-- Activate virtual environment
-- Install requirements
-- Review error logs
-- Verify mocked dependencies
+Review the error output and verify project dependencies.
 
 ---
 
-## Import Errors
+## Mock Errors
 
-Run tests from the project root.
+### Problem
 
----
+Mock-related test failures.
 
-# GitHub Actions Issues
+### Solution
 
-## Workflow Failed
-
-Verify:
-
-- requirements.txt
-- requirements_test.txt
-- Workflow YAML
-- Python version
+- Verify mock paths.
+- Check import statements.
+- Ensure patched objects match the source code.
 
 ---
 
-## Missing Dependency
+# Performance Issues
 
-Add the missing package to:
+## Slow Processing
 
-```
-requirements.txt
-```
+### Solution
 
-or
-
-```
-requirements_test.txt
-```
-
-Commit the update and rerun the workflow.
+- Use a smaller Whisper model.
+- Close unnecessary applications.
+- Process shorter videos.
+- Use local SSD storage.
 
 ---
 
-## CI Passes Locally but Fails Online
+## High Memory Usage
 
-Check:
+### Solution
 
-- Python version mismatch
-- Missing dependency
-- Platform-specific paths
-- File permissions
+- Process smaller videos.
+- Reduce chunk size.
+- Close background applications.
 
 ---
 
-# Frequently Encountered Errors
+# Common Error Messages
 
 | Error | Solution |
 |--------|----------|
-| ModuleNotFoundError | Install missing package |
+| ModuleNotFoundError | Install missing dependency |
 | FileNotFoundError | Verify file path |
-| PermissionError | Check directory permissions |
-| TimeoutError | Retry operation |
-| ConnectionError | Verify network/provider |
+| PermissionError | Check file permissions |
 | ValueError | Validate user input |
+| RuntimeError | Review logs for processing failures |
+| ConnectionError | Verify AI provider connection |
 
 ---
 
-# Diagnostic Checklist
+# Recommended Checks
 
-Before reporting an issue, verify:
+Before reporting an issue:
 
-✅ Python installed
-
-✅ Virtual environment activated
-
-✅ Dependencies installed
-
-✅ FFmpeg available
-
-✅ Ollama running (if used)
-
-✅ API keys configured
-
-✅ Tests passing
-
-✅ Latest project version
+- Verify Python installation.
+- Verify FFmpeg installation.
+- Install all dependencies.
+- Check API keys.
+- Confirm AI provider availability.
+- Ensure uploaded files are valid.
+- Review application logs.
+- Run the automated test suite.
 
 ---
 
-# Reporting Bugs
+# Getting Help
 
-Include the following information:
+If the issue persists:
 
-- Operating System
-- Python Version
-- Error Message
-- Stack Trace
-- Steps to Reproduce
-- Screenshots (if applicable)
-- Log Files
-
----
-
-# Getting Support
-
-Helpful resources:
-
-- Project Documentation
-- GitHub Issues
-- GitHub Discussions
-- Project Wiki
+1. Review the project documentation.
+2. Check the FAQ.
+3. Run the application with logs enabled.
+4. Open an issue on the GitHub repository with:
+   - Error message
+   - Steps to reproduce
+   - Operating system
+   - Python version
+   - Project version
 
 ---
 
-# Related Documentation
+# Summary
 
-- INSTALLATION.md
-- USER_GUIDE.md
-- CONFIGURATION.md
-- TESTING.md
-- SECURITY.md
-- FAQ.md
-- README.md
-
----
-
-# 👨‍💻 Author
-
-**Nekkanti Satya Srinath**
-
-GitHub Repository
-
-https://github.com/satya66123/AI-Video-Analyzer
-
----
-
-## License
-
-Released under the **MIT License**.
-
----
-
-**Version:** v1.0.0
-
-⭐ This troubleshooting guide is intended to help users quickly diagnose and resolve common issues while using AI Video Analyzer.
+Most issues can be resolved by verifying dependencies, AI provider configuration, FFmpeg installation, file permissions, and supported input formats. The comprehensive test suite (**531 passing tests**) also provides a reliable baseline for validating project functionality.

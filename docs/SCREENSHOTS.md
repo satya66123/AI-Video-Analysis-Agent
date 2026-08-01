@@ -1,503 +1,274 @@
-# 📸 AI Video Analyzer - Screenshots Guide
+# 📸 Application Screenshots
 
-<div align="center">
+<p align="center">
 
-# AI Video Analyzer
+![Screenshots](https://img.shields.io/badge/Screenshots-10-blue?style=for-the-badge)
+![UI](https://img.shields.io/badge/User_Interface-Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)
+![Architecture](https://img.shields.io/badge/Architecture-Agent--Service--Provider-success?style=for-the-badge)
+![Version](https://img.shields.io/badge/Version-v1.0.0-blue?style=for-the-badge)
+![Status](https://img.shields.io/badge/Application-Completed-success?style=for-the-badge)
 
-## Application Screenshots & Feature Walkthrough
-
-<div align="center">
-
-# 📸 AI Video Analyzer - Screenshots Guide
-
-![GitHub](https://img.shields.io/badge/GitHub-AI--Video--Analyzer-181717?logo=github)
-![Python](https://img.shields.io/badge/Python-3.11+-3776AB?logo=python&logoColor=white)
-![Streamlit](https://img.shields.io/badge/Streamlit-App-FF4B4B?logo=streamlit&logoColor=white)
-![Whisper](https://img.shields.io/badge/OpenAI-Whisper-412991?logo=openai&logoColor=white)
-![FFmpeg](https://img.shields.io/badge/FFmpeg-Media_Processing-007808?logo=ffmpeg&logoColor=white)
-![Ollama](https://img.shields.io/badge/Ollama-Local_LLM-000000)
-![OpenAI](https://img.shields.io/badge/OpenAI-GPT-412991?logo=openai&logoColor=white)
-![Anthropic](https://img.shields.io/badge/Anthropic-Claude-D97706)
-![Pytest](https://img.shields.io/badge/Pytest-Unit_Tested-0A9EDC?logo=pytest&logoColor=white)
-![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-CI-2088FF?logo=githubactions&logoColor=white)
-
-![Repo Size](https://img.shields.io/github/repo-size/satya66123/AI-Video-Analyzer)
-![Code Size](https://img.shields.io/github/languages/code-size/satya66123/AI-Video-Analyzer)
-![Languages](https://img.shields.io/github/languages/count/satya66123/AI-Video-Analyzer)
-![Top Language](https://img.shields.io/github/languages/top/satya66123/AI-Video-Analyzer)
-![Last Commit](https://img.shields.io/github/last-commit/satya66123/AI-Video-Analyzer)
-![Release](https://img.shields.io/github/v/release/satya66123/AI-Video-Analyzer)
-![Issues](https://img.shields.io/github/issues/satya66123/AI-Video-Analyzer)
-![Pull Requests](https://img.shields.io/github/issues-pr/satya66123/AI-Video-Analyzer)
-![Stars](https://img.shields.io/github/stars/satya66123/AI-Video-Analyzer?style=social)
-![Forks](https://img.shields.io/github/forks/satya66123/AI-Video-Analyzer?style=social)
-![License](https://img.shields.io/github/license/satya66123/AI-Video-Analyzer)
-
-## Complete Visual Walkthrough
-
-**Version:** v1.0.0
-
-**Author:** Nekkanti Satya Srinath
-
-</div>
-
-**Project Version:** v1.0.0
-
-**Author:** Nekkanti Satya Srinath
-
-This document provides a visual walkthrough of the AI Video Analyzer application. Each screenshot demonstrates a major feature, allowing users, recruiters, and developers to understand the complete workflow of the application.
+</p>
 
 ---
 
-</div>
+# 📖 Overview
 
-# 📑 Table of Contents
+This document showcases the major user interface pages of the **AI Video Analysis Agent**.
 
-1. Overview
-2. Screenshot Directory
-3. Home Dashboard
-4. Video Upload
-5. Video to Audio Conversion
-6. Speech-to-Text (Step 1)
-7. Speech-to-Text (Step 2)
-8. Audio Processing
-9. AI Analysis
-10. AI Chat
-11. Reports
-12. Export Center
-13. About
-14. Test Results
-15. Complete Workflow
-16. Future Screenshots
-17. Thank You
+Each screenshot highlights a core module of the application and demonstrates the complete AI-powered video analysis workflow.
 
 ---
 
-# 📌 Overview
+# 🏠 Dashboard
 
-The screenshots in this document demonstrate the complete workflow of the AI Video Analyzer application, from uploading a video to generating AI-powered insights and exporting reports.
+<p>
 
-These screenshots are also referenced in the project's README.md for GitHub presentation.
+![Module](https://img.shields.io/badge/Module-Dashboard-blue?style=flat-square)
+![Purpose](https://img.shields.io/badge/Purpose-Home_Page-success?style=flat-square)
+![Status](https://img.shields.io/badge/Status-Completed-brightgreen?style=flat-square)
 
----
+</p>
 
-# 📂 Screenshot Directory
+The Dashboard serves as the central navigation page for the application.
 
-```text
-docs/
-└── screenshots/
-    ├── home-dashboard.png
-    ├── video-upload.png
-    ├── video-to-audio.png
-    ├── speechtotext1.png
-    ├── speechtotext2.png
-    ├── audio-processing.png
-    ├── analysis.png
-    ├── aichat.png
-    ├── reports.png
-    ├── export-center.png
-    ├── about.png
-    └── all-tests-passed.png
-```
+It provides quick access to every AI module.
+
+![Dashboard](screenshots-agents/dashboardPageAgent.png)
 
 ---
 
-# 🏠 1. Home Dashboard
+# 📤 Upload Video
 
-## 🏠 Home Dashboard
+<p>
 
-![UI](https://img.shields.io/badge/Module-Home_Dashboard-blue)
-![Status](https://img.shields.io/badge/Completed-Yes-success)
-![Streamlit](https://img.shields.io/badge/Framework-Streamlit-red?logo=streamlit)
+![Agent](https://img.shields.io/badge/Agent-Upload-blue?style=flat-square)
+![Feature](https://img.shields.io/badge/Feature-Video_Upload-success?style=flat-square)
+![Validation](https://img.shields.io/badge/Validation-Enabled-orange?style=flat-square)
 
-![Home Dashboard](screenshots/home-dashboard.png)
+</p>
 
+Upload videos for processing.
 
-## Description
+Features include:
 
-The Home Dashboard is the landing page of the application.
+- Video Validation
+- Duplicate Detection
+- Upload Progress
 
-### Highlights
-
-- Modern Streamlit interface
-- Navigation sidebar
-- Project overview
-- Quick access to all modules
-- Professional dashboard layout
+![Upload Video](screenshots-agents/uploadVideoAgent.png)
 
 ---
 
-# 📤 2. Video Upload
+# 🎙 Transcript Agent
 
-## 📤 Video Upload
+<p>
 
-![Module](https://img.shields.io/badge/Module-Video_Upload-blue)
-![Validation](https://img.shields.io/badge/File_Validation-Enabled-success)
-![Feature](https://img.shields.io/badge/Feature-Upload-important)
+![Agent](https://img.shields.io/badge/Agent-Transcript-blue?style=flat-square)
+![AI](https://img.shields.io/badge/Whisper-Integrated-success?style=flat-square)
+![Speech](https://img.shields.io/badge/Speech-To_Text-red?style=flat-square)
 
+</p>
 
-![Video Upload](screenshots/video-upload.png)
+Generate transcripts using OpenAI Whisper.
 
-## Description
+Features include:
 
-Users upload supported video formats for analysis.
+- Speech Recognition
+- Audio Chunking
+- Transcript Storage
 
-### Supported Features
-
-- MP4
-- AVI
-- MOV
-- MKV
-- WEBM
-
-### Demonstrates
-
-- File validation
-- Upload progress
-- Error handling
+![Transcript Agent](screenshots-agents/transcriptAgentPage.png)
 
 ---
 
-# 🎬 3. Video to Audio
+# 🤖 AI Analysis Agent
 
-## 🎬 Video to Audio
+<p>
 
-![FFmpeg](https://img.shields.io/badge/FFmpeg-Audio_Extraction-green?logo=ffmpeg)
-![Processing](https://img.shields.io/badge/Processing-Completed-success)
+![Agent](https://img.shields.io/badge/Agent-AI_Analysis-blue?style=flat-square)
+![Providers](https://img.shields.io/badge/Providers-Multi_AI-success?style=flat-square)
+![LLM](https://img.shields.io/badge/LLM-Supported-orange?style=flat-square)
 
-![Video to Audio](screenshots/video-to-audio.png)
+</p>
 
-## Description
+Perform intelligent transcript analysis using AI providers.
 
-The uploaded video is converted into audio using FFmpeg.
-
-### Highlights
-
-- FFmpeg integration
-- Progress tracking
-- Audio extraction
-- Temporary file management
-
----
-
-# 🎤 4. Speech-to-Text (Step 1)
-
-## 🎤 Speech-to-Text
-
-![Whisper](https://img.shields.io/badge/OpenAI-Whisper-purple?logo=openai)
-![Speech](https://img.shields.io/badge/Speech-Recognition-blue)
-
-![Speech to Text](screenshots/speechtotext1.png)
-
-## Description
-
-Initial transcription process using OpenAI Whisper.
-
-### Features
-
-- Automatic speech recognition
-- Language detection
-- Transcript generation
-
----
-
-# 🎤 5. Speech-to-Text (Step 2)
-## 🎤 Speech-to-Text
-
-![Whisper](https://img.shields.io/badge/OpenAI-Whisper-purple?logo=openai)
-![Speech](https://img.shields.io/badge/Speech-Recognition-blue)
-
-![Speech to Text](screenshots/speechtotext2.png)
-
-## Description
-
-Displays the generated transcript.
-
-### Highlights
-
-- Readable transcript
-- Scrollable content
-- Clean formatting
-
----
-
-# 🔊 6. Audio Processing
-
-## 🤖 Audio Processing
-
-![AI](https://img.shields.io/badge/Artificial_Intelligence-Enabled-success)
-![LLM](https://img.shields.io/badge/Multi-Provider-orange)
-![Summary](https://img.shields.io/badge/Summary-Generated-blue)
-
-
-![Audio Processing](screenshots/audio-processing.png)
-
-## Description
-
-Processes extracted audio before transcription.
-
-### Demonstrates
-
-- Audio pipeline
-- Audio validation
-- Metadata extraction
-
----
-
-# 🤖 7. AI Analysis
-## 🤖 AI Analysis
-
-![AI](https://img.shields.io/badge/Artificial_Intelligence-Enabled-success)
-![LLM](https://img.shields.io/badge/Multi-Provider-orange)
-![Summary](https://img.shields.io/badge/Summary-Generated-blue)
-
-![Analysis](screenshots/analysishistory.png)
-
-![AI Analysis](screenshots/analysis.png)
-
-## Description
-
-AI models analyze the transcript and generate intelligent insights.
-
-### Generated Information
-
-- Summary
-- Key Points
-- Action Items
-- Important Topics
-- Recommendations
-
-### Supported Providers
+Supported Providers:
 
 - Ollama
 - OpenAI
 - Anthropic
 
----
-
-# 💬 8. AI Chat
-
-## 💬 AI Chat
-
-![Chat](https://img.shields.io/badge/Chat-AI_Assistant-success)
-![Context](https://img.shields.io/badge/Context-Aware-blue)
-
-![AI Chat](screenshots/aichat.png)
-
-## Description
-
-Interactive chat interface for asking questions about the transcript.
-
-### Features
-
-- Context-aware responses
-- Follow-up questions
-- Multi-provider support
+![Analysis Agent](screenshots-agents/analysisAgent.png)
 
 ---
 
-# 📄 9. Reports
+# 💬 AI Chat Agent
 
-## 📄 Reports
+<p>
 
-![Reports](https://img.shields.io/badge/Reports-Generated-success)
-![Output](https://img.shields.io/badge/Output-Structured-blue)
+![Agent](https://img.shields.io/badge/Agent-AI_Chat-blue?style=flat-square)
+![Feature](https://img.shields.io/badge/Feature-Conversation-success?style=flat-square)
+![History](https://img.shields.io/badge/History-Saved-orange?style=flat-square)
 
+</p>
 
-![Reports](screenshots/reports.png)
+Chat with generated transcripts using AI.
 
-## Description
+Features include:
 
-Displays generated reports and AI outputs.
+- Context-aware Chat
+- Conversation History
+- Transcript Question Answering
 
-### Includes
+![Chat Agent](screenshots-agents/chatAgent.png)
 
+---
+
+# 📄 Report Agent
+
+<p>
+
+![Agent](https://img.shields.io/badge/Agent-Report-blue?style=flat-square)
+![Output](https://img.shields.io/badge/Output-Markdown-success?style=flat-square)
+![Automation](https://img.shields.io/badge/Automation-Enabled-orange?style=flat-square)
+
+</p>
+
+Generate complete AI Video Analysis Reports.
+
+The report includes:
+
+- Metadata
 - Transcript
-- Summary
-- Analysis
-- Key Points
-- Action Items
+- AI Analysis
+- Chat History
+
+![Report Agent](screenshots-agents/ReportAgent.png)
 
 ---
 
-# 📤 10. Export Center
+# 📤 Export Agent
 
-## 📤 Export Center
+<p>
 
-![Export](https://img.shields.io/badge/Export-TXT_|_MD_|_HTML_|_PDF-success)
-![Formats](https://img.shields.io/badge/Formats-Multiple-blue)
+![Agent](https://img.shields.io/badge/Agent-Export-blue?style=flat-square)
+![Formats](https://img.shields.io/badge/Formats-5-success?style=flat-square)
+![Reports](https://img.shields.io/badge/Reports-Professional-orange?style=flat-square)
 
-![Export Center](screenshots/export-center.png)
+</p>
 
-## Description
+Export reports into multiple formats.
 
-Exports generated reports into multiple formats.
+Supported formats:
 
-### Supported Formats
-
-- TXT
-- Markdown
-- HTML
 - PDF
+- HTML
+- Markdown
+- TXT
+- JSON
+
+![Export Agent](screenshots-agents/exportAgent.png)
 
 ---
 
-# ℹ️ 11. About
+# 🕘 History Agent
 
-## ℹ️ About
+<p>
 
-![Project](https://img.shields.io/badge/Project-AI_Video_Analyzer-blue)
-![Version](https://img.shields.io/badge/v1.0.0-Latest-success)
+![Agent](https://img.shields.io/badge/Agent-History-blue?style=flat-square)
+![Management](https://img.shields.io/badge/File_Management-Enabled-success?style=flat-square)
+![Storage](https://img.shields.io/badge/Storage-Local-orange?style=flat-square)
 
-![About](screenshots/about.png)
+</p>
 
-## Description
+Manage generated application data.
 
-Displays project information and technical details.
+Includes:
 
-### Shows
+- Videos
+- Audio
+- Transcripts
+- Analysis
+- Reports
+- Exports
 
-- Application version
-- Technologies used
-- Developer information
-- Project overview
-
----
-
-# ✅ 12. All Tests Passed
-
-## ✅ All Tests Passed
-
-![Pytest](https://img.shields.io/badge/Pytest-Passed-success?logo=pytest)
-![CI](https://img.shields.io/badge/GitHub_Actions-Passing-success?logo=githubactions)
-![Coverage](https://img.shields.io/badge/Status-Stable-brightgreen)
-
-
-![All Tests Passed](screenshots/all-tests-passed.png)
-
-## Description
-
-Demonstrates successful execution of the complete test suite.
-
-### Includes
-
-- Pytest results
-- Passing tests
-- CI readiness
+![History Agent](screenshots-agents/historyAgent.png)
 
 ---
 
-# 🔄 Complete Application Workflow
+# ⚙ Settings
 
-```text
-Home Dashboard
-        │
-        ▼
-Video Upload
-        │
-        ▼
-Video Validation
-        │
-        ▼
-Video to Audio
-        │
-        ▼
-Audio Processing
-        │
-        ▼
-Speech-to-Text
-        │
-        ▼
-Transcript Generation
-        │
-        ▼
-AI Analysis
-        │
-        ▼
-AI Chat
-        │
-        ▼
-Reports
-        │
-        ▼
-Export Center
-```
+<p>
+
+![Page](https://img.shields.io/badge/Page-Settings-blue?style=flat-square)
+![Configuration](https://img.shields.io/badge/Configuration-AI_Providers-success?style=flat-square)
+![Customization](https://img.shields.io/badge/Models-Supported-orange?style=flat-square)
+
+</p>
+
+Configure application settings including:
+
+- AI Providers
+- AI Models
+- Application Preferences
+
+![Settings](screenshots-agents/settingsAgent.png)
 
 ---
 
-# 📈 Features Demonstrated
+# ℹ About
 
-✅ Modern Streamlit UI
+<p>
 
-✅ Video Upload
+![Page](https://img.shields.io/badge/Page-About-blue?style=flat-square)
+![Project](https://img.shields.io/badge/Project-Information-success?style=flat-square)
+![Version](https://img.shields.io/badge/Release-v1.0.0-orange?style=flat-square)
 
-✅ FFmpeg Integration
+</p>
 
-✅ Whisper Speech Recognition
+Displays:
 
-✅ AI Analysis
+- Project Information
+- Technologies
+- Version Details
+- Author Information
 
-✅ Multi-LLM Provider Support
-
-✅ Transcript Management
-
-✅ Report Generation
-
-✅ Multiple Export Formats
-
-✅ Testing
+![About](screenshots-agents/aboutAgent.png)
 
 ---
 
-# 🚀 Future Screenshots (Optional)
+# 📊 Screenshot Summary
 
-If new features are added in future releases, consider capturing screenshots for:
+<p align="center">
 
-- Settings
-- Theme Switcher
-- Model Manager
-- Provider Selection
-- Transcript Search
-- Analytics Dashboard
-- Batch Processing
-- User Authentication
-- Docker Deployment
-- Cloud Deployment
+![Pages](https://img.shields.io/badge/Pages-10-blue?style=for-the-badge)
+![Workflow](https://img.shields.io/badge/Workflow-Complete-success?style=for-the-badge)
+![Architecture](https://img.shields.io/badge/Architecture-Modular-blueviolet?style=for-the-badge)
+![AI](https://img.shields.io/badge/AI-Multi_Provider-orange?style=for-the-badge)
+![Status](https://img.shields.io/badge/Release-v1.0.0-success?style=for-the-badge)
 
----
+</p>
 
-# 📌 Notes
+The screenshots demonstrate the complete AI Video Analysis Agent workflow:
 
-- All screenshots should be stored in:
-
-```text
-docs/screenshots/
-```
-
-- Use descriptive filenames.
-- Keep screenshots updated with each major release.
-- Replace outdated images whenever the UI changes significantly.
+- 🏠 Dashboard
+- 📤 Upload Video
+- 🎙 Transcript Generation
+- 🤖 AI Analysis
+- 💬 AI Chat
+- 📄 Report Generation
+- 📤 Export Reports
+- 🕘 History Management
+- ⚙ Settings
+- ℹ About
 
 ---
 
-# 🙏 Thank You
+<p align="center">
 
-Thank you for exploring the **AI Video Analyzer** application.
+**AI Video Analysis Agent v1.0.0**  
+Built with ❤️ using Python, Streamlit, Whisper, and AI.
 
-These screenshots provide a complete visual walkthrough of the project's workflow and features, making it easier for users, recruiters, and developers to understand the application's capabilities.
-
----
-
-<div align="center">
-
-**AI Video Analyzer**
-
-**Version 1.0.0**
-
-**Developed by**
-
-# Nekkanti Satya Srinath
-
-⭐ If you found this project useful, consider giving it a **GitHub Star**.
-
-</div>
+</p>

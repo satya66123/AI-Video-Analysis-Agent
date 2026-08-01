@@ -1,205 +1,135 @@
-# 🌟 Contributor Covenant Code of Conduct
+# Code of Conduct
 
-<p align="center">
+![Community](https://img.shields.io/badge/Community-Welcoming-success)
+![Contributions](https://img.shields.io/badge/Contributions-Welcome-brightgreen)
+![License](https://img.shields.io/badge/License-MIT-blue)
 
-<img src="https://img.shields.io/github/license/satya66123/AI-Video-Analyzer?style=for-the-badge"/>
+## Our Pledge
 
-<img src="https://img.shields.io/github/contributors/satya66123/AI-Video-Analyzer?style=for-the-badge"/>
+We are committed to fostering an open, inclusive, respectful, and welcoming environment for everyone participating in the AI Video Analysis Agent project.
 
-<img src="https://img.shields.io/github/issues/satya66123/AI-Video-Analyzer?style=for-the-badge"/>
-
-<img src="https://img.shields.io/github/discussions/satya66123/AI-Video-Analyzer?style=for-the-badge"/>
-
-<img src="https://img.shields.io/github/actions/workflow/status/satya66123/AI-Video-Analyzer/python-app.yml?style=for-the-badge&label=Build"/>
-
-<img src="https://img.shields.io/badge/Open%20Source-Community-success?style=for-the-badge"/>
-
-<img src="https://img.shields.io/badge/Version-v1.0.0-blue?style=for-the-badge"/>
-
-</p>
-
----
-
-# 📑 Table of Contents
-
-- Our Pledge
-- Our Standards
-- Examples of Positive Behavior
-- Examples of Unacceptable Behavior
-- Community Responsibilities
-- Scope
-- Enforcement
-- Reporting Issues
-- Attribution
-
----
-
-# 🌍 Our Pledge
-
-We, as contributors, maintainers, and community members, pledge to make participation in the **AI Video Analyzer** project a welcoming, respectful, and harassment-free experience for everyone regardless of:
+Contributors, maintainers, and community members are expected to collaborate professionally and respectfully regardless of:
 
 - Experience level
-- Education
 - Nationality
-- Personal background
-- Identity
-- Technical expertise
+- Ethnicity
+- Gender identity or expression
+- Sexual orientation
+- Disability
+- Physical appearance
+- Age
+- Religion
+- Technical background
 
-We are committed to fostering an open, collaborative, and inclusive environment.
-
----
-
-# ✅ Our Standards
-
-Examples of behavior that contribute to a positive community include:
-
-- Being respectful and considerate
-- Providing constructive feedback
-- Helping newcomers
-- Sharing knowledge openly
-- Respecting differing viewpoints
-- Accepting constructive criticism
-- Working collaboratively
-- Focusing on improving the project
+Our goal is to build a friendly and productive open-source community.
 
 ---
 
-# 🤝 Positive Community Behavior
+# Our Standards
 
-Community members are encouraged to:
+Examples of behavior that contributes to a positive environment include:
 
-- Ask thoughtful questions
-- Review code respectfully
-- Write clear documentation
-- Report bugs responsibly
-- Suggest improvements
-- Share ideas professionally
-- Welcome first-time contributors
-
----
-
-# 🚫 Unacceptable Behavior
-
-Examples of unacceptable behavior include:
-
-- Harassment or discrimination
-- Personal attacks
-- Offensive language
-- Trolling
-- Deliberate intimidation
-- Publishing private information
-- Spam
-- Malicious contributions
-- Disruptive behavior
-
-These behaviors are not tolerated.
+- Being respectful and courteous.
+- Using welcoming and inclusive language.
+- Providing constructive feedback.
+- Respecting differing viewpoints and experiences.
+- Helping new contributors learn the project.
+- Accepting constructive criticism professionally.
+- Focusing on what is best for the project and community.
+- Collaborating openly and honestly.
 
 ---
 
-# 👥 Community Responsibilities
+# Unacceptable Behavior
 
-Project maintainers are responsible for:
+The following behaviors are not acceptable:
 
-- Reviewing contributions fairly
-- Maintaining respectful discussions
-- Enforcing this Code of Conduct
-- Encouraging collaboration
-- Keeping the project welcoming
-
-Contributors are expected to:
-
-- Follow project guidelines
-- Respect review decisions
-- Write maintainable code
-- Help improve documentation
-- Support other contributors
+- Harassment or discrimination of any kind.
+- Personal attacks or insults.
+- Hate speech.
+- Threatening or abusive language.
+- Deliberate intimidation.
+- Trolling or disruptive behavior.
+- Sharing private information without permission.
+- Spam or malicious contributions.
+- Knowingly submitting malicious code.
 
 ---
 
-# 🌐 Scope
+# Expected Contributor Behavior
+
+Contributors should:
+
+- Follow the project's coding standards.
+- Write clear and maintainable code.
+- Add or update tests when appropriate.
+- Keep pull requests focused and well documented.
+- Respect review feedback.
+- Use GitHub Issues for bugs and feature requests.
+- Be patient during the review process.
+
+---
+
+# Reporting Issues
+
+If you experience or witness unacceptable behavior, please report it through the project's GitHub Issues page or contact the project maintainer.
+
+When reporting an issue, please include:
+
+- A clear description of the incident.
+- Relevant screenshots or logs, if available.
+- Steps to reproduce (if applicable).
+- Any additional context that may help resolve the issue.
+
+All reports will be reviewed fairly and handled as confidentially as possible.
+
+---
+
+# Enforcement
+
+Project maintainers are responsible for enforcing this Code of Conduct.
+
+Depending on the severity of a violation, maintainers may:
+
+- Provide a warning.
+- Request changes to behavior.
+- Remove inappropriate comments or content.
+- Reject or close pull requests.
+- Temporarily restrict participation.
+- Permanently ban users who repeatedly violate this Code of Conduct.
+
+Enforcement decisions will be made in the interest of maintaining a healthy and respectful community.
+
+---
+
+# Scope
 
 This Code of Conduct applies to:
 
+- GitHub repositories
 - GitHub Issues
 - Pull Requests
 - Discussions
-- Project Wiki
-- Documentation
-- Community interactions
-- Project-related communication
+- Project documentation
+- Community interactions related to this project
 
 ---
 
-# ⚖️ Enforcement
+# Contributing
 
-Project maintainers may take appropriate action in response to unacceptable behavior, including:
+By participating in this project, you agree to:
 
-- Warning
-- Content removal
-- Temporary restrictions
-- Permanent removal from the community for repeated or severe violations
-
-Actions will be taken with the goal of maintaining a healthy and productive community.
+- Follow this Code of Conduct.
+- Respect other contributors.
+- Help maintain a welcoming environment.
+- Collaborate professionally.
 
 ---
 
-# 📧 Reporting Issues
+# Acknowledgements
 
-If you experience or witness unacceptable behavior:
-
-1. Open a private communication with the project maintainer.
-2. Provide relevant details and context.
-3. Allow time for investigation.
-4. Respect the privacy of everyone involved.
-
-Reports will be handled with discretion and fairness.
+This Code of Conduct is inspired by widely adopted open-source community standards and has been adapted for the AI Video Analysis Agent project.
 
 ---
 
-# ❤️ Our Goal
-
-The goal of this Code of Conduct is to build:
-
-- A respectful community
-- A welcoming learning environment
-- High-quality collaboration
-- Professional open-source development
-- Long-term project sustainability
-
----
-
-# 📚 Related Documentation
-
-- README.md
-- CONTRIBUTING.md
-- SECURITY.md
-- CHANGELOG.md
-- RELEASE_NOTES.md
-
----
-
-# 📖 Attribution
-
-This document is inspired by the principles of the **Contributor Covenant** and adapted for the AI Video Analyzer project.
-
----
-
-# 👨‍💻 Author
-
-**Nekkanti Satya Srinath**
-
-GitHub Repository
-
-https://github.com/satya66123/AI-Video-Analyzer
-
----
-
-## License
-
-Released under the **MIT License**
-
----
-
-**Version:** v1.0.0
-
-⭐ Thank you for helping make AI Video Analyzer an inclusive, respectful, and collaborative open-source project.
+Thank you for helping make **AI Video Analysis Agent** a welcoming, collaborative, and professional open-source project for everyone.

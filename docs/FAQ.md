@@ -1,51 +1,24 @@
-# ❓ AI Video Analyzer - Frequently Asked Questions (FAQ)
+# Frequently Asked Questions (FAQ)
 
-<p align="center">
+![FAQ](https://img.shields.io/badge/FAQ-Guide-blue)
+![Version](https://img.shields.io/badge/Version-v1.0.0-blue)
+![Support](https://img.shields.io/badge/Support-Available-success)
 
-<img src="https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white"/>
-
-<img src="https://img.shields.io/badge/FAQ-Documentation-blue?style=for-the-badge"/>
-
-<img src="https://img.shields.io/badge/Version-v1.0.0-success?style=for-the-badge"/>
-
-</p>
+This document answers the most frequently asked questions about the **AI Video Analysis Agent**.
 
 ---
 
-# Table of Contents
+# General
 
-- General Questions
-- Installation
-- Video Processing
-- Audio Processing
-- Speech Recognition
-- AI Providers
-- Export
-- Testing
-- Troubleshooting
+### What is AI Video Analysis Agent?
+
+AI Video Analysis Agent is a Streamlit-based application that automatically processes videos by extracting metadata, generating transcripts, performing AI analysis, enabling AI chat, generating reports, and exporting results.
 
 ---
 
-# General Questions
+### What operating systems are supported?
 
-## What is AI Video Analyzer?
-
-AI Video Analyzer is a Streamlit-based application that extracts audio from videos, generates transcripts using Whisper, performs AI-powered analysis, supports interactive AI chat, and exports results in multiple formats.
-
----
-
-## Who is this project for?
-
-- Students
-- Developers
-- Researchers
-- Content Creators
-- Educators
-- Business Professionals
-
----
-
-## Which operating systems are supported?
+The application supports:
 
 - Windows
 - Linux
@@ -53,33 +26,67 @@ AI Video Analyzer is a Streamlit-based application that extracts audio from vide
 
 ---
 
-# Installation
+### Which Python version is recommended?
 
-## Which Python version is required?
-
-Python **3.11 or newer** is recommended.
+Python **3.11 or later** is recommended.
 
 ---
 
-## Do I need FFmpeg?
+# Installation
+
+### How do I install the project?
+
+Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+Run the application:
+
+```bash
+streamlit run app_agent.py
+```
+
+---
+
+### Do I need FFmpeg?
 
 Yes.
 
-FFmpeg is required for audio extraction from uploaded videos.
+FFmpeg is required for audio extraction from videos.
 
 ---
 
-## Do I need Ollama?
+### Do I need Whisper?
 
-Only if you want to use local AI models.
+Yes.
 
-Cloud providers (OpenAI and Anthropic) do not require Ollama.
+Whisper is used for automatic speech-to-text transcription.
+
+---
+
+# AI Providers
+
+### Which AI providers are supported?
+
+- Ollama
+- OpenAI
+- Anthropic
+
+---
+
+### Can I use the application offline?
+
+Yes.
+
+Using **Ollama** and **Whisper**, the application can run locally without cloud AI services.
 
 ---
 
 # Video Processing
 
-## Which video formats are supported?
+### Which video formats are supported?
 
 - MP4
 - AVI
@@ -89,96 +96,102 @@ Cloud providers (OpenAI and Anthropic) do not require Ollama.
 
 ---
 
-## Is there a maximum upload size?
+### Can duplicate videos be detected?
 
-The limit depends on your application configuration.
+Yes.
 
-You can modify it inside the configuration settings if required.
-
----
-
-## Can I process multiple videos?
-
-Current version focuses on single-video processing.
-
-Batch processing is planned for a future release.
+The application checks uploaded videos to help prevent duplicate processing.
 
 ---
 
-# Audio Processing
+# Audio & Transcript
 
-## Where are extracted audio files stored?
+### How is audio extracted?
+
+Audio is extracted automatically during the workflow after a video is uploaded.
+
+---
+
+### Which Whisper models are supported?
+
+Common Whisper models include:
+
+- tiny
+- base
+- small
+- medium
+- large
+
+---
+
+### Where are transcripts stored?
 
 ```
-audio/
+transcripts/
 ```
 
 ---
 
-## Can I reuse extracted audio?
+# AI Analysis
+
+### What can AI analyze?
+
+The AI can analyze transcript content to produce summaries, insights, key information, and other report content based on the selected prompt and provider.
+
+---
+
+### Can I use different AI models?
 
 Yes.
 
-Previously extracted audio can be reused without repeating extraction.
+The available models depend on the configured AI provider.
 
 ---
 
-# Speech Recognition
+# AI Chat
 
-## Which speech recognition model is used?
-
-OpenAI Whisper.
-
----
-
-## Does transcription work offline?
+### Can I ask questions about the video?
 
 Yes.
 
-When Whisper is installed locally, transcription can be performed without an internet connection.
+The chat feature answers questions using the generated transcript as context.
 
 ---
 
-# AI Providers
-
-## Which AI providers are supported?
-
-- Ollama
-- OpenAI
-- Anthropic
-
----
-
-## Which provider should I use?
-
-| Provider | Best For |
-|----------|----------|
-| Ollama | Offline local inference |
-| OpenAI | High-quality cloud responses |
-| Anthropic | Claude-based analysis |
-
----
-
-## Can I change providers?
+### Is chat history saved?
 
 Yes.
 
-The provider can be changed from the application settings.
+Chat history is stored locally.
 
 ---
 
-# Export
+# Reports
 
-## Which export formats are supported?
+### What information is included in reports?
 
-- TXT
-- Markdown
-- HTML
+Reports may include:
+
+- Video Information
+- Audio Information
+- Transcript
+- AI Analysis
+- Chat History
+- Processing Metadata
+
+---
+
+### Which export formats are supported?
+
 - PDF
+- HTML
+- Markdown
+- TXT
+- JSON
 
 ---
 
-## Where are exported files stored?
+### Where are exported reports stored?
 
 ```
 exports/
@@ -186,87 +199,135 @@ exports/
 
 ---
 
+# Storage
+
+### Where are uploaded videos stored?
+
+```
+uploads/
+```
+
+---
+
+### Where are audio files stored?
+
+```
+audio/
+```
+
+---
+
+### Where is metadata stored?
+
+```
+metadata/
+```
+
+---
+
+### Where are AI analyses stored?
+
+```
+analysis/
+```
+
+---
+
+### Where are reports stored?
+
+```
+reports/
+```
+
+---
+
 # Testing
 
-## Which testing framework is used?
+### Which testing framework is used?
 
 Pytest.
 
 ---
 
-## Does the project support GitHub Actions?
+### How many tests are included?
 
-Yes.
+Current release:
 
-The repository includes automated CI workflows.
+```
+531 Tests Passed
+```
+
+Run tests:
+
+```bash
+pytest
+```
 
 ---
 
 # Troubleshooting
 
-## The application cannot find FFmpeg.
+### The application cannot detect FFmpeg.
 
-Ensure FFmpeg is installed and available in your system PATH.
-
----
-
-## Ollama is not responding.
-
-Run:
-
-```bash
-ollama serve
-```
+Ensure FFmpeg is installed and added to your system PATH.
 
 ---
 
-## API key errors.
+### Whisper transcription fails.
 
-Verify your `.env` configuration.
+Verify that:
+
+- FFmpeg is installed.
+- The audio file is valid.
+- The selected Whisper model is available.
 
 ---
 
-## Export failed.
+### AI provider is unavailable.
 
 Check:
 
-- Output directory
-- File permissions
-- Available disk space
+- Ollama service is running.
+- API keys are configured correctly (for cloud providers).
+- Internet connection (if using cloud providers).
 
 ---
 
-# Still Need Help?
+### Export failed.
 
-If you encounter an issue that is not covered here:
+Verify that:
 
-1. Review the documentation.
-2. Check the Troubleshooting Guide.
-3. Open a GitHub Issue.
-4. Include logs and screenshots when reporting bugs.
+- The report was generated successfully.
+- The `exports/` directory is writable.
+- Sufficient disk space is available.
 
 ---
 
-# Related Documentation
+# Documentation
 
-- INSTALLATION.md
-- USER_GUIDE.md
+Additional documentation is available in the `docs/` folder:
+
+- API_DOCUMENTATION.md
+- ARCHITECTURE.md
 - CONFIGURATION.md
-- TROUBLESHOOTING.md
-- README.md
+- CONTRIBUTING.md
+- CHANGELOG.md
+- EXPORT_GUIDE.md
+- TESTING.md
+- USER_GUIDE.md
+- ROADMAP.md
+- SECURITY.md
 
 ---
 
-# 👨‍💻 Author
+# Need More Help?
 
-**Nekkanti Satya Srinath**
+If your question is not answered here:
 
-GitHub Repository
-
-https://github.com/satya66123/AI-Video-Analyzer
+- Review the project documentation.
+- Open a GitHub Issue.
+- Check the project README for setup instructions.
 
 ---
 
-**Version:** v1.0.0
-
-**License:** MIT
+**Thank you for using AI Video Analysis Agent!**
