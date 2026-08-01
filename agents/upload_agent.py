@@ -65,16 +65,17 @@ class UploadAgent(BaseAgent):
         )
 
         if duplicate:
+            context["status"] = "failed"
 
-            logger.warning(
-                "Duplicate upload detected."
+            context["current_agent"] = "Upload Agent"
+
+            context["error"] = (
+                "Video already uploaded."
             )
 
-
-
-            context["duplicate"] = True
-
-            return context
+            raise ValueError(
+                "Video already uploaded."
+            )
 
         video_info = self.video_service.save_video(
             uploaded_file=uploaded_file,

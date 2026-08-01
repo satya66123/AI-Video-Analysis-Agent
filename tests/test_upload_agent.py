@@ -116,7 +116,6 @@ def test_execute_success():
 def test_execute_duplicate():
 
     service = make_service()
-
     service.is_duplicate.return_value = True
 
     agent = UploadAgent(service)
@@ -124,18 +123,14 @@ def test_execute_duplicate():
     uploaded_file = make_uploaded_file()
 
     context = {
-
         "uploaded_file": uploaded_file,
-
     }
 
-    result = agent.execute(context)
-
-    assert result["duplicate"] is True
-
-    assert "status" not in result
-
-    assert "video" not in result
+    with pytest.raises(
+        ValueError,
+        match="Video already uploaded.",
+    ):
+        agent.execute(context)
 
     service.save_video.assert_not_called()
 

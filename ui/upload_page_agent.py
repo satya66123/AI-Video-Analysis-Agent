@@ -27,6 +27,66 @@ class UploadPageAgent:
         self.video_service = VideoService()
         self.orchestrator = st.session_state.orchestrator
 
+    def recent_videos(self):
+
+        st.divider()
+
+        st.subheader("🎬 Recent Videos")
+
+        videos = self.video_service.list_videos()
+
+        if not videos:
+            st.info("No uploaded videos found.")
+
+            return
+
+        for video in videos[-5:][::-1]:
+
+            video_path = Path(
+                self.video_service.UPLOAD_FOLDER
+            ) / video
+
+            if not video_path.exists():
+                continue
+
+            size = video_path.stat().st_size / (
+                    1024 * 1024
+            )
+
+            modified = datetime.fromtimestamp(
+                video_path.stat().st_mtime
+            )
+
+            with st.expander(f"📹 {video}"):
+
+                col1, col2 = st.columns(2)
+
+                with col1:
+                    st.write(
+                        f"**Filename:** {video}"
+                    )
+
+                    st.write(
+                        f"**Extension:** {video_path.suffix}"
+                    )
+
+                    st.write(
+                        f"**Size:** {size:.2f} MB"
+                    )
+
+                with col2:
+                    st.write(
+                        f"**Uploaded:** {modified:%d-%m-%Y %I:%M %p}"
+                    )
+
+                    st.write(
+                        f"**Location:** {video_path.parent}"
+                    )
+
+                    st.write(
+                        f"**Status:** Available"
+                    )
+
     def render(self):
 
         HeaderAgent.render("📤 Upload Video")
@@ -43,8 +103,9 @@ class UploadPageAgent:
         )
 
         if uploaded_file is None:
-
             st.info("Upload a video to begin.")
+
+            self.recent_videos()
 
             FooterAgent.render()
 
@@ -66,9 +127,48 @@ class UploadPageAgent:
 
             self.start(uploaded_file)
 
-        StatusBarAgent.render()
+        def render(self):
 
-        FooterAgent.render()
+            HeaderAgent.render("📤 Upload Video")
+
+            uploaded_file = st.file_uploader(
+                "Choose Video",
+                type=[
+                    "mp4",
+                    "avi",
+                    "mov",
+                    "mkv",
+                    "webm",
+                ],
+            )
+
+            if uploaded_file is None:
+
+                st.info("Upload a video to begin.")
+
+            else:
+
+                self.preview(uploaded_file)
+
+                st.divider()
+
+                self.metadata(uploaded_file)
+
+                st.divider()
+
+                if st.button(
+                        "🚀 Start Analysis",
+                        type="primary",
+                        use_container_width=True,
+                ):
+                    self.start(uploaded_file)
+
+            # Always display recent videos
+            self.recent_videos()
+
+            StatusBarAgent.render()
+
+            FooterAgent.render()
 
     def preview(self, uploaded_file):
 
@@ -144,11 +244,30 @@ class UploadPageAgent:
 
             result = self.orchestrator.run(context)
 
+            if result.get("status") == "failed":
+                st.session_state.workflow_running = False
+                st.session_state.current_agent = "Failed"
+                st.session_state.workflow_progress = 0
+
+                progress.progress(0)
+
+                status.error(result.get("error", "Workflow failed."))
+
+                st.error(result.get("error", "Workflow failed."))
+
+                return
+
+            # Success
             st.session_state.workflow_progress = 100
             progress.progress(100)
 
             st.session_state.workflow_running = False
             st.session_state.current_agent = "Completed"
+
+            st.session_state.last_result = result
+
+            status.success("Workflow completed successfully.")
+            st.success("Analysis finished.")
 
             st.session_state.last_result = result
 
@@ -183,8 +302,16 @@ class UploadPageAgent:
 
         except Exception as exc:
 
-            st.session_state.workflow_running = False
-            st.session_state.current_agent = "Failed"
-            st.session_state.workflow_progress = 0
+            progress.progress(0)
 
-            st.error(str(exc))
+            status.error(
+                f"❌ {exc}"
+            )
+
+            st.error(
+                f"Video already uploaded.\n\n{exc}"
+            )
+
+            st.session_state.workflow_running = False
+
+            return

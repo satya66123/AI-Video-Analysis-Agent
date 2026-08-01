@@ -29,12 +29,31 @@ class DashboardPageAgent:
     ROOT = Path(".")
 
     FOLDERS = {
+
+        # Main folders
         "Videos": ROOT / "uploads",
         "Audio": ROOT / "audio",
         "Transcripts": ROOT / "transcripts",
         "Analysis": ROOT / "analysis",
-        "Reports": ROOT / "reports",
         "Chats": ROOT / "chat_history",
+
+
+    }
+
+    EXPORT_FILE_FOLDERS = {
+        "Exports / PDF": ROOT / "exports/pdf",
+        "Exports / HTML": ROOT / "exports/html",
+        "Exports / Markdown": ROOT / "exports/markdown",
+        "Exports / TXT": ROOT / "exports/txt",
+        "Exports / JSON": ROOT / "exports/json",
+    }
+
+    REPORT_FILE_FOLDERS = {
+        "Reports / PDF": ROOT / "reports/pdf",
+        "Reports / HTML": ROOT / "reports/html",
+        "Reports / Markdown": ROOT / "reports/markdown",
+        "Reports / TXT": ROOT / "reports/txt",
+        "Reports / JSON": ROOT / "reports/json",
     }
 
     EXPORT_FOLDERS = {
@@ -43,6 +62,14 @@ class DashboardPageAgent:
         "Markdown": ROOT / "exports" / "markdown",
         "TXT": ROOT / "exports" / "txt",
         "JSON": ROOT / "exports" / "json",
+    }
+
+    REPORT_FOLDERS = {
+        "PDF": ROOT / "reports" / "pdf",
+        "HTML": ROOT / "reports" / "html",
+        "Markdown": ROOT / "reports" / "markdown",
+        "TXT": ROOT / "reports" / "txt",
+        "JSON": ROOT / "reports" / "json",
     }
 
     def __init__(self):
@@ -97,18 +124,17 @@ class DashboardPageAgent:
     # Count Files
     ########################################################
 
+
     @staticmethod
     def count_files(path: Path):
 
         if not path.exists():
             return 0
 
-        return len(
-            [
-                file
-                for file in path.iterdir()
-                if file.is_file()
-            ]
+        return sum(
+            1
+            for file in path.rglob("*")
+            if file.is_file()
         )
 
     ########################################################
@@ -185,6 +211,45 @@ class DashboardPageAgent:
             "size": export_size,
 
             "details": export_details,
+
+        }
+
+        ####################################################
+        # Reports
+        ####################################################
+
+        report_count = 0
+
+        report_size = 0
+
+        report_details = {}
+
+        for name, folder in self.REPORT_FOLDERS.items():
+            count = self.count_files(folder)
+
+            size = self.folder_size(folder)
+
+            report_count += count
+
+            report_size += size
+
+            report_details[name] = {
+
+                "count": count,
+
+                "size": size,
+
+                "path": folder,
+
+            }
+
+        statistics["Reports"] = {
+
+            "count": report_count,
+
+            "size": report_size,
+
+            "details": report_details,
 
         }
 
@@ -435,6 +500,53 @@ class DashboardPageAgent:
         st.divider()
 
         ##########################################################
+        # Export Statistics
+        ##########################################################
+
+        st.subheader("📤 Report Statistics")
+
+        report = stats["Reports"]["details"]
+
+        c1, c2, c3, c4, c5 = st.columns(5)
+
+        with c1:
+
+            st.metric(
+                "PDF",
+                report["PDF"]["count"],
+            )
+
+        with c2:
+
+            st.metric(
+                "HTML",
+                report["HTML"]["count"],
+            )
+
+        with c3:
+
+            st.metric(
+                "Markdown",
+                report["Markdown"]["count"],
+            )
+
+        with c4:
+
+            st.metric(
+                "TXT",
+                report["TXT"]["count"],
+            )
+
+        with c5:
+
+            st.metric(
+                "JSON",
+                report["JSON"]["count"],
+            )
+
+        st.divider()
+
+        ##########################################################
         # Folder Statistics
         ##########################################################
 
@@ -671,6 +783,32 @@ class DashboardPageAgent:
         st.divider()
 
         ##########################################################
+        # Report Folder Details
+        ##########################################################
+
+        st.subheader("📤 Report Folder Details")
+
+        export = stats["Reports"]["details"]
+
+        for name, data in export.items():
+            with st.expander(
+                    f"{name} ({data['count']} files)"
+            ):
+                st.write(
+                    f"Folder : {data['path']}"
+                )
+
+                st.write(
+                    f"Files : {data['count']}"
+                )
+
+                st.write(
+                    f"Storage : {self.format_size(data['size'])}"
+                )
+
+        st.divider()
+
+        ##########################################################
         # Folder Browser
         ##########################################################
 
@@ -679,7 +817,8 @@ class DashboardPageAgent:
         folders = {}
 
         folders.update(self.FOLDERS)
-        folders.update(self.EXPORT_FOLDERS)
+        folders.update(self.EXPORT_FILE_FOLDERS)
+        folders.update(self.REPORT_FILE_FOLDERS)
 
         selected_folder = st.selectbox(
             "Select Folder",
@@ -768,15 +907,15 @@ class DashboardPageAgent:
             f"""
         Dashboard Summary
 
-        🎥 Videos       : {stats['Videos']['count']}
-        🎵 Audio        : {stats['Audio']['count']}
-        📝 Transcripts  : {stats['Transcripts']['count']}
-        🤖 Analysis     : {stats['Analysis']['count']}
-        📑 Reports      : {stats['Reports']['count']}
-        💬 Chats        : {stats['Chats']['count']}
-        📤 Exports      : {stats['Exports']['count']}
+        🎥 Videos       : {stats['Videos']['count']}\n
+        🎵 Audio        : {stats['Audio']['count']}\n
+        📝 Transcripts  : {stats['Transcripts']['count']}\n
+        🤖 Analysis     : {stats['Analysis']['count']}\n
+        📑 Reports      : {stats['Reports']['count']}\n
+        💬 Chats        : {stats['Chats']['count']}\n
+        📤 Exports      : {stats['Exports']['count']}\n
 
-        Total Storage : {self.format_size(total_storage)}
+        Total Storage : {self.format_size(total_storage)}\n
                     """
         )
 
