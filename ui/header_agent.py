@@ -25,7 +25,7 @@ class HeaderAgent:
     ):
 
         col1, col2 = st.columns(
-            [3, 1]
+            [2, 1]
         )
 
         with col1:
@@ -33,11 +33,11 @@ class HeaderAgent:
             st.title(title)
 
         with col2:
+            provider = st.session_state.get("provider")
 
-            st.caption(
-                f"Provider: "
-                f"{st.session_state.provider}"
-            )
+            st.caption(provider)
+
+            st.caption(f"Provider: {provider}")
 
             st.caption(
                 f"Model: "

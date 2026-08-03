@@ -13,6 +13,10 @@ The project follows a simple versioning approach.
 
 # Version 1.0.0
 
+**Release Date:** July 2026
+
+# Version 1.1.0
+
 **Release Date:** August 2026
 
 ## Added
@@ -120,6 +124,16 @@ Added support for:
 - Export history
 
 ---
+
+### Integrated Agent
+
+- upload video 
+- process new video 
+- chat session
+- end chat report
+
+---
+
 
 ### Documentation
 

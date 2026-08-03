@@ -29,59 +29,239 @@ class AIChatService:
         )
 
     @staticmethod
+    def generate_chat_id(
+            video_name: str,
+    ) -> str:
+
+        video_name = Path(video_name).stem
+
+        timestamp = datetime.now().strftime(
+            "%Y%m%d_%H%M%S"
+        )
+
+        return f"{video_name}_{timestamp}"
+
+    def create_chat(
+            self,
+            video_name: str,
+    ):
+
+        chat_id = self.generate_chat_id(
+            video_name
+        )
+
+        self.save_chat(
+            f"{chat_id}.json",
+            [],
+            status="Open",
+        )
+
+        return chat_id
+
+    def list_video_chats(
+            self,
+            video_name: str,
+    ):
+
+        video_name = Path(video_name).stem
+
+        chats = []
+
+        for file in self.CHAT_FOLDER.glob("*.json"):
+
+            if file.stem.startswith(
+                    f"{video_name}_"
+            ):
+                chats.append(file)
+
+        chats.sort(
+            reverse=True,
+        )
+
+        return chats
+
+    def chat_exists(
+            self,
+            chat_id: str,
+    ):
+
+        return (
+                self.CHAT_FOLDER
+                / f"{chat_id}.json"
+        ).exists()
+
+    def load_chat_by_id(
+            self,
+            chat_id: str,
+    ):
+
+        path = self.CHAT_FOLDER / f"{chat_id}.json"
+
+        if not path.exists():
+            return []
+
+        with open(
+                path,
+                "r",
+                encoding="utf-8",
+        ) as file:
+
+            data = json.load(file)
+
+        if isinstance(
+                data,
+                list,
+        ):
+            return data
+
+        return data.get(
+            "history",
+            [],
+        )
+
+    def save_chat_by_id(
+            self,
+            chat_id: str,
+            history,
+            status: str = "Open",
+    ):
+
+        return self.save_chat(
+            f"{chat_id}.json",
+            history,
+            status,
+        )
+
+    def append_message(
+            self,
+            history,
+            user,
+            assistant,
+    ):
+
+        history.append(
+
+            self.create_message(
+                user,
+                assistant,
+            )
+
+        )
+
+        return history
+
+    @staticmethod
     def build_prompt(
             transcript: str,
-        history: List[Dict],
-        question: str,
+            history: List[Dict],
+            question: str,
     ) -> str:
-        """
-        Build prompt using transcript,
-        previous conversation and question.
-        """
+
+        question_lower = question.strip().lower()
+
+        casual_messages = {
+
+            "hi",
+            "hello",
+            "hey",
+            "hii",
+            "helo",
+            "good morning",
+            "good afternoon",
+            "good evening",
+            "good night",
+            "bye",
+            "good bye",
+            "goodbye",
+            "see you",
+            "see you later",
+            "thanks",
+            "thank you",
+            "thankyou",
+            "ok",
+            "okay",
+            "how are you",
+            "who are you",
+            "what can you do",
+            "nice",
+            "great",
+            "awesome",
+        }
+
+        ####################################################
+        # Casual Conversation
+        ####################################################
+
+        if question_lower in casual_messages:
+            return f"""
+    You are a friendly AI Video Analysis Assistant.
+
+    The user is having a normal conversation with you.
+
+    DO NOT use or mention the video transcript.
+
+    Respond naturally, politely and conversationally.
+
+    User:
+    {question}
+
+    Assistant:
+    """
+
+        ####################################################
+        # Video Question
+        ####################################################
 
         prompt = f"""
-You are an AI Video Assistant.
+    You are an AI Video Analysis Assistant.
 
-Answer ONLY using the transcript below.
+    Your primary responsibility is answering questions about the uploaded video.
 
-If the transcript does not contain the answer,
-reply exactly:
+    Rules:
 
-"I couldn't find that information in the transcript."
+    1. Answer using ONLY the transcript below.
+    2. If the answer exists in the transcript, answer clearly.
+    3. If the answer is NOT available in the transcript, reply exactly:
 
---------------------------------------------------
-VIDEO TRANSCRIPT
---------------------------------------------------
+    "I couldn't find that information in the transcript."
 
-{transcript}
+    4. Do not invent information.
+    5. Do not guess.
+    6. Do not answer from general knowledge.
+    7. Ignore previous world knowledge unless the user is having a casual conversation.
 
---------------------------------------------------
-CHAT HISTORY
---------------------------------------------------
-"""
+    --------------------------------------------------
+    VIDEO TRANSCRIPT
+    --------------------------------------------------
+
+    {transcript}
+
+    --------------------------------------------------
+    CHAT HISTORY
+    --------------------------------------------------
+    """
 
         for item in history:
-
             prompt += f"""
 
-User:
-{item.get("user","")}
+    User:
+    {item.get("user", "")}
 
-Assistant:
-{item.get("assistant","")}
-"""
+    Assistant:
+    {item.get("assistant", "")}
+    """
 
         prompt += f"""
 
---------------------------------------------------
-CURRENT QUESTION
---------------------------------------------------
+    --------------------------------------------------
+    CURRENT QUESTION
+    --------------------------------------------------
 
-User:
-{question}
+    User:
+    {question}
 
-Assistant:
-"""
+    Assistant:
+    """
 
         return prompt
 
@@ -144,21 +324,44 @@ Assistant:
         )
 
     def save_chat(
-        self,
-        filename: str,
-        history: List[Dict],
+            self,
+            filename: str,
+            history: List[Dict],
+            status: str = "Open",
     ) -> Path:
 
         path = self.CHAT_FOLDER / filename
 
+        chat_data = {
+
+            "chat_id": Path(filename).stem,
+
+            "video": Path(filename).stem,
+
+            "status": status,
+
+            "created_at": datetime.now().isoformat(),
+
+            "history": history,
+
+        }
+
+        if status == "Closed":
+
+            chat_data["closed_at"] = datetime.now().isoformat()
+
+        else:
+
+            chat_data["closed_at"] = None
+
         with open(
-            path,
-            "w",
-            encoding="utf-8",
+                path,
+                "w",
+                encoding="utf-8",
         ) as file:
 
             json.dump(
-                history,
+                chat_data,
                 file,
                 indent=4,
                 ensure_ascii=False,
@@ -167,8 +370,8 @@ Assistant:
         return path
 
     def load_chat(
-        self,
-        filename: str,
+            self,
+            filename: str,
     ) -> List[Dict]:
 
         path = self.CHAT_FOLDER / filename
@@ -177,16 +380,27 @@ Assistant:
             return []
 
         with open(
-            path,
-            "r",
-            encoding="utf-8",
+                path,
+                "r",
+                encoding="utf-8",
         ) as file:
 
-            return json.load(file)
+            data = json.load(file)
+
+        if isinstance(
+                data,
+                list,
+        ):
+            return data
+
+        return data.get(
+            "history",
+            [],
+        )
 
 
 
-    CHAT_FOLDER = Path("chat_history")
+
 
     @classmethod
     def list_chats(cls):

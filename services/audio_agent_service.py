@@ -2,7 +2,10 @@ import os
 import json
 from pathlib import Path
 
-from moviepy.editor import VideoFileClip
+from moviepy.editor import (
+    VideoFileClip,
+)
+from mutagen.mp3 import MP3
 
 
 class AudioService:
@@ -129,25 +132,21 @@ class AudioService:
 
         try:
 
-            clip = VideoFileClip(audio_path)
+            print("Audio Path :", path)
+
+            audio = MP3(path)
 
             metadata = {
 
                 "filename": path.name,
 
-                "duration": f"{clip.duration:.2f} sec",
+                "duration": f"{audio.info.length:.2f} sec",
 
-                "sample_rate": getattr(
-                    clip.audio,
-                    "fps",
-                    "Unknown",
-                ),
+                "sample_rate": audio.info.sample_rate,
 
-                "channels": getattr(
-                    clip.audio,
-                    "nchannels",
-                    "Unknown",
-                ),
+                "channels": audio.info.channels,
+
+                "bitrate": audio.info.bitrate,
 
                 "format": path.suffix,
 
@@ -155,9 +154,18 @@ class AudioService:
 
             }
 
-            clip.close()
+        except Exception as e:
 
-        except Exception:
+            print("=" * 60)
+            print("CREATE AUDIO METADATA ERROR")
+            print("Audio Path :", path)
+            print("Exists     :", path.exists())
+
+            if path.exists():
+                print("File Size  :", path.stat().st_size)
+
+            print("Exception  :", e)
+            print("=" * 60)
 
             metadata = {
 
@@ -168,6 +176,8 @@ class AudioService:
                 "sample_rate": "Unknown",
 
                 "channels": "Unknown",
+
+                "bitrate": "Unknown",
 
                 "format": path.suffix,
 

@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import os
 from datetime import datetime
+from pathlib import Path
 from typing import Dict, List
 
 from providers.provider_factory import ProviderFactory
@@ -76,6 +77,130 @@ Transcript
             "analysis_type": prompt,
             "generated_at": datetime.now().isoformat(),
         }
+
+    @classmethod
+    def list_video_analysis(
+            cls,
+            video_name: str,
+    ):
+
+        os.makedirs(
+            cls.ANALYSIS_FOLDER,
+            exist_ok=True,
+        )
+
+        video_name = Path(video_name).stem
+
+        files = []
+
+        for file in Path(
+                cls.ANALYSIS_FOLDER
+        ).glob("*"):
+
+            if file.stem.startswith(video_name):
+                files.append(file)
+
+        files.sort(
+            key=lambda x: x.stat().st_mtime,
+            reverse=True,
+        )
+
+        return files
+
+    @classmethod
+    def latest_analysis_exists(
+            cls,
+            video_name: str,
+    ):
+
+        return len(
+            cls.list_video_analysis(
+                video_name
+            )
+        ) > 0
+
+    @classmethod
+    def load_latest_analysis(
+            cls,
+            video_name: str,
+    ):
+
+        files = cls.list_video_analysis(
+            video_name
+        )
+
+        if not files:
+            return ""
+
+        latest = files[0]
+
+        with open(
+                latest,
+                "r",
+                encoding="utf-8",
+        ) as file:
+            return file.read()
+
+    @classmethod
+    def find_latest_analysis(
+            cls,
+            video_stem: str,
+    ) -> str | None:
+
+        os.makedirs(
+            cls.ANALYSIS_FOLDER,
+            exist_ok=True,
+        )
+
+        matching_files = []
+
+        for filename in os.listdir(
+                cls.ANALYSIS_FOLDER
+        ):
+
+            if not filename.endswith(".md"):
+                continue
+
+            if filename.startswith(
+                    f"{video_stem}_"
+            ):
+                path = os.path.join(
+                    cls.ANALYSIS_FOLDER,
+                    filename,
+                )
+
+                matching_files.append(
+                    (
+                        os.path.getmtime(path),
+                        filename,
+                    )
+                )
+
+        if not matching_files:
+            return None
+
+        matching_files.sort(
+            reverse=True
+        )
+
+        return matching_files[0][1]
+
+    @classmethod
+    def latest_analysis_path(
+                cls,
+                video_name: str,
+        ):
+
+            files = cls.list_video_analysis(
+                video_name
+            )
+
+            if not files:
+                return None
+
+            return str(files[0])
+
+
 
     @classmethod
     def save_analysis(

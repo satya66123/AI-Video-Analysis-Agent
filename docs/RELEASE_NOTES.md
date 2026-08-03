@@ -9,9 +9,15 @@
 
 # AI Video Analysis Agent v1.0.0
 
-**Release Date:** August 2026
+**Release Date:** July 2026
 
 This is the first stable release of the **AI Video Analysis Agent**, providing a complete end-to-end workflow for AI-powered video processing, transcript generation, analysis, reporting, and export.
+
+**Release Date:** August 2026
+
+This is the Second stable release of the **AI Video Analysis Agent**, providing a complete end-to-end workflow for AI-powered video processing, transcript generation, analysis, reporting, and export.
+
+
 
 ---
 
