@@ -6,7 +6,7 @@
 ![Streamlit](https://img.shields.io/badge/Streamlit-Application-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)
 ![Version](https://img.shields.io/badge/Version-v1.0.0-success?style=for-the-badge)
 ![Version](https://img.shields.io/badge/Version-v1.1.0-success?style=for-the-badge)
-![Tests](https://img.shields.io/badge/Tests-531%20Passed-success?style=for-the-badge)
+![Tests](https://img.shields.io/badge/Tests-580%20Passed-success?style=for-the-badge)
 ![Architecture](https://img.shields.io/badge/Architecture-Agent--Service--Provider-blueviolet?style=for-the-badge)
 ![License](https://img.shields.io/github/license/satya66123/AI-Video-Analysis-Agent?style=for-the-badge)
 
