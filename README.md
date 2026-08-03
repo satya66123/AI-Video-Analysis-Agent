@@ -9,6 +9,10 @@
 ![Tests](https://img.shields.io/badge/Tests-580%20Passed-success?style=for-the-badge)
 ![Architecture](https://img.shields.io/badge/Architecture-Agent--Service--Provider-blueviolet?style=for-the-badge)
 ![License](https://img.shields.io/github/license/satya66123/AI-Video-Analysis-Agent?style=for-the-badge)
+[![Tests](https://github.com/satya66123/AI-Video-Analysis-Agent/actions/workflows/python-tests.yml/badge.svg)](https://github.com/satya66123/AI-Video-Analysis-Agent/actions/workflows/python-tests.yml)
+![GitHub release](https://img.shields.io/github/v/release/satya66123/AI-Video-Analysis-Agent)
+![Pytest](https://img.shields.io/badge/Tested%20with-Pytest-0A9EDC?logo=pytest)
+![AI](https://img.shields.io/badge/AI-Video%20Analysis-success)
 
 </p>
 
