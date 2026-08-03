@@ -2,13 +2,20 @@
 
 <p align="center">
 
-![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![Streamlit](https://img.shields.io/badge/Streamlit-Application-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)
-![Version](https://img.shields.io/badge/Version-v1.0.0-success?style=for-the-badge)
-![Version](https://img.shields.io/badge/Version-v1.1.0-success?style=for-the-badge)
-![Tests](https://img.shields.io/badge/Tests-531%20Passed-success?style=for-the-badge)
-![Architecture](https://img.shields.io/badge/Architecture-Agent--Service--Provider-blueviolet?style=for-the-badge)
-![License](https://img.shields.io/github/license/satya66123/AI-Video-Analysis-Agent?style=for-the-badge)
+<img src="https://img.shields.io/github/license/satya66123/AI-Video-Analysis-Agent?style=for-the-badge"/>
+<img src="https://img.shields.io/github/actions/workflow/status/satya66123/AI-Video-Analysis-Agent/python-tests.yml?style=for-the-badge&label=Build"/>
+<img src="https://img.shields.io/github/v/release/satya66123/AI-Video-Analysis-Agent?style=for-the-badge"/>
+<img src="https://img.shields.io/github/downloads/satya66123/AI-Video-Analysis-Agent/total?style=for-the-badge"/>
+<img src="https://img.shields.io/github/stars/satya66123/AI-Video-Analysis-Agent?style=for-the-badge"/>
+<img src="https://img.shields.io/github/forks/satya66123/AI-Video-Analysis-Agent?style=for-the-badge"/>
+<img src="https://img.shields.io/github/issues/satya66123/AI-Video-Analysis-Agent?style=for-the-badge"/>
+<img src="https://img.shields.io/github/last-commit/satya66123/AI-Video-Analysis-Agent?style=for-the-badge"/>
+<img src="https://img.shields.io/github/repo-size/satya66123/AI-Video-Analysis-Agent?style=for-the-badge"/>
+<img src="https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white"/>
+<img src="https://img.shields.io/badge/Streamlit-App-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white"/>
+<img src="https://img.shields.io/badge/Tests-531_Passed-success?style=for-the-badge"/>
+<img src="https://img.shields.io/badge/Status-Stable-success?style=for-the-badge"/>
+<img src="https://img.shields.io/badge/Release-v1.0.0-blue?style=for-the-badge"/>
 
 </p>
 
@@ -114,48 +121,6 @@ Manage:
 - Chat History
 - Reports
 - Exported Files
-
----
-### v1.1.0 Features
-
-- Integrated Assistant Agent 
-- Home Assistant 
-- dashbaord
-
-```
-Upload Video
-      │
-      ▼
-Save Video
-      │
-      ▼
-Extract Audio
-      │
-      ▼
-Generate Audio Metadata
-      │
-      ▼
-Generate Transcript
-      │
-      ▼
-Generate Analysis
-      │
-      ▼
-Load Everything
-      │
-      ▼
-Start Chat
-      │
-      ▼
-End Chat
-      │
-      ▼
-Generate Report
-      │
-      ▼
-Export Report
-```
-
 
 ---
 
@@ -430,11 +395,7 @@ pip install -r requirements.txt
 Run the application
 
 ```bash
-
-streamlit run app_agent.py  ---indivdual agent
-
-Streamlit run app_agent_home.py --- assistant integrated
-
+streamlit run app_agent.py
 ```
 
 ---
