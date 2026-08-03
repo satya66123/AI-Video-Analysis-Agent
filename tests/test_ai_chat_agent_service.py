@@ -155,7 +155,10 @@ def test_save_chat(chat_service):
 
         data = json.load(file)
 
-    assert data == history
+    assert data["history"] == history
+    assert data["status"] == "Open"
+    assert data["chat_id"] == "chat"
+    assert data["closed_at"] is None
 
 
 def test_load_chat(chat_service):

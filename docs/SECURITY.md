@@ -6,8 +6,9 @@
 ## Supported Versions
 
 | Version | Supported |
-|----------|-----------|
-| v1.0.x | ✅ Yes |
+|---------|-----------|
+| v1.0.0  | ✅ Yes     |
+| v1.1.0  | ✅ Yes     |
 
 ---
 
